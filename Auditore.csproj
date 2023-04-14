@@ -52,4 +52,11 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Conversores\" />
+	  <Folder Include="ViewModels\" />
+	  <Folder Include="Views\Desktop\" />
+	  <Folder Include="Views\Phone\" />
+	</ItemGroup>
+
 </Project>

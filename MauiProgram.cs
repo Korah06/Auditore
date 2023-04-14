@@ -1,5 +1,6 @@
 ﻿using Auditore.Services;
 using Auditore.Services.Interfaces;
+using Auditore.Views.Desktop;
 using Microsoft.Extensions.Logging;
 
 namespace Auditore;
@@ -20,6 +21,11 @@ public static class MauiProgram
 		//Services
         builder.Services.AddSingleton<ITaskService, TaskService>();
         builder.Services.AddSingleton<IHttpsClientHandlerService, HttpsClientHandlerService>();
+
+		//views
+		builder.Services.AddSingleton<LoginDesktop>();
+
+		//viewModels
 
 #if DEBUG
         builder.Logging.AddDebug();

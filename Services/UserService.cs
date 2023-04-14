@@ -75,5 +75,38 @@ namespace Auditore.Services
                 return null;
             }
         }
+
+        public async Task<bool> Register(RegisterRequest user)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.Register, string.Empty));
+            try
+            {
+                string json = JsonSerializer.Serialize<RegisterRequest>(user, _serializerOptions);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response;
+                response = await _client.PostAsync(uri, content);
+
+                if(response.StatusCode == System.Net.HttpStatusCode.NotAcceptable) 
+                {
+                    await Application.Current.MainPage.DisplayAlert
+                        ("Error", "Ya existe un usuario con la misma dirección de correo", "Aceptar");
+                    return false;
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                return false;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
+        }
     }
 }

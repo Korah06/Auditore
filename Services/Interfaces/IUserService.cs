@@ -10,5 +10,6 @@ namespace Auditore.Services.Interfaces
     public interface IUserService
     {
         Task<string> Login(LoginRequest user);
+        Task<bool> Register(RegisterRequest user);
     }
 }

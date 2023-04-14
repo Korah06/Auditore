@@ -1,4 +1,5 @@
 using Auditore.Services.Interfaces;
+using Auditore.ViewModels;
 
 namespace Auditore.Views.Desktop;
 
@@ -9,6 +10,6 @@ public partial class RegisterDesktop : ContentPage
 	{
         InitializeComponent();
         _userService = userService;
-        InitializeComponent();
+        this.BindingContext = new RegisterViewModel(_userService);
 	}
 }

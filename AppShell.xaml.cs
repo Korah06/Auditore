@@ -15,7 +15,6 @@ public partial class AppShell : Shell
         loginPage.ContentTemplate = new DataTemplate(typeof(LoginPhone));
 #else
 		loginPage.ContentTemplate= new DataTemplate(typeof(LoginDesktop));
-		//registerPage.ContentTemplate = new DataTemplate(typeof(RegisterDesktop));
 #endif
 	}
 }

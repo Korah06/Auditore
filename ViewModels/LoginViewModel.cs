@@ -32,7 +32,7 @@ namespace Auditore.ViewModels
             _userService = userService;
         }
 
-        public ICommand LoginComand => new Command(async () =>
+        public ICommand LoginCommand => new Command(async () =>
         {
             if(_email == string.Empty || _password == string.Empty)
             {

@@ -31,6 +31,7 @@ public static class MauiProgram
 
         //viewModels
         builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddSingleton<RegisterViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

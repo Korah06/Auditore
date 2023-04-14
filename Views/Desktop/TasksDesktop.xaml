@@ -7,28 +7,29 @@
              x:Class="Auditore.Views.Desktop.TasksDesktop"
              Shell.TabBarIsVisible="True">
     <Grid ColumnDefinitions="*,*">
-        <VerticalStackLayout Grid.Column="0">
+        <StackLayout Grid.Column="0">
             <Label Text="Tareas Pendientes" 
                    FontSize="Subtitle" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-            <RefreshView Command="{Binding RefreshCommand}"
+                <RefreshView Command="{Binding RefreshCommand}"
                              IsRefreshing="{Binding isRefreshing}">
-                <CollectionView
-                        ItemsSource="{Binding Tasks}">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate x:DataType="models:MyTask">
-                            <Frame>
+                    <CollectionView
+                        ItemsSource="{Binding Tasks}"
+                        VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:MyTask">
+                                <Frame HeightRequest="200">
                                     <Label Text="{Binding Name}">
 
                                     </Label>
-                            </Frame>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-                </CollectionView>
-            </RefreshView>
-        </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            
+        </StackLayout>
         
     </Grid>
         

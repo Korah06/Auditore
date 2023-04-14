@@ -10,7 +10,7 @@
         x:Name="loginPage"
         Route="Login" />
 
-    <TabBar>
+    <TabBar IsVisible="True">
         <Tab Title="Tasks">
             <ShellContent Route="Tasks"
                           x:Name="tasksPage"/>

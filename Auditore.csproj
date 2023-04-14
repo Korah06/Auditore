@@ -55,8 +55,13 @@
 	<ItemGroup>
 	  <Folder Include="Conversores\" />
 	  <Folder Include="ViewModels\" />
-	  <Folder Include="Views\Desktop\" />
 	  <Folder Include="Views\Phone\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="Views\Desktop\LoginDesktop.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

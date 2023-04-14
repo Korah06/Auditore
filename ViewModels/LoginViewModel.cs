@@ -45,8 +45,7 @@ namespace Auditore.ViewModels
             if(token != null)
             {
                 Preferences.Default.Set("token", token);
-                
-                //TODO NAVEGACION HACIA MAIN
+                await Shell.Current.GoToAsync("//Tasks");
             }
 
 

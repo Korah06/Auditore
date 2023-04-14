@@ -10,4 +10,11 @@
         x:Name="loginPage"
         Route="Login" />
 
+    <TabBar>
+        <Tab Title="Tasks">
+            <ShellContent Route="Tasks"
+                          x:Name="tasksPage"/>
+        </Tab>
+    </TabBar>
+
 </Shell>

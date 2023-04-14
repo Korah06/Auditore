@@ -55,8 +55,10 @@ namespace Auditore.Services
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     TasksDto = JsonSerializer.Deserialize<MyTaskDto>(content, _serializerOptions);
+                    Tasks = TasksDto.Tasks;
+                    return Tasks;
                 }
-
+                return null;
             }
             catch (Exception ex)
             {

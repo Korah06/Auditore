@@ -4,7 +4,7 @@
              x:Class="Auditore.Views.Desktop.RegisterDesktop"
              Shell.FlyoutBehavior="Disabled">
 
-    <VerticalStackLayout VerticalOptions="Center" Spacing="20">
+    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
         <!--#region Title -->
         <Label  Text="Register"
                 FontSize="Header"

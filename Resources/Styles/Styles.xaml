@@ -24,8 +24,8 @@
     </Style>
 
     <Style TargetType="Button">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Primary}}" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightButtonBackground}, Dark={StaticResource DarkButtonBackground}}" />
         <Setter Property="FontFamily" Value="Cairo"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="CornerRadius" Value="8"/>
@@ -134,6 +134,7 @@
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource }, Dark={StaticResource DarkContentsBackground}}"/>
     </Style>
 
     <Style TargetType="ImageButton">

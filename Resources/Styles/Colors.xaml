@@ -21,10 +21,14 @@
 
     <!--#region DarkTheme Colors -->
     <Color x:Key="DarkBackground">#1b1b21</Color>
+    <Color x:Key="DarkContentsBackground">#292931</Color>
+    <Color x:Key="DarkButtonBackground">#373742</Color>
     <!--#endregion-->
 
     <!--#region LightTheme Colors -->
     <Color x:Key="LightBackground">#e7e7ed</Color>
+    <Color x:Key="LightContentsBackground">#dbdce4</Color>
+    <Color x:Key="LightButtonBackground">#d0d0db</Color>
     <!--#endregion-->
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>

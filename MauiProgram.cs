@@ -27,6 +27,7 @@ public static class MauiProgram
 
 		//views
 		builder.Services.AddSingleton<LoginDesktop>();
+        builder.Services.AddSingleton<RegisterDesktop>();
 
         //viewModels
         builder.Services.AddSingleton<LoginViewModel>();

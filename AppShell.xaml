@@ -6,9 +6,8 @@
     xmlns:local="clr-namespace:Auditore"
     Shell.FlyoutBehavior="Disabled">
 
-    <ShellContent
+    <ShellContent 
         x:Name="loginPage"
-        Route="MainPage" />
-    <ShellContent/>
+        Route="Login" />
 
 </Shell>

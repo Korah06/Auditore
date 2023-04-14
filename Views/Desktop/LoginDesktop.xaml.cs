@@ -12,4 +12,9 @@ public partial class LoginDesktop : ContentPage
 		_userService = userService;
 		this.BindingContext = new LoginViewModel(_userService);
 	}
+
+    private void GoToRegisterAsync(object sender, TappedEventArgs e)
+    {
+        Shell.Current.GoToAsync("//Login/RegisterDesktop");
+    }
 }

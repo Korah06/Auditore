@@ -1,12 +1,15 @@
+using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
 
 namespace Auditore.Views.Desktop;
 
 public partial class LoginDesktop : ContentPage
 {
-	public LoginDesktop()
+    private readonly IUserService _userService;
+    public LoginDesktop(IUserService userService)
 	{
 		InitializeComponent();
-		this.BindingContext = new LoginViewModel();
+		_userService = userService;
+		this.BindingContext = new LoginViewModel(_userService);
 	}
 }

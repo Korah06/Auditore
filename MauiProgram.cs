@@ -22,6 +22,7 @@ public static class MauiProgram
 
 		//Services
         builder.Services.AddSingleton<ITaskService, TaskService>();
+        builder.Services.AddSingleton<IUserService, UserService>();
         builder.Services.AddSingleton<IHttpsClientHandlerService, HttpsClientHandlerService>();
 
 		//views

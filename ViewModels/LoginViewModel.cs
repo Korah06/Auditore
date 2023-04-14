@@ -1,4 +1,5 @@
 ﻿using Auditore.Dtos.Request;
+using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,13 @@ namespace Auditore.ViewModels
             get { return _password; }
             set { _password = value; }
         }
+        private readonly IUserService _userService;
         #endregion
+
+        public LoginViewModel(IUserService userService)
+        {
+            _userService = userService;
+        }
 
         public ICommand LoginComand => new Command(async () =>
         {
@@ -32,10 +39,15 @@ namespace Auditore.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Email/Password Son necesarios", "Aceptar");
                 return;
             }
-            //new LoginRequest(_email, _password);
 
+            string token = await _userService.Login(new LoginRequest(_email, _password));
 
-
+            if(token != null)
+            {
+                Preferences.Default.Set("token", token);
+                
+                //TODO NAVEGACION HACIA MAIN
+            }
 
 
         });

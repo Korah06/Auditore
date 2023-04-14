@@ -1,5 +1,6 @@
 ﻿using Auditore.Models;
 using Auditore.Services.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.Maui.Controls;
 using System;
 using System.Collections.Generic;
@@ -13,20 +14,24 @@ namespace Auditore.ViewModels
 {
     public class TasksViewModel
     {
-        public bool _isRefreshing;
-        private List<MyTask> _tasks;
-        private int pageSize = 20;
-        public bool isRefreshing
+
+        private bool _isLoading;
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set { _isLoading = value; }
+        }
+        private bool _isRefreshing;
+        public bool IsRefreshing
         {
             get { return _isRefreshing; }
             set { _isRefreshing = value; }
         }
+
+        private List<MyTask> _tasks;
+        
         public ObservableCollection<MyTask> Tasks { get; set; } = new ObservableCollection<MyTask>();
-        //public ObservableCollection<MyTask> Tasks
-        //{
-        //    get { return _tasks; }
-        //    set { _tasks = value; }
-        //}
+        
 
 
         private readonly ITaskService _taskService;
@@ -38,31 +43,32 @@ namespace Auditore.ViewModels
             RefreshCommand = new Command(() => OnRefresh());
             ObtainTasks();
         }
+        
 
-        public void OnRefresh()
+        private void OnRefresh()
         {
             ObtainTasks();
         }
 
         private void ObtainTasks()
         {
-            isRefreshing = true;
-            Tasks.Clear();
+            IsLoading= true;
+
             Task.Run(async () => 
             {
                 _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
 
                 App.Current.Dispatcher.Dispatch(() =>
                 {
-                    var tasksToAdd = _tasks.Take(pageSize).ToList();
-                    foreach(var task in tasksToAdd)
+                    foreach(var task in _tasks)
                     {
                         Tasks.Add(task);
                     }
+                    IsLoading = false;
+
                 });
             });
 
-            isRefreshing = false;
 
         }
 

@@ -31,15 +31,18 @@ namespace Auditore.ViewModels
         private List<MyTask> _tasks;
         
         public ObservableCollection<MyTask> Tasks { get; set; } = new ObservableCollection<MyTask>();
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
         
 
 
         private readonly ITaskService _taskService;
+        private readonly ICategoryService _categoryService;
 
         public Command RefreshCommand { get; set; }
-        public TasksViewModel(ITaskService taskService) 
+        public TasksViewModel(ITaskService taskService, ICategoryService categoryService) 
         { 
             _taskService = taskService;
+            _categoryService = categoryService;
             RefreshCommand = new Command(() => OnRefresh());
             ObtainTasks();
         }

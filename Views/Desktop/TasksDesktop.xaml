@@ -8,25 +8,86 @@
              Shell.TabBarIsVisible="True">
     <Grid ColumnDefinitions="*,*">
         <StackLayout Grid.Column="0">
-            <Label Text="Tareas Pendientes" 
-                   FontSize="Subtitle" 
+            <Grid Margin="10,10,10,10">
+                <Label Text="Categorias" 
+                   FontSize="Medium" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-
+                <Button Text="Crear Categoria" 
+                        HorizontalOptions="End"
+                        WidthRequest="130"
+                        HeightRequest="10"/>
+            </Grid>
+            
+            <!--#region Categories -->
+            <StackLayout Orientation="Horizontal">
+                <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+                    <CollectionView ItemsSource="{Binding Categories}"
+                                    HorizontalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:Category">
+                                <Frame>
+                                    <VerticalStackLayout Padding="15" Spacing="10">
+                                        <Label Text="{Binding Name}"/>
+                                        <Label Text="{Binding PendingTasks, StringFormat='{0} Tareas'}"/>
+                                        <ProgressBar Progress="{Binding Percentage}"
+                                                     ProgressColor=
+                                                     "{Binding Color, Converter={StaticResource ColorConverter}}"/>
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </RefreshView>
+            </StackLayout>
+            <!--#endregion-->
+            <Grid Margin="10,0,10,10">
+                <Label Text="Tareas Pendientes" 
+                   FontSize="Medium"
+                   HorizontalOptions="Start"/>
+                <Button Text="Crear Tarea" 
+                        HorizontalOptions="End"
+                        WidthRequest="130"
+                        HeightRequest="10"/>
+            </Grid>
+            
+            <!--#region Tasks -->
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView
                         ItemsSource="{Binding Tasks}"
                         VerticalOptions="FillAndExpand">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:MyTask">
-                            <Frame HeightRequest="500">
-                                <Label Text="{Binding Name}">
-                                </Label>
+                            <Frame Margin="10,5,10,5">
+                                <Grid ColumnDefinitions="*,*">
+                                    <HorizontalStackLayout Grid.Column="0">
+                                        <CheckBox IsChecked="{Binding Completed}"
+                                              x:Name="TaskCheckbox"
+                                              VerticalOptions="Center"
+                                              Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
+                                        <Label Text="{Binding Name}"
+                                           VerticalOptions="Center"
+                                           FontSize="Small">
+                                            <Label.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Reference TaskCheckbox}, 
+                                                Path=IsChecked}"
+                                                     TargetType="Label"
+                                                     Value="True">
+                                                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                    <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
+                                           Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                </Grid>
+                                    
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
+            <!--#endregion-->
         </StackLayout>
         
     </Grid>

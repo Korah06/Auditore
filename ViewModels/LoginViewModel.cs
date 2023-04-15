@@ -12,8 +12,9 @@ namespace Auditore.ViewModels
     public class LoginViewModel
     {
         #region Variables
-        private string _email = string.Empty;
-        private string _password = string.Empty;
+        //string.Empty
+        private string _email = "admin@admin.com";
+        private string _password = "admin1234.";
         public string email
         {
             get { return _email; }

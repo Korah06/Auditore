@@ -16,6 +16,7 @@ public partial class AppShell : Shell
 #else
 		loginPage.ContentTemplate= new DataTemplate(typeof(LoginDesktop));
 		tasksPage.ContentTemplate = new DataTemplate(typeof(TasksDesktop));
+		CreateTasksPage.ContentTemplate = new DataTemplate(typeof(CreateTaskDesktop));
 #endif
 	}
 }

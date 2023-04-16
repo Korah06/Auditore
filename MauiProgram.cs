@@ -30,11 +30,13 @@ public static class MauiProgram
 		builder.Services.AddSingleton<LoginDesktop>();
         builder.Services.AddSingleton<RegisterDesktop>();
 		builder.Services.AddTransient<TasksDesktop>();
+		builder.Services.AddTransient<CreateTaskDesktop>();
 
         //viewModels
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<RegisterViewModel>();
         builder.Services.AddSingleton<TasksViewModel>();
+        builder.Services.AddSingleton<CreateTaskViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

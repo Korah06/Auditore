@@ -123,52 +123,57 @@ namespace Auditore.ViewModels
             }
         }
 
+        public ICommand CreateTaskCommand => new Command(async () =>
+        {
+            await Shell.Current.GoToAsync("//Tasks/CreateTask");
+        });
+
         private void ObtainTasks()
         {
-            IsLoading= true;
-            Task.Run(async () => 
-            {
+        IsLoading= true;
+        Task.Run(async () => 
+        {
                 
-                _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
-                _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
+            _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
+            _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
-                App.Current.Dispatcher.Dispatch(() =>
+            App.Current.Dispatcher.Dispatch(() =>
+            {
+                foreach(var category in _categories)
                 {
-                    foreach(var category in _categories)
-                    {
-                        var tasks = from t in _tasks
-                                    where t.CategoryId == category._id
+                    var tasks = from t in _tasks
+                                where t.CategoryId == category._id
+                                select t;
+
+                    var completed = from t in tasks
+                                    where t.Completed == true
                                     select t;
 
-                        var completed = from t in tasks
-                                        where t.Completed == true
+                    var notCompleted = from t in tasks
+                                        where t.Completed == false
                                         select t;
 
-                        var notCompleted = from t in tasks
-                                           where t.Completed == false
-                                           select t;
 
 
+                    category.PendingTasks = notCompleted.Count();
+                    category.Percentage = (float)completed.Count() / (float)tasks.Count();
+                    Categories.Add(category);
+                }
 
-                        category.PendingTasks = notCompleted.Count();
-                        category.Percentage = (float)completed.Count() / (float)tasks.Count();
-                        Categories.Add(category);
-                    }
+                foreach(var task in _tasks)
+                {
+                    var catColor =
+                    (from c in Categories
+                    where c._id == task.CategoryId
+                    select c.Color).FirstOrDefault();
 
-                    foreach(var task in _tasks)
-                    {
-                        var catColor =
-                     (from c in Categories
-                      where c._id == task.CategoryId
-                      select c.Color).FirstOrDefault();
+                    task.TaskColor = catColor;
+                    Tasks.Add(task);
+                }
+                IsLoading = false;
 
-                        task.TaskColor = catColor;
-                        Tasks.Add(task);
-                    }
-                    IsLoading = false;
-
-                });
             });
+        });
 
 
         }

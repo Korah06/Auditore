@@ -17,4 +17,7 @@
         </Tab>
     </TabBar>
 
+    <ShellContent Route="CreateTask"
+                  x:Name="CreateTasksPage"/>
+
 </Shell>

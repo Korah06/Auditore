@@ -48,7 +48,8 @@
                 <Button Text="Crear Tarea" 
                         HorizontalOptions="End"
                         WidthRequest="130"
-                        HeightRequest="10"/>
+                        HeightRequest="10"
+                        Command="{Binding CreateTaskCommand}"/>
             </Grid>
             
             <!--#region Tasks -->

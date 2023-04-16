@@ -24,6 +24,26 @@
                             TitleColor="{StaticResource LightBackground}"
                             HorizontalOptions="Start"
                             ItemDisplayBinding="{Binding Name}"/>
+                    <HorizontalStackLayout>
+                        <CheckBox/>
+                        <Label Text="Crear categoria"/>
+                    </HorizontalStackLayout>
+                    <Label Text="Descripción"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center" 
+                           WidthRequest="300"
+                           Text="{Binding Description}"/>
+                    <Label Text="Fecha final"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <DatePicker/>
+                    <HorizontalStackLayout>
+                        <CheckBox/>
+                        <Label Text="Seleccionar fecha de inicio"/>
+                    </HorizontalStackLayout>
+                    <DatePicker IsVisible="false"/>
+
 
                     <Button Text="Registrarse"
                             Margin="0,10,0,10"

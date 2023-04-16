@@ -17,10 +17,4 @@ public partial class TasksDesktop : ContentPage
         this.BindingContext = _viewModel;
 	}
 
-	
-
-    private void TaskCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
-    {
-        //_viewModel.UpdateTasks();
-    }
 }

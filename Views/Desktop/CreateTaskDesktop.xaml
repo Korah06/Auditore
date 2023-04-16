@@ -4,8 +4,7 @@
              x:Class="Auditore.Views.Desktop.CreateTaskDesktop"
              xmlns:models="clr-namespace:Auditore.Models"
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
-             x:DataType="viewmodels:CreateTaskViewModel"
-             Title="CreateTaskDesktop">
+             x:DataType="viewmodels:CreateTaskViewModel">
     <VerticalStackLayout VerticalOptions="Center" Spacing="5">
         <Label  Text="Creador de Tareas"
                 FontSize="Header"
@@ -18,10 +17,17 @@
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 
                            WidthRequest="300"
-                           Text="{Binding Cpassword}"/>
+                           Text="{Binding TaskName}"/>
+                    <Picker ItemsSource="{Binding Categories}"
+                            WidthRequest="200"
+                            Title="Categorias"
+                            TitleColor="{StaticResource LightBackground}"
+                            HorizontalOptions="Start"
+                            ItemDisplayBinding="{Binding Name}"/>
+
                     <Button Text="Registrarse"
                             Margin="0,10,0,10"
-                            Command="{Binding RegisterCommand}"/>
+                            Command="{Binding CreateTaskCommand}"/>
                 </VerticalStackLayout>
                 
             </Frame.Content>

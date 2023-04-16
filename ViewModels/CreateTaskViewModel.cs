@@ -6,21 +6,30 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Auditore.ViewModels
 {
     public class CreateTaskViewModel
     {
 
-        private string _name = string.Empty;
+        private bool _categoryFactory { get; set; }
+        public bool CategoryFactory
+        {
+            get { return _categoryFactory; }
+            set { _categoryFactory = value; }
+        }
+
+        #region TaskVariablesRegion
+        private string _taskName = string.Empty;
         private string _description = string.Empty;
         private DateTimeOffset _startDate = DateTimeOffset.Now;
         private DateTimeOffset _endDate = DateTimeOffset.Now;
         private string _categoryId = string.Empty;
-        public string Name
+        public string TaskName
         {
-            get { return _name; }
-            set { _name = value; }
+            get { return _taskName; }
+            set { _taskName = value; }
         }
         public string Description
         {
@@ -43,7 +52,8 @@ namespace Auditore.ViewModels
         {
             get { return _endDate; }
             set { _endDate = value; }
-        }
+        } 
+        #endregion
 
         private List<Category> _categories;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
@@ -56,6 +66,11 @@ namespace Auditore.ViewModels
             _taskService = taskService;
             ObtainCategories();
         }
+
+        public ICommand CreateTaskCommand => new Command(async () =>
+        {
+            await Shell.Current.GoToAsync("//Tasks");
+        });
 
         private void ObtainCategories()
         {

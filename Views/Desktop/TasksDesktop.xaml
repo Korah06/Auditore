@@ -63,7 +63,6 @@
                                 <Grid ColumnDefinitions="*,*">
                                     <HorizontalStackLayout Grid.Column="0">
                                         <CheckBox IsChecked="{Binding Completed}"
-                                                  CheckedChanged="TaskCheckbox_CheckedChanged"
                                               x:Name="TaskCheckbox"
                                               VerticalOptions="Center"
                                               Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>

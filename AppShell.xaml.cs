@@ -11,12 +11,12 @@ public partial class AppShell : Shell
 		InitializeComponent();
 
 		Routing.RegisterRoute("RegisterDesktop", typeof(RegisterDesktop));
+		Routing.RegisterRoute("CreateTaskDesktop", typeof(CreateTaskDesktop));
 #if ANDROID || IOS
         loginPage.ContentTemplate = new DataTemplate(typeof(LoginPhone));
 #else
 		loginPage.ContentTemplate= new DataTemplate(typeof(LoginDesktop));
 		tasksPage.ContentTemplate = new DataTemplate(typeof(TasksDesktop));
-		CreateTasksPage.ContentTemplate = new DataTemplate(typeof(CreateTaskDesktop));
 #endif
 	}
 }

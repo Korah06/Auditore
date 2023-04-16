@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PropertyChanged;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace Auditore.Models
 {
+    [AddINotifyPropertyChangedInterface]
     public class User
     {
-        public string Id { get; set; }
+        public string _id { get; set; }
         public string username { get; set; }
         public string name { get; set; }
         public string surname { get; set; }

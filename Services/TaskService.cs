@@ -1,4 +1,5 @@
 ﻿using Auditore.Constants;
+using Auditore.Dtos.Request;
 using Auditore.Dtos.Response;
 using Auditore.Models;
 using Auditore.Services.Interfaces;
@@ -68,6 +69,49 @@ namespace Auditore.Services
 
 
             return null;
+        }
+
+        public async Task<bool> UpdateTasks(List<MyTask> tasks, string token)
+        {
+            List<UpdateTask> Utasks = new List<UpdateTask>();
+            foreach(var task in tasks)
+            {
+                Utasks.Add(new UpdateTask 
+                {
+                    _id = task._id,
+                    categoryId = task.CategoryId,
+                    completed = task.Completed, 
+                    description = task.Description,
+                    endDate = task.EndDate,
+                    name = task.Name,
+                    startDate = task.StartDate,
+                    taskColor = task.TaskColor,
+                    userId = task.UserId,
+                    __v = task.V+1
+                });
+            }
+            UpdateTasksDto dto = new UpdateTasksDto();
+            dto.Tasks = Utasks;
+            Uri uri = new Uri(string.Format(HttpUris.UpdateMyTasks, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto.Tasks), Encoding.UTF8,"application/json");
+
+                HttpResponseMessage response = await _client.PutAsync(uri,jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                { 
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
         }
 
     }

@@ -7,12 +7,20 @@ public partial class TasksDesktop : ContentPage
 {
 	private readonly ITaskService _taskService;
 	private readonly ICategoryService _categoryService;
+	private TasksViewModel _viewModel;
 	public TasksDesktop(ITaskService taskService, ICategoryService categoryService)
 	{
 		InitializeComponent();
         _taskService = taskService;
 		_categoryService = categoryService;
-
-        this.BindingContext = new TasksViewModel(_taskService, _categoryService);
+		_viewModel = new TasksViewModel(_taskService, _categoryService);
+        this.BindingContext = _viewModel;
 	}
+
+	
+
+    private void TaskCheckbox_CheckedChanged(object sender, CheckedChangedEventArgs e)
+    {
+        //_viewModel.UpdateTasks();
+    }
 }

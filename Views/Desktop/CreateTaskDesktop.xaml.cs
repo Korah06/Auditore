@@ -1,3 +1,4 @@
+using Auditore.Models;
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
 using System.Diagnostics;
@@ -29,5 +30,11 @@ public partial class CreateTaskDesktop : ContentPage
         {
             startPicker.Date = endPicker.Date;
         }
+    }
+
+    private void catPicker_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Category cat = (Category)catPicker.SelectedItem;
+        _taskViewModel.CategoryId = cat._id;
     }
 }

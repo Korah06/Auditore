@@ -75,7 +75,20 @@ namespace Auditore.ViewModels
 
         public ICommand CreateTaskCommand => new Command(async () =>
         {
-            
+
+            if(_categoryId != string.Empty && _categoryName != string.Empty) 
+            {
+                _categoryId = await _categoryService
+                .CreateCategory(_categoryName, Preferences.Default.Get("token", ""));
+            }
+            else
+            {
+                await Application.Current.MainPage
+                .DisplayAlert("Error", "Seleccione o cree alguna categoria", "Aceptar");
+                return;
+
+            }
+
             await Shell.Current.GoToAsync("//Tasks");
         });
 

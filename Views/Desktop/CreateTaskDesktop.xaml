@@ -22,6 +22,8 @@
                            Text="{Binding TaskName}"/>
                         <Picker ItemsSource="{Binding Categories}"
                             WidthRequest="200"
+                            x:Name="catPicker"
+                            SelectedIndexChanged="catPicker_SelectedIndexChanged"
                             Title="Categorias"
                             TitleColor="{StaticResource LightBackground}"
                             HorizontalOptions="Start"

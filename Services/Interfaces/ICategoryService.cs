@@ -10,5 +10,6 @@ namespace Auditore.Services.Interfaces
     public interface ICategoryService
     {
         Task<List<Category>> GetCategories(string token);
+        Task<string> CreateCategory(string catName, string token);
     }
 }

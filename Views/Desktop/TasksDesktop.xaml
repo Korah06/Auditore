@@ -8,16 +8,10 @@
              Shell.TabBarIsVisible="True">
     <Grid ColumnDefinitions="*,*">
         <StackLayout Grid.Column="0">
-            <Grid Margin="10,10,10,10">
                 <Label Text="Categorias" 
                    FontSize="Medium" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-                <Button Text="Crear Categoria" 
-                        HorizontalOptions="End"
-                        WidthRequest="130"
-                        HeightRequest="10"/>
-            </Grid>
             
             <!--#region Categories -->
             <StackLayout Orientation="Horizontal">

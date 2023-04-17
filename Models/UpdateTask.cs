@@ -15,8 +15,8 @@ namespace Auditore.Models
         public string description { get; set; }
         public string categoryId { get; set; }
         public string userId { get; set; }
-        public DateTimeOffset startDate { get; set; }
-        public DateTimeOffset endDate { get; set; }
+        public DateTime startDate { get; set; }
+        public DateTime endDate { get; set; }
         public bool completed { get; set; } = false;
         public string taskColor { get; set; }
         public long __v { get; set; }

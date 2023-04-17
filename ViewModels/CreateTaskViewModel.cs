@@ -23,13 +23,19 @@ namespace Auditore.ViewModels
         #region TaskVariablesRegion
         private string _taskName = string.Empty;
         private string _description = string.Empty;
-        private DateTimeOffset _startDate = DateTimeOffset.Now;
-        private DateTimeOffset _endDate = DateTimeOffset.Now;
+        private DateTime _startDate = DateTime.Now;
+        private DateTime _endDate = DateTime.Now;
         private string _categoryId = string.Empty;
+        private string _categoryName = string.Empty;
         public string TaskName
         {
             get { return _taskName; }
             set { _taskName = value; }
+        }
+        public string CategoryName
+        {
+            get { return _categoryName; }
+            set { _categoryName = value; }
         }
         public string Description
         {
@@ -42,13 +48,13 @@ namespace Auditore.ViewModels
             set { _categoryId = value; }
         }
 
-        public DateTimeOffset StartDate
+        public DateTime StartDate
         {
             get { return _startDate; }
             set { _startDate = value; }
         }
 
-        public DateTimeOffset EndDate
+        public DateTime EndDate
         {
             get { return _endDate; }
             set { _endDate = value; }

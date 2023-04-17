@@ -28,6 +28,14 @@
                         <CheckBox/>
                         <Label Text="Crear categoria"/>
                     </HorizontalStackLayout>
+                    <Grid IsVisible="False">
+                        <Label Text="Descripción"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <Entry HorizontalOptions="Center" 
+                           WidthRequest="300"
+                           Text="{Binding CategoryName}"/>
+                    </Grid>
                     <Label Text="Descripción"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
@@ -37,14 +45,12 @@
                     <Label Text="Fecha final"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
-                    <DatePicker/>
-                    <HorizontalStackLayout>
-                        <CheckBox/>
-                        <Label Text="Seleccionar fecha de inicio"/>
-                    </HorizontalStackLayout>
-                    <DatePicker IsVisible="false"/>
-
-
+                    <DatePicker Date="{Binding EndDate}"/>
+                    <Label Text="Fecha inicio"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <DatePicker Date="{Binding StartDate}"
+                                MaximumDate="{Binding EndDate}"/>
                     <Button Text="Registrarse"
                             Margin="0,10,0,10"
                             Command="{Binding CreateTaskCommand}"/>

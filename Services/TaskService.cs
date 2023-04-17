@@ -114,5 +114,27 @@ namespace Auditore.Services
             }
         }
 
+        public async Task<bool> CreateTask(CreateTaskRequest dto, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.CreateTask, string.Empty));
+            try
+            {
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PostAsync(uri, jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+
+                return false;
+            }catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
     }
 }

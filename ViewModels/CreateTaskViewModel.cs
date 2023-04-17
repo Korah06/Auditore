@@ -1,4 +1,5 @@
-﻿using Auditore.Models;
+﻿using Auditore.Dtos.Request;
+using Auditore.Models;
 using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace Auditore.ViewModels
         private string _description = string.Empty;
         private DateTime _startDate = DateTime.Now;
         private DateTime _endDate = DateTime.Now;
-        private string _categoryId = string.Empty;
+        private Category _selectedCat;
         private string _categoryName = string.Empty;
         public string TaskName
         {
@@ -42,10 +43,10 @@ namespace Auditore.ViewModels
             get { return _description; }
             set { _description = value; }
         }
-        public string CategoryId
+        public Category SelectedCat
         {
-            get { return _categoryId; }
-            set { _categoryId = value; }
+            get { return _selectedCat; }
+            set { _selectedCat = value; }
         }
 
         public DateTime StartDate
@@ -75,21 +76,38 @@ namespace Auditore.ViewModels
 
         public ICommand CreateTaskCommand => new Command(async () =>
         {
-
-            if(_categoryId != string.Empty && _categoryName != string.Empty) 
+            string catId = string.Empty;
+            if(_selectedCat != null || _categoryName != string.Empty) 
             {
-                _categoryId = await _categoryService
+                if (_selectedCat ==null)
+                {
+                    catId = await _categoryService
                 .CreateCategory(_categoryName, Preferences.Default.Get("token", ""));
+                }
+                else
+                {
+                    catId = _selectedCat._id;
+                }
+                 
             }
             else
             {
                 await Application.Current.MainPage
                 .DisplayAlert("Error", "Seleccione o cree alguna categoria", "Aceptar");
                 return;
-
             }
+            CreateTaskRequest dto = new CreateTaskRequest();
+            dto.categoryId = catId;
+            dto.startDate = _startDate;
+            dto.endDate = _endDate;
+            dto.description = _description;
+            dto.name = _taskName;
+            bool created = await _taskService.CreateTask(dto, Preferences.Default.Get("token", ""));
 
-            await Shell.Current.GoToAsync("//Tasks");
+            if(created)
+            {
+                await Shell.Current.GoToAsync("//Tasks");
+            }
         });
 
         private void ObtainCategories()

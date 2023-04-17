@@ -1,4 +1,5 @@
-﻿using Auditore.Models;
+﻿using Auditore.Dtos.Request;
+using Auditore.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,5 +13,6 @@ namespace Auditore.Services.Interfaces
     {
         Task<List<MyTask>> GetTasks(string token);
         Task<bool> UpdateTasks(List<MyTask> tasks, string token);
+        Task<bool> CreateTask(CreateTaskRequest dto, string token);
     }
 }

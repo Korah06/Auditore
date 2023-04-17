@@ -32,9 +32,5 @@ public partial class CreateTaskDesktop : ContentPage
         }
     }
 
-    private void catPicker_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        Category cat = (Category)catPicker.SelectedItem;
-        _taskViewModel.CategoryId = cat._id;
-    }
+    
 }

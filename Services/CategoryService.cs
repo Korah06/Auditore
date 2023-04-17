@@ -80,8 +80,9 @@ namespace Auditore.Services
                 if (response.IsSuccessStatusCode)
                 {
                     string content = await response.Content.ReadAsStringAsync();
-                    string newCatId = JsonSerializer.Deserialize<string>(content, _serializerOptions);
-                    return newCatId;
+                    NewCategoryResponse catResponse = 
+                        JsonSerializer.Deserialize<NewCategoryResponse>(content, _serializerOptions);
+                    return catResponse.id;
                 }
                 return null;
 

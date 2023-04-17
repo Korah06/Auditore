@@ -18,9 +18,12 @@
                 <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                     <CollectionView ItemsSource="{Binding Categories}"
                                     HorizontalOptions="FillAndExpand">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:Category">
-                                <Frame WidthRequest="200">
+                                <Frame WidthRequest="200" Margin="10">
                                     <VerticalStackLayout Padding="15" Spacing="10">
                                         <Label Text="{Binding Name}" HorizontalOptions="Center"/>
                                         <Label Text="{Binding PendingTasks, StringFormat='{0} Tareas Pendientes'}"/>

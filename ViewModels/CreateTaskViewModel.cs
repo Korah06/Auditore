@@ -75,6 +75,7 @@ namespace Auditore.ViewModels
 
         public ICommand CreateTaskCommand => new Command(async () =>
         {
+            
             await Shell.Current.GoToAsync("//Tasks");
         });
 

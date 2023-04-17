@@ -1,4 +1,5 @@
 ﻿using Auditore.Constants;
+using Auditore.Dtos.Request;
 using Auditore.Dtos.Response;
 using Auditore.Models;
 using Auditore.Services.Interfaces;
@@ -60,9 +61,36 @@ namespace Auditore.Services
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
             }
-
-
             return null;
+        }
+
+        public async Task<string> CreateCategory(string catName, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.CreateCategory, string.Empty));
+            CreateCategoryRequest dto = new CreateCategoryRequest();
+            dto.name = catName;
+            var r = new Random();
+            dto.color = Color.FromRgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)).ToHex();
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PostAsync(uri,jsonContent);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    string newCatId = JsonSerializer.Deserialize<string>(content, _serializerOptions);
+                    return newCatId;
+                }
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
+            }
         }
     }
 }

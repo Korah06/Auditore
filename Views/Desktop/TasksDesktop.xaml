@@ -52,8 +52,10 @@
             <!--#region Tasks -->
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView
-                        ItemsSource="{Binding Tasks}"
-                        VerticalOptions="FillAndExpand">
+                    ItemsSource="{Binding Tasks}"
+                    VerticalOptions="FillAndExpand" 
+                    SelectionMode="Single"
+                    SelectionChanged="CollectionView_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:MyTask">
                             <Frame Margin="10,5,10,5">
@@ -87,6 +89,24 @@
                 </CollectionView>
             </RefreshView>
             <!--#endregion-->
+        </StackLayout>
+        <StackLayout Grid.Column="1">
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="No se encuentra ninguna tarea seleccionada" 
+                           HorizontalOptions="Center"
+                           x:Name="taskFounded">
+                        <Label.Triggers>
+                            <DataTrigger Binding="{Binding ItemSelected}"
+                                         TargetType="Label"
+                                         Value="True">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                        
+                    </Label>
+                </VerticalStackLayout>
+            </Frame>
         </StackLayout>
         
     </Grid>

@@ -17,4 +17,8 @@ public partial class TasksDesktop : ContentPage
         this.BindingContext = _viewModel;
 	}
 
+    private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		taskFounded.IsVisible = false;
+    }
 }

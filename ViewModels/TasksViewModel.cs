@@ -16,8 +16,13 @@ namespace Auditore.ViewModels
 {
     public class TasksViewModel
     {
-
+        private bool _itemSelected = false;
         private bool _isLoading;
+        public bool ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
         public bool IsLoading
         {
             get { return _isLoading; }
@@ -126,6 +131,11 @@ namespace Auditore.ViewModels
         public ICommand CreateTaskCommand => new Command(async () =>
         {
             await Shell.Current.GoToAsync("//Tasks/CreateTaskDesktop");
+        });
+
+        public ICommand SelectCommand => new Command( () =>
+        {
+            _itemSelected = true;
         });
 
         private void ObtainTasks()

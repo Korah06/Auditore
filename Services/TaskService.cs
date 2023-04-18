@@ -136,5 +136,63 @@ namespace Auditore.Services
             }
         }
 
+        public async Task<bool> DeleteTask(string taskId,string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.DeleteTask, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", taskId);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(taskId), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Eliminado", "La tarea ha sido eliminada correctamente", "Aceptar");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> ModifyTask(MyTask task ,string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.ModifyTask, string.Empty));
+            ModifyTaskRequest dto = new ModifyTaskRequest
+            {
+                categoryId = task.CategoryId,
+                completed = task.Completed,
+                description = task.Description,
+                endDate = task.EndDate,
+                name = task.Name,
+                startDate = task.StartDate,
+                userId = task.UserId
+            };
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", task._id);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PutAsync(uri, jsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Modificado", "La tarea ha sido modificada correctamente", "Aceptar");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex) 
+            {
+                return false;
+            }
+
+        }
+
     }
 }

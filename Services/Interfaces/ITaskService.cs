@@ -14,5 +14,7 @@ namespace Auditore.Services.Interfaces
         Task<List<MyTask>> GetTasks(string token);
         Task<bool> UpdateTasks(List<MyTask> tasks, string token);
         Task<bool> CreateTask(CreateTaskRequest dto, string token);
+        Task<bool> DeleteTask(string taskId, string token);
+        Task<bool> ModifyTask(MyTask task, string token);
     }
 }

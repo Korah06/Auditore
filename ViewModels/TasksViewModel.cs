@@ -53,6 +53,8 @@ namespace Auditore.ViewModels
         private readonly ICategoryService _categoryService;
 
         public Command RefreshCommand { get; set; }
+
+        
         public TasksViewModel(ITaskService taskService, ICategoryService categoryService) 
         { 
             _taskService = taskService;
@@ -146,9 +148,22 @@ namespace Auditore.ViewModels
             
         });
 
-        public ICommand RefreshSelectCommand => new Command<object>((obj) =>
+        public ICommand DeleteTask => new Command(async() =>
         {
-            
+            bool deleted = await _taskService.DeleteTask(_itemSelected._id, Preferences.Default.Get("token", ""));
+            if (deleted)
+            {
+                OnRefresh();
+            }
+        });
+
+        public ICommand UpdateTask => new Command(async () =>
+        {
+            bool updated = await _taskService.ModifyTask(_itemSelected, Preferences.Default.Get("token", ""));
+            if (updated)
+            {
+                OnRefresh();
+            }
         });
         #endregion
 

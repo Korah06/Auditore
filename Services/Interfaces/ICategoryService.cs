@@ -11,5 +11,6 @@ namespace Auditore.Services.Interfaces
     {
         Task<List<Category>> GetCategories(string token);
         Task<string> CreateCategory(string catName, string token);
+        Task<bool> DeleteCategory(string categoryId, string token);
     }
 }

@@ -143,7 +143,6 @@ namespace Auditore.Services
             {
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 _client.DefaultRequestHeaders.Add("id", taskId);
-                using StringContent jsonContent = new(JsonSerializer.Serialize(taskId), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await _client.DeleteAsync(uri);
 
                 if (response.IsSuccessStatusCode)

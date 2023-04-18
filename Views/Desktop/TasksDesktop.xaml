@@ -17,7 +17,9 @@
             <StackLayout Orientation="Horizontal">
                 <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                     <CollectionView ItemsSource="{Binding Categories}"
-                                    HorizontalOptions="FillAndExpand">
+                                    HorizontalOptions="FillAndExpand"
+                                    x:Name="CollectionCat"
+                                    SelectionMode="Single">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
@@ -35,7 +37,15 @@
                                                    HorizontalOptions="End"
                                                    HeightRequest="30">
                                                 <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:TasksViewModel}}, Path=DeleteCategory}"/>
+                                                    <TapGestureRecognizer 
+                                                        Command=
+                                                        "{Binding Source=
+                                                        {RelativeSource AncestorType=
+                                                        {x:Type viewmodels:TasksViewModel}}, 
+                                                        Path=DeleteCategory}"
+                                                        CommandParameter=
+                                                        "{Binding SelectedItem,
+                                                        Source={x:Reference CollectionCat}}"/>
                                                 </Image.GestureRecognizers>
                                             </Image>
                                         </Grid>

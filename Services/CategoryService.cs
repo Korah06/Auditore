@@ -93,5 +93,28 @@ namespace Auditore.Services
                 return null;
             }
         }
+
+        public async Task<bool> DeleteCategory(string categoryId, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.DeleteCategory, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", categoryId);
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Eliminado", "La categoria ha sido eliminada correctamente", "Aceptar");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

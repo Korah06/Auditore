@@ -156,6 +156,16 @@ namespace Auditore.ViewModels
                 OnRefresh();
             }
         });
+        public ICommand DeleteCategory => new Command(async () =>
+        {
+            //bool deleted = false;
+            //if (deleted)
+            //{
+            //    OnRefresh();
+            //}
+            await Application.Current.MainPage
+                        .DisplayAlert("Modificado", "La tarea ha sido modificada correctamente", "Aceptar");
+        });
 
         public ICommand UpdateTask => new Command(async () =>
         {

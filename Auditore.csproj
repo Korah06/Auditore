@@ -51,6 +51,8 @@
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\Cairo-Regular.ttf" />
 	  <None Remove="Resources\Images\Auditore.png" />
+	  <None Remove="Resources\Images\deleteicon.png" />
+	  <None Remove="Resources\Images\trash_icon.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

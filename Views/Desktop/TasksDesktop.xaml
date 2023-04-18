@@ -53,8 +53,11 @@
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView
                     ItemsSource="{Binding Tasks}"
+                    x:Name="TaskCollection"
                     VerticalOptions="FillAndExpand" 
                     SelectionMode="Single"
+                    SelectionChangedCommand="{Binding SelectCommand}"
+                    SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference TaskCollection}}"
                     SelectionChanged="CollectionView_SelectionChanged">
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:MyTask">
@@ -95,16 +98,37 @@
                 <VerticalStackLayout>
                     <Label Text="No se encuentra ninguna tarea seleccionada" 
                            HorizontalOptions="Center"
-                           x:Name="taskFounded">
-                        <Label.Triggers>
-                            <DataTrigger Binding="{Binding ItemSelected}"
-                                         TargetType="Label"
-                                         Value="True">
-                                <Setter Property="IsVisible" Value="False"/>
-                            </DataTrigger>
-                        </Label.Triggers>
-                        
-                    </Label>
+                           x:Name="taskFounded"/>
+                    <!--<RefreshView Command="{Binding RefreshSelectCommand}" IsRefreshing="{Binding IsRefreshing}">-->
+                        <Grid x:Name="ContentGrid" IsVisible="false">
+                            <VerticalStackLayout Spacing="10">
+                                <Label Text="Tarea"/>
+                                <Entry Text="{Binding ItemSelected.Name}"
+                                       x:Name="TaskName"/>
+                                <HorizontalStackLayout HorizontalOptions="Center">
+                                    <Label Text="Fecha Inicio"/>
+                                    <DatePicker Date="{Binding ItemSelected.StartDate}"
+                                                x:Name="StartDate"/>
+                                    <Label Text="Fecha Final" />
+                                    <DatePicker Date="{Binding ItemSelected.EndDate}"
+                                                x:Name="EndDate"/>
+                                </HorizontalStackLayout>
+                                <Label Text="Descripción"/>
+                                <Entry Text="{Binding ItemSelected.Description}"
+                                       x:Name="TaskDescription"/>
+                                <Label Text="Categorias"/>
+                                <Picker ItemsSource="{Binding Categories}"
+                                        x:Name="TaskCategory"
+                            WidthRequest="200"
+                            Title="Categorias"
+                            SelectedItem="{Binding SelectedCat}"
+                            TitleColor="{StaticResource LightBackground}"
+                            HorizontalOptions="Start"
+                            ItemDisplayBinding="{Binding Name}"/>
+
+                            </VerticalStackLayout>
+                        </Grid>
+                    <!--</RefreshView>-->
                 </VerticalStackLayout>
             </Frame>
         </StackLayout>

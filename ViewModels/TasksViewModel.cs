@@ -16,9 +16,10 @@ namespace Auditore.ViewModels
 {
     public class TasksViewModel
     {
-        private bool _itemSelected = false;
+        private MyTask _itemSelected;
         private bool _isLoading;
-        public bool ItemSelected
+        private Category _selectedCat;
+        public MyTask ItemSelected
         {
             get { return _itemSelected; }
             set { _itemSelected = value; }
@@ -33,6 +34,11 @@ namespace Auditore.ViewModels
         {
             get { return _isRefreshing; }
             set { _isRefreshing = value; }
+        }
+        public Category SelectedCat
+        {
+            get { return _selectedCat; }
+            set { _selectedCat = value; }
         }
 
         private List<MyTask> _tasks;
@@ -128,15 +134,23 @@ namespace Auditore.ViewModels
             }
         }
 
+        #region Commands
         public ICommand CreateTaskCommand => new Command(async () =>
         {
             await Shell.Current.GoToAsync("//Tasks/CreateTaskDesktop");
         });
 
-        public ICommand SelectCommand => new Command( () =>
+        public ICommand SelectCommand => new Command<object>((obj) =>
         {
-            _itemSelected = true;
+            _itemSelected = obj as MyTask;
+            
         });
+
+        public ICommand RefreshSelectCommand => new Command<object>((obj) =>
+        {
+            
+        });
+        #endregion
 
         private void ObtainTasks()
         {
@@ -185,7 +199,7 @@ namespace Auditore.ViewModels
             });
         });
 
-
+            IsLoading = false;
         }
 
 

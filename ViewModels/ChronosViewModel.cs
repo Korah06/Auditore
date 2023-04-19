@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Auditore.ViewModels
 {
@@ -58,6 +59,11 @@ namespace Auditore.ViewModels
 
             IsLoading = false;
         }
+
+        public ICommand CreateChronoCommand => new Command(async () =>
+        {
+            await Shell.Current.GoToAsync("//Tasks/CreateChronoDesktop");
+        });
 
     }
 }

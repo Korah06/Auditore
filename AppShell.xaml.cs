@@ -12,6 +12,7 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute("RegisterDesktop", typeof(RegisterDesktop));
 		Routing.RegisterRoute("CreateTaskDesktop", typeof(CreateTaskDesktop));
+		Routing.RegisterRoute("CreateChronoDesktop", typeof(CreateChronoDesktop));
 #if ANDROID || IOS
         loginPage.ContentTemplate = new DataTemplate(typeof(LoginPhone));
 #else

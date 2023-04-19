@@ -15,7 +15,8 @@
                    Margin="10,0,0,0"/>
                 <Button Text="Crear Crono" 
                         WidthRequest="120"
-                        HorizontalOptions="End"/>
+                        HorizontalOptions="End"
+                        Command="{Binding }"/>
             </Grid>
             <!--#region ChronoCollection -->
             <CollectionView ItemsSource="{Binding Chronos}">

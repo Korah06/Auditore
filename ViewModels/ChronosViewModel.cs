@@ -62,7 +62,7 @@ namespace Auditore.ViewModels
 
         public ICommand CreateChronoCommand => new Command(async () =>
         {
-            await Shell.Current.GoToAsync("//Tasks/CreateChronoDesktop");
+            await Shell.Current.GoToAsync("//Chrono/CreateChronoDesktop");
         });
 
     }

@@ -16,7 +16,7 @@
                 <Button Text="Crear Crono" 
                         WidthRequest="120"
                         HorizontalOptions="End"
-                        Command="{Binding }"/>
+                        Command="{Binding CreateChronoCommand}"/>
             </Grid>
             <!--#region ChronoCollection -->
             <CollectionView ItemsSource="{Binding Chronos}">

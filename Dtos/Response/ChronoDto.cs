@@ -10,6 +10,6 @@ namespace Auditore.Dtos.Response
     public class ChronoDto
     {
         public string message { get; set; }
-        public List<Chrono> Chronos { get; set; }
+        public List<Chrono> chronos { get; set; }
     }
 }

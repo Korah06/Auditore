@@ -9,6 +9,6 @@ namespace Auditore.Services.Interfaces
 {
     public interface IChronoService
     {
-        Task<List<Chrono>> GetTasks(string token);
+        Task<List<Chrono>> GetChronos(string token);
     }
 }

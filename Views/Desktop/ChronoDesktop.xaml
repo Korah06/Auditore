@@ -13,18 +13,24 @@
                    FontSize="Medium" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-                <Button Text="Crear Crono"/>
+                <Button Text="Crear Crono" 
+                        WidthRequest="120"
+                        HorizontalOptions="End"/>
             </Grid>
             <!--#region ChronoCollection -->
-            <CollectionView>
+            <CollectionView ItemsSource="{Binding Chronos}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="2" Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame>
+                    <DataTemplate x:DataType="models:Chrono">
+                        <Frame WidthRequest="250">
                             <VerticalStackLayout>
-                                <Label Text=""/>
+                                <Label Text="{Binding Name}"
+                                       FontSize="Subtitle"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding Minutes, StringFormat='{0}:00 minutos'}"
+                                       HorizontalOptions="Center"/>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

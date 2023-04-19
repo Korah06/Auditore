@@ -9,8 +9,6 @@ using System.Linq;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
-using ThreadNetwork;
 
 namespace Auditore.Services
 {
@@ -37,11 +35,11 @@ namespace Auditore.Services
                 WriteIndented = true
             };
         }
-        public async Task<List<Chrono>> GetTasks(string token)
+        public async Task<List<Chrono>> GetChronos(string token)
         {
             ChronoDto dto = new ChronoDto();
             List<Chrono> chronos = new List<Chrono>();
-            Uri uri = new Uri(string.Format(HttpUris.GetMyTasks, string.Empty));
+            Uri uri = new Uri(string.Format(HttpUris.GetChronos, string.Empty));
             try
             {
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -52,18 +50,17 @@ namespace Auditore.Services
                 {
                     string content = await response.Content.ReadAsStringAsync();
                     dto = JsonSerializer.Deserialize<ChronoDto>(content, _serializerOptions);
-                    chronos = dto.Chronos;
-                    return chronos;
+
+                    return dto.chronos;
                 }
                 return null;
             }
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
             }
-
-
-            return null;
+            
         }
     }
 }

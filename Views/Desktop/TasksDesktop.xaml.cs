@@ -16,7 +16,22 @@ public partial class TasksDesktop : ContentPage
 		_categoryService = categoryService;
 		_viewModel = new TasksViewModel(_taskService, _categoryService);
         this.BindingContext = _viewModel;
-	}
+        Appearing += MyPage_AppearingAsync;
+    }
+
+    bool init = false;
+    private void MyPage_AppearingAsync(object sender, EventArgs e)
+    {
+        if (init)
+        {
+            _viewModel.OnRefresh();
+
+        }
+        else
+        {
+            init = true;
+        }
+    }
 
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

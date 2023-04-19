@@ -22,6 +22,7 @@ public static class MauiProgram
 
 		//Services
         builder.Services.AddSingleton<ITaskService, TaskService>();
+        builder.Services.AddSingleton<IChronoService, ChronoService>();
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
         builder.Services.AddSingleton<IUserService, UserService>();
         builder.Services.AddSingleton<IHttpsClientHandlerService, HttpsClientHandlerService>();
@@ -31,12 +32,14 @@ public static class MauiProgram
         builder.Services.AddSingleton<RegisterDesktop>();
 		builder.Services.AddTransient<TasksDesktop>();
 		builder.Services.AddTransient<CreateTaskDesktop>();
+		builder.Services.AddTransient<ChronoDesktop>();
 
         //viewModels
         builder.Services.AddSingleton<LoginViewModel>();
         builder.Services.AddSingleton<RegisterViewModel>();
         builder.Services.AddSingleton<TasksViewModel>();
         builder.Services.AddSingleton<CreateTaskViewModel>();
+        builder.Services.AddSingleton<ChronosViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

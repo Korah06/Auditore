@@ -132,6 +132,7 @@ namespace Auditore.Services
                 return false;
             }catch (Exception ex)
             {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
             }
         }
@@ -155,6 +156,7 @@ namespace Auditore.Services
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
             }
         }
@@ -188,6 +190,7 @@ namespace Auditore.Services
             }
             catch (Exception ex) 
             {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
             }
 

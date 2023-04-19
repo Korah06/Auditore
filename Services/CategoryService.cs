@@ -113,6 +113,7 @@ namespace Auditore.Services
             }
             catch (Exception ex)
             {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
             }
         }

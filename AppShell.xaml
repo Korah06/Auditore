@@ -15,6 +15,10 @@
             <ShellContent Route="Tasks"
                           x:Name="tasksPage"/>
         </Tab>
+        <Tab Title="Chrono">
+            <ShellContent Route="Chrono"
+                          x:Name="chronoPage"/>
+        </Tab>
     </TabBar>
 
 </Shell>

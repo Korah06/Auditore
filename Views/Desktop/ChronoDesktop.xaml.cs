@@ -32,4 +32,15 @@ public partial class ChronoDesktop : ContentPage
             init = true;
         }
     }
+
+    private void ChronoCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_viewModel.SelectedChrono != null)
+        {
+            chronoFounded.IsVisible = false;
+            contentGrid.IsVisible = true;
+            lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.Name"));
+            lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
+        }
+    }
 }

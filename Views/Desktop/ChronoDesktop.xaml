@@ -21,7 +21,11 @@
             <!--#region ChronoCollection -->
             <CollectionView ItemsSource="{Binding Chronos}"
                             VerticalOptions="FillAndExpand"
-                            SelectionMode="Single">
+                            SelectionMode="Single"
+                            x:Name="ChronoCollection"
+                            SelectionChangedCommand="{Binding SelectCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ChronoCollection}}"
+                            SelectionChanged="ChronoCollection_SelectionChanged">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="2" Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
@@ -45,6 +49,27 @@
 
         <!--#region Timer -->
         <StackLayout Grid.Column="1">
+            <Frame>
+                <VerticalStackLayout>
+                    <Label Text="No se encuentra ninguna tarea seleccionada" 
+                           HorizontalOptions="Center"
+                           x:Name="chronoFounded"/>
+                    <Grid x:Name="contentGrid">
+                        <VerticalStackLayout Spacing="10">
+                            <Label Text="Crono"/>
+                            <Label x:Name="lblName"/>
+                            <Label x:Name="lblCrono"/>
+                            <Button x:Name="startButton"
+                                    Text="Empezar/Pausar"
+                                    Command="{Binding StartPauseCommand}"/>
+                            <Button x:Name="resetButton"
+                                    Text="Reset"
+                                    Command="{Binding ResetCommand}"/>
+                        </VerticalStackLayout>
+                        
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
             
         </StackLayout>
         <!--#endregion-->

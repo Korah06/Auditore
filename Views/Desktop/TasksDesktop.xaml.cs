@@ -40,10 +40,55 @@ public partial class TasksDesktop : ContentPage
             taskFounded.IsVisible = false;
             ContentGrid.IsVisible = true;
 
-            TaskName.Text = _viewModel.ItemSelected.Name;
-            TaskDescription.Text = _viewModel.ItemSelected.Description;
-            EndDate.Date = _viewModel.ItemSelected.EndDate;
-            StartDate.Date = _viewModel.ItemSelected.StartDate;
+
+            TaskName.SetBinding(Entry.TextProperty, new Binding("ItemSelected.Name"));
+            TaskDescription.SetBinding(Entry.TextProperty, new Binding("ItemSelected.Description"));
+            EndDate.SetBinding(DatePicker.DateProperty, new Binding("ItemSelected.EndDate"));
+            StartDate.SetBinding(DatePicker.DateProperty, new Binding("ItemSelected.StartDate"));
+
+
+            if(VerticalDad.Children.Count > 7)
+            {
+                VerticalDad.Children.RemoveAt(VerticalDad.Children.Count - 1);
+            }
+                var buttonGrid = new Grid
+                {
+
+                    Margin = new Thickness(0, 10, 0, 0),
+                    ColumnDefinitions = new ColumnDefinitionCollection
+                    {
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) },
+                        new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }
+                    }
+                };
+
+                var updateButton = new Button
+                {
+                    Text = "Actualizar Tarea",
+                    HorizontalOptions = LayoutOptions.Start
+                };
+                updateButton.SetBinding(Button.CommandProperty, new Binding("UpdateTask"));
+                updateButton.Clicked += Button_Clicked_1;
+
+                var deleteButton = new Button
+                {
+                    Text = "Eliminar Tarea",
+                    HorizontalOptions = LayoutOptions.End,
+                    BackgroundColor = Color.FromArgb("#6a040f")
+                };
+                deleteButton.SetBinding(Button.CommandProperty, new Binding("DeleteTask"));
+                deleteButton.Clicked += Button_Clicked;
+
+                Grid.SetColumn(updateButton, 0);
+                Grid.SetColumn(deleteButton, 1);
+
+                buttonGrid.Children.Add(updateButton);
+                buttonGrid.Children.Add(deleteButton);
+
+                // Agrega el grid al layout principal
+                VerticalDad.Children.Add(buttonGrid);
+            
+
             Category cat;
             foreach (Category item in _viewModel.Categories)
             {

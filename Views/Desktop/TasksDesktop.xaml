@@ -150,7 +150,8 @@
                                 
                                 <Button Text="Actualizar Tarea"
                                         HorizontalOptions="Start"
-                                        Command="{Binding UpdateTask}"/>
+                                        Command="{Binding UpdateTask}"
+                                        Clicked="Button_Clicked_1"/>
                                 <Button Text="Eliminar Tarea"
                                         HorizontalOptions="End"
                                         Clicked="Button_Clicked"

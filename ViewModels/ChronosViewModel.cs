@@ -41,6 +41,11 @@ namespace Auditore.ViewModels
             ObtainChronos();
         }
 
+        public void OnRefresh()
+        {
+            Chronos.Clear();
+            ObtainChronos();
+        }
         public async void ObtainChronos()
         {
             IsLoading = true;

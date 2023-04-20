@@ -1,4 +1,5 @@
-﻿using Auditore.Models;
+﻿using Auditore.Dtos.Request;
+using Auditore.Models;
 using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -34,16 +35,45 @@ namespace Auditore.ViewModels
         private List<Category> _categories;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
 
-        private IChronoService _chronoService;
-        public CreateChronoViewModel(IChronoService chronoService) 
+        private readonly IChronoService _chronoService;
+        private readonly ICategoryService _categoryService;
+        public CreateChronoViewModel(IChronoService chronoService,ICategoryService categoryService) 
         {
             _chronoService = chronoService;
+            _categoryService = categoryService;
+            ObtainCategories();
         }
 
+        private void ObtainCategories()
+        {
+            Task.Run(async () =>
+            {
+
+                _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
+
+                App.Current.Dispatcher.Dispatch(() =>
+                {
+                    foreach (var category in _categories) {Categories.Add(category);}
+                });
+            });
+        }
+
+        #region Commands
         public ICommand CreateChronoCommand => new Command(async () =>
         {
-            await Shell.Current.GoToAsync("//Chrono/CreateChronoDesktop");
-        });
+            CreateChronoRequest dto = new CreateChronoRequest
+            {
+                categoryId = _selectedCat._id,
+                minutes = _chronoMinutes,
+                name = _chronoName
+            };
+            bool created = await _chronoService.CreateChrono(dto, Preferences.Default.Get("token", ""));
+            if (created)
+            {
+                await Shell.Current.GoToAsync("//Chrono");
+            }
+        }); 
+        #endregion
 
     }
 }

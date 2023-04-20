@@ -126,8 +126,6 @@ namespace Auditore.ViewModels
                     }
                 });
             });
-
-
         }
     }
 }

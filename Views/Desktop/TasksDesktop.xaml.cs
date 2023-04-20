@@ -61,4 +61,9 @@ public partial class TasksDesktop : ContentPage
         taskFounded.IsVisible = true;
         ContentGrid.IsVisible = false;
     }
+
+    private void Button_Clicked_1(object sender, EventArgs e)
+    {
+
+    }
 }

@@ -17,5 +17,19 @@ public partial class ChronoDesktop : ContentPage
         _viewModel = new ChronosViewModel(_chronoService, _taskService, _categoryService);
 		InitializeComponent();
         this.BindingContext = _viewModel;
-	}
+        Appearing += MyPage_AppearingAsync;
+    }
+
+    bool init = false;
+    private void MyPage_AppearingAsync(object sender, EventArgs e)
+    {
+        if (init)
+        {
+            _viewModel.OnRefresh();
+        }
+        else
+        {
+            init = true;
+        }
+    }
 }

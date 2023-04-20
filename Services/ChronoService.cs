@@ -1,4 +1,5 @@
 ﻿using Auditore.Constants;
+using Auditore.Dtos.Request;
 using Auditore.Dtos.Response;
 using Auditore.Models;
 using Auditore.Services.Interfaces;
@@ -60,7 +61,29 @@ namespace Auditore.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return null;
             }
-            
+        }
+
+        public async Task<bool> CreateChrono(CreateChronoRequest dto, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.CreateChronos, string.Empty));
+            try
+            {
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PostAsync(uri,jsonContent);
+
+                if(response.IsSuccessStatusCode)
+                {
+                    return true;
+                }
+                return false;
+            }
+            catch(Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
         }
     }
 }

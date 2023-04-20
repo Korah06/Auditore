@@ -5,13 +5,15 @@ namespace Auditore.Views.Desktop;
 
 public partial class CreateChronoDesktop : ContentPage
 {
-	IChronoService _chronoService;
-	CreateChronoViewModel _createChronoViewModel;
+    private readonly IChronoService _chronoService;
+    private readonly ICategoryService _categoryService;
+	private readonly CreateChronoViewModel _createChronoViewModel;
 
-    public CreateChronoDesktop(IChronoService chronoService)
+    public CreateChronoDesktop(IChronoService chronoService, ICategoryService categoryService)
 	{
 		_chronoService = chronoService;
-		_createChronoViewModel = new CreateChronoViewModel(_chronoService);
+		_categoryService = categoryService;
+		_createChronoViewModel = new CreateChronoViewModel(_chronoService,_categoryService);
 		InitializeComponent();
 		this.BindingContext = _createChronoViewModel;
 		

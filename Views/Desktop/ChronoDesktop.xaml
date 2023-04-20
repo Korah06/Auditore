@@ -5,10 +5,10 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:ChronosViewModel">
-    <Grid ColumnDefinitions="*,*">
+    <Grid ColumnDefinitions="0.4*,0.6*">
         <!--#region ChronoViewer -->
         <StackLayout Grid.Column="0">
-            <Grid>
+            <Grid Margin="0,10,0,10">
                 <Label Text="Cronometros" 
                    FontSize="Medium" 
                    HorizontalOptions="Start"
@@ -19,13 +19,15 @@
                         Command="{Binding CreateChronoCommand}"/>
             </Grid>
             <!--#region ChronoCollection -->
-            <CollectionView ItemsSource="{Binding Chronos}">
+            <CollectionView ItemsSource="{Binding Chronos}"
+                            VerticalOptions="FillAndExpand"
+                            SelectionMode="Single">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="2" Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:Chrono">
-                        <Frame WidthRequest="250">
+                        <Frame WidthRequest="250" Margin="10">
                             <VerticalStackLayout>
                                 <Label Text="{Binding Name}"
                                        FontSize="Subtitle"
@@ -38,6 +40,12 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <!--#endregion-->
+        </StackLayout>
+        <!--#endregion-->
+
+        <!--#region Timer -->
+        <StackLayout Grid.Column="1">
+            
         </StackLayout>
         <!--#endregion-->
     </Grid>

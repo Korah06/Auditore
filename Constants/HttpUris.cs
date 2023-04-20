@@ -15,8 +15,10 @@ namespace Auditore.Constants
         public static string UpdateMyTasks = "http://localhost:3000/tasks/updatetasks";
         public static string CreateTask = "http://localhost:3000/tasks/";
         #endregion
+
         #region CHRONOS
         public static string GetChronos = "http://localhost:3000/chrono/";
+        public static string CreateChronos = "http://localhost:3000/chrono/";
         #endregion
 
         #region CATEGORIES

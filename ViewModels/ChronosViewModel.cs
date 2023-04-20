@@ -97,6 +97,7 @@ namespace Auditore.ViewModels
                 }
             }
         }
+        private bool isReset = false;
         public async void Countdown()
         {
             
@@ -113,16 +114,23 @@ namespace Auditore.ViewModels
                     minutesLeft = totalSeconds / 60;
                     secondsLeft = totalSeconds % 60;
 
-                    _showTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+                    ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
 
                     await Task.Delay(1000);
                     totalSeconds--;
-                    Debug.WriteLine("____________"+totalSeconds+"______________" + _showTime);
+                    Debug.WriteLine("____________"+totalSeconds+"______________" + ShowTime);
                 }
                 else
                 {
                     Debug.WriteLine("Soy false: " + isRunning);
                     await Task.Delay(50);
+                }
+                if (isReset)
+                {
+                    totalSeconds = 0;
+                    isReset = false;
+
+                    return;
                 }
             }
 
@@ -164,11 +172,13 @@ namespace Auditore.ViewModels
             isRunning = !isRunning;
         });
 
-        public ICommand ResetCommand => new Command<object>((obj) =>
+        public ICommand ResetCommand => new Command(async () =>
         {
+            isReset = true;
+            ShowTime = "0:00";
             isRunning = false;
             Countdown();
-            
+
         });
 
     }

@@ -98,15 +98,22 @@ namespace Auditore.ViewModels
             }
         }
         private bool isReset = false;
+        int totalSeconds = 0;
         public async void Countdown()
         {
-            
-            int totalSeconds = _selectedChrono.Minutes * 60;
+            totalSeconds = 0;
+
+            if(_selectedChrono != null)
+            {
+                totalSeconds = _selectedChrono.Minutes * 60;
+                
+            }
             int minutesLeft;
             int secondsLeft;
 
             while (totalSeconds > 0)
             {
+                
                 Debug.WriteLine("Inicio: " + isRunning);
                 if (isRunning)
                 {
@@ -116,22 +123,37 @@ namespace Auditore.ViewModels
 
                     ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
 
-                    await Task.Delay(1000);
                     totalSeconds--;
-                    Debug.WriteLine("____________"+totalSeconds+"______________" + ShowTime);
+                    await Task.Delay(1000);
+
+                    
+                    Debug.WriteLine("____________"+totalSeconds+"______________" + ShowTime + "reset: " + isReset);
+
+                    if (isReset)
+                    {
+
+                        isReset = false;
+                        return;
+                    }
+                    Debug.WriteLine
+                        ("Soy false: " + isRunning + " reset: " + isReset +
+                        " secs: " + totalSeconds + "reset: " + isReset);
                 }
                 else
                 {
-                    Debug.WriteLine("Soy false: " + isRunning);
+                    
                     await Task.Delay(50);
-                }
-                if (isReset)
-                {
-                    totalSeconds = 0;
-                    isReset = false;
+                    if (isReset)
+                    {
 
-                    return;
+                        isReset = false;
+                        return;
+                    }
+                    Debug.WriteLine
+                        ("Soy false: " + isRunning + " reset: " + isReset + 
+                        " secs: " + totalSeconds + "reset: " + isReset);
                 }
+                
             }
 
 

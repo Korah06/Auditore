@@ -48,8 +48,8 @@
         <!--#endregion-->
 
         <!--#region Timer -->
-        <StackLayout Grid.Column="1">
-            <Frame>
+        <StackLayout Grid.Column="1" VerticalOptions="Center">
+            <Frame Margin="10" >
                 <VerticalStackLayout>
                     <Label Text="No se encuentra ninguna tarea seleccionada" 
                            HorizontalOptions="Center"
@@ -58,7 +58,9 @@
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Crono"/>
                             <Label x:Name="lblName"/>
-                            <Label x:Name="lblCrono"/>
+                            <Label x:Name="lblCrono"
+                                   HorizontalOptions="Center"
+                                   FontSize="Header"/>
                             <Button x:Name="startButton"
                                     Text="Empezar/Pausar"
                                     Command="{Binding StartPauseCommand}"/>

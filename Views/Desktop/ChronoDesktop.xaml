@@ -63,26 +63,40 @@
         <!--#endregion-->
 
         <!--#region Timer -->
-        <StackLayout Grid.Column="1" VerticalOptions="Center">
+        <StackLayout Grid.Column="1">
             <Frame Margin="10" >
                 <VerticalStackLayout>
                     <Label Text="No se encuentra ninguna tarea seleccionada" 
                            HorizontalOptions="Center"
-                           x:Name="chronoFounded"
-                           IsVisible="false"/>
-                    <Grid x:Name="contentGrid">
+                           x:Name="chronoFounded"/>
+                    <Grid x:Name="contentGrid"
+                          IsVisible="false">
                         <VerticalStackLayout Spacing="10">
-                            <Label Text="Crono"/>
-                            <Label x:Name="lblName"/>
+                            <Label x:Name="lblName"
+                                   FontSize="Title"/>
                             <Label x:Name="lblCrono"
-                                   HorizontalOptions="Center"
-                                   FontSize="Header"/>
-                            <Button x:Name="startButton"
+                                   FontSize="50"
+                                   HorizontalOptions="Center"/>
+                            <Grid>
+                                <Button x:Name="startButton"
                                     Text="Empezar/Pausar"
-                                    Command="{Binding StartPauseCommand}"/>
-                            <Button x:Name="resetButton"
+                                    Margin="0,0,180,0"
+                                    WidthRequest="150"
+                                    Command="{Binding StartPauseCommand}"
+                                    HorizontalOptions="Center"/>
+                                <Button x:Name="resetButton"
                                     Text="Reset"
-                                    Command="{Binding ResetCommand}"/>
+                                    WidthRequest="150"
+                                    Margin="180,0,0,0"
+                                    Command="{Binding ResetCommand}"
+                                    HorizontalOptions="Center"/>
+                            </Grid>
+                            <Grid>
+                                <Label Text="Tareas" FontSize="Subtitle"/>
+                                <Button Text="Finalizar" 
+                                        WidthRequest="150" 
+                                        HorizontalOptions="End"/>
+                            </Grid>
                         </VerticalStackLayout>
                         
                     </Grid>

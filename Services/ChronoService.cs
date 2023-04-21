@@ -85,5 +85,30 @@ namespace Auditore.Services
                 return false;
             }
         }
+
+        public async Task<bool> DeleteChrono(string id, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.DeleteChrono, string.Empty));
+            try
+            {
+
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", id);
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Eliminado", "El cronometro ha sido eliminado correctamente", "Aceptar");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
+        }
     }
 }

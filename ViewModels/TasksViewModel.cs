@@ -164,7 +164,6 @@ namespace Auditore.ViewModels
             {
                 OnRefresh();
             }
-
         });
 
         public ICommand UpdateTask => new Command(async () =>

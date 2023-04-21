@@ -12,5 +12,6 @@ namespace Auditore.Services.Interfaces
     {
         Task<List<Chrono>> GetChronos(string token);
         Task<bool> CreateChrono(CreateChronoRequest dto, string token);
+        Task<bool> DeleteChrono(string id, string token);
     }
 }

@@ -38,6 +38,21 @@
                                        HorizontalOptions="Center"/>
                                 <Label Text="{Binding Minutes, StringFormat='{0}:00 minutos'}"
                                        HorizontalOptions="Center"/>
+                                <Image Source="deleteicon.png"
+                                                   HorizontalOptions="End"
+                                                   HeightRequest="30">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                        Command=
+                                                        "{Binding Source=
+                                                        {RelativeSource AncestorType=
+                                                        {x:Type viewmodels:ChronosViewModel}}, 
+                                                        Path=DeleteChrono}"
+                                                        CommandParameter=
+                                                        "{Binding SelectedItem,
+                                                        Source={x:Reference ChronoCollection}}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>
@@ -53,7 +68,8 @@
                 <VerticalStackLayout>
                     <Label Text="No se encuentra ninguna tarea seleccionada" 
                            HorizontalOptions="Center"
-                           x:Name="chronoFounded"/>
+                           x:Name="chronoFounded"
+                           IsVisible="false"/>
                     <Grid x:Name="contentGrid">
                         <VerticalStackLayout Spacing="10">
                             <Label Text="Crono"/>

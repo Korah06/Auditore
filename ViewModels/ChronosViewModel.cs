@@ -180,12 +180,44 @@ namespace Auditore.ViewModels
             await Shell.Current.GoToAsync("//Chrono/CreateChronoDesktop");
         });
 
+        public ICommand DeleteChrono => new Command<object>(async (obj) =>
+        {
+            bool deleted = false;
+            var chrono = obj as Chrono;
+            bool answer = await Application.Current.MainPage.DisplayAlert
+            ("Eliminar", "Quieres eliminar el Cronometro?", "Yes", "No");
+            if (answer)
+            {
+                deleted = await _chronoService.DeleteChrono(chrono._id, Preferences.Default.Get("token", ""));
+            }
+            
+            if (deleted)
+            {
+                OnRefresh();
+            }
+        });
+
 
 
         public ICommand SelectCommand => new Command<object>((obj) =>
         {
             _selectedChrono = obj as Chrono;
-            Countdown();
+            int minutesLeft = _selectedChrono.Minutes;
+            int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
+
+            ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+            if(isRunning)
+            {
+                isReset = true;
+                isRunning = false;
+                Countdown();
+            }
+            else
+            {
+                Countdown();
+
+            }
+
         });
 
         
@@ -196,11 +228,17 @@ namespace Auditore.ViewModels
 
         public ICommand ResetCommand => new Command(async () =>
         {
-            isReset = true;
-            ShowTime = "0:00";
-            isRunning = false;
-            Countdown();
+            if (_selectedChrono != null)
+            {
+                isReset = true;
+                int minutesLeft = _selectedChrono.Minutes;
+                int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
 
+                ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+                isRunning = false;
+                Countdown();
+            }
+                
         });
 
     }

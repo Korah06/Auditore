@@ -1,3 +1,4 @@
+using Auditore.Models;
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
 
@@ -9,6 +10,8 @@ public partial class ChronoDesktop : ContentPage
     private readonly ICategoryService _categoryService;
     private readonly IChronoService _chronoService;
     private ChronosViewModel _viewModel;
+
+    private Chrono _selected;
     public ChronoDesktop(ITaskService taskService, ICategoryService categoryService, IChronoService chronoService)
 	{   
         _taskService = taskService;
@@ -26,6 +29,7 @@ public partial class ChronoDesktop : ContentPage
         if (init)
         {
             _viewModel.OnRefresh();
+            _viewModel.SelectedChrono = _selected;
         }
         else
         {
@@ -41,6 +45,7 @@ public partial class ChronoDesktop : ContentPage
             contentGrid.IsVisible = true;
             lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.Name"));
             lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
+            _selected = _viewModel.SelectedChrono;
         }
     }
 }

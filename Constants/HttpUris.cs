@@ -19,6 +19,7 @@ namespace Auditore.Constants
         #region CHRONOS
         public static string GetChronos = "http://localhost:3000/chrono/";
         public static string CreateChronos = "http://localhost:3000/chrono/";
+        public static string DeleteChrono = "http://localhost:3000/chrono/";
         #endregion
 
         #region CATEGORIES

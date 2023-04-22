@@ -98,6 +98,7 @@ namespace Auditore.ViewModels
             }
         }
         private bool isReset = false;
+        private bool isChanging = false;
         int totalSeconds = 0;
         public async void Countdown()
         {
@@ -135,6 +136,11 @@ namespace Auditore.ViewModels
                         isReset = false;
                         return;
                     }
+                    if (isChanging)
+                    {
+                        totalSeconds = 0;
+                        return;
+                    }
                     Debug.WriteLine
                         ("Soy false: " + isRunning + " reset: " + isReset +
                         " secs: " + totalSeconds + "reset: " + isReset);
@@ -147,6 +153,11 @@ namespace Auditore.ViewModels
                     {
 
                         isReset = false;
+                        return;
+                    }
+                    if (isChanging)
+                    {
+                        totalSeconds = 0;
                         return;
                     }
                     Debug.WriteLine
@@ -201,12 +212,17 @@ namespace Auditore.ViewModels
 
         public ICommand SelectCommand => new Command<object>((obj) =>
         {
-            _selectedChrono = obj as Chrono;
+            isChanging = true;
+            if(obj != null)
+            {
+                _selectedChrono = obj as Chrono;
+            }
             getTasksForChrono();
             int minutesLeft = _selectedChrono.Minutes;
             int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
 
             ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+            isChanging= false;
             if(isRunning)
             {
                 isReset = true;
@@ -250,41 +266,46 @@ namespace Auditore.ViewModels
                 _tasks = await _taskService.GetTasksCategory(_selectedChrono.CategoryId,Preferences.Default.Get("token", ""));
                 _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
-                App.Current.Dispatcher.Dispatch(() =>
+                if(_tasks != null )
                 {
-                    foreach (var category in _categories)
+                    App.Current.Dispatcher.Dispatch(() =>
                     {
-                        var tasks = from t in _tasks
-                                    where t.CategoryId == category._id
-                                    select t;
-
-                        var completed = from t in tasks
-                                        where t.Completed == true
+                        foreach (var category in _categories)
+                        {
+                            var tasks = from t in _tasks
+                                        where t.CategoryId == category._id
                                         select t;
 
-                        var notCompleted = from t in tasks
-                                           where t.Completed == false
-                                           select t;
+                            var completed = from t in tasks
+                                            where t.Completed == true
+                                            select t;
+
+                            var notCompleted = from t in tasks
+                                               where t.Completed == false
+                                               select t;
 
 
 
-                        category.PendingTasks = notCompleted.Count();
-                        category.Percentage = (float)completed.Count() / (float)tasks.Count();
-                        Categories.Add(category);
-                    }
+                            category.PendingTasks = notCompleted.Count();
+                            category.Percentage = (float)completed.Count() / (float)tasks.Count();
+                            Categories.Add(category);
+                        }
 
-                    foreach (var task in _tasks)
-                    {
-                        var catColor =
-                        (from c in Categories
-                         where c._id == task.CategoryId
-                         select c.Color).FirstOrDefault();
+                        foreach (var task in _tasks)
+                        {
+                            var catColor =
+                            (from c in Categories
+                             where c._id == task.CategoryId
+                             select c.Color).FirstOrDefault();
 
-                        task.TaskColor = catColor;
-                        Tasks.Add(task);
-                    }
+                            task.TaskColor = catColor;
+                            Tasks.Add(task);
+                        }
 
-                });
+                    });
+                }
+
+                
             });
         }
 

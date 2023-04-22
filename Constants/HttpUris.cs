@@ -10,7 +10,7 @@ namespace Auditore.Constants
     {
         #region TASKS
         public static string GetMyTasks = "http://localhost:3000/tasks/mytasks";
-        public static string GetMyCategoryTasks = "http://localhost:3000/tasks//mytasksCategory";
+        public static string GetMyCategoryTasks = "http://localhost:3000/tasks/mytasksCategory";
         public static string DeleteTask = "http://localhost:3000/tasks/";
         public static string ModifyTask = "http://localhost:3000/tasks/";
         public static string UpdateMyTasks = "http://localhost:3000/tasks/updatetasks";

@@ -71,6 +71,35 @@ namespace Auditore.Services
             return null;
         }
 
+        public async Task<List<MyTask>> GetTasksCategory(string catId,string token)
+        {
+            TasksDto = new MyTaskDto();
+            Uri uri = new Uri(string.Format(HttpUris.GetMyCategoryTasks, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", catId);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    TasksDto = JsonSerializer.Deserialize<MyTaskDto>(content, _serializerOptions);
+                    Tasks = TasksDto.Tasks;
+                    return Tasks;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+
+            return null;
+        }
+
         public async Task<bool> UpdateTasks(List<MyTask> tasks, string token)
         {
             List<UpdateTask> Utasks = new List<UpdateTask>();

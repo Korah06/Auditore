@@ -31,6 +31,12 @@ namespace Auditore.ViewModels
             get { return _selectedCat; }
             set { _selectedCat = value; }
         }
+        private bool _chronoPomodoro;
+        public bool ChronoPomodoro
+        {
+            get { return _chronoPomodoro; }
+            set { _chronoPomodoro = value; }
+        }
 
         private List<Category> _categories;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
@@ -65,7 +71,8 @@ namespace Auditore.ViewModels
             {
                 categoryId = _selectedCat._id,
                 minutes = _chronoMinutes,
-                name = _chronoName
+                name = _chronoName,
+                IsPomodoro = _chronoPomodoro
             };
             bool created = await _chronoService.CreateChrono(dto, Preferences.Default.Get("token", ""));
             if (created)

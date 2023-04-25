@@ -11,5 +11,6 @@ namespace Auditore.Dtos.Request
         public string name { get; set; }
         public int minutes { get; set; }
         public string categoryId { get; set; }
+        public bool IsPomodoro { get; set; }
     }
 }

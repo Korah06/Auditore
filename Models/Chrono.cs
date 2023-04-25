@@ -13,6 +13,7 @@ namespace Auditore.Models
         public string UserId { get; set; }
         public string CategoryId { get; set; }
         public int Minutes { get; set; }
+        public bool IsPomodoro { get; set; }
         public long V { get; set; }
     }
 }

@@ -99,6 +99,7 @@ namespace Auditore.ViewModels
         }
         private bool isReset = false;
         private bool isChanging = false;
+        private bool Finished = true;
         int totalSeconds = 0;
         public async void Countdown()
         {
@@ -212,41 +213,54 @@ namespace Auditore.ViewModels
 
         public ICommand SelectCommand => new Command<object>((obj) =>
         {
-            isChanging = true;
-            if(obj != null)
+            if (Finished)
             {
-                _selectedChrono = obj as Chrono;
-            }
-            getTasksForChrono();
-            int minutesLeft = _selectedChrono.Minutes;
-            int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
+                if (obj != null)
+                {
+                    _selectedChrono = obj as Chrono;
+                }
+                int minutesLeft = _selectedChrono.Minutes;
+                int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
 
-            ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
-            isChanging= false;
-            if(isRunning)
-            {
-                isReset = true;
-                isRunning = false;
-                Countdown();
+                ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
             }
-            else
-            {
-                Countdown();
-
-            }
+            
 
         });
 
-        
+        private bool init = false;
         public ICommand StartPauseCommand => new Command(() =>
         {
-            isRunning = !isRunning;
+            if (init)
+            {
+                isRunning = !isRunning;
+                Debug.WriteLine("Is Running: " + isRunning);
+            }
+            else
+            {
+                Finished = false;
+                isRunning = true;
+                init = true;
+                Countdown();
+                Debug.WriteLine("Started");
+            }
+        });
+        public ICommand EndCommand => new Command(() =>
+        {
+            if (init)
+            {
+                totalSeconds = 0;
+                init = false;
+                Finished = true;
+                Debug.WriteLine("Finished");
+            }
         });
 
         public ICommand ResetCommand => new Command(async () =>
         {
             if (_selectedChrono != null)
             {
+                Debug.WriteLine("Reset: "+ isReset);
                 isReset = true;
                 await Task.Delay(50);
                 int minutesLeft = _selectedChrono.Minutes;
@@ -259,8 +273,10 @@ namespace Auditore.ViewModels
                 
         });
 
-        private async void getTasksForChrono()
+        public async void getTasksForChrono()
         {
+            Tasks.Clear();
+            Categories.Clear();
             await Task.Run(async () =>
             {
                 _tasks = await _taskService.GetTasksCategory(_selectedChrono.CategoryId,Preferences.Default.Get("token", ""));

@@ -95,9 +95,10 @@
                                 <Label Text="Tareas" FontSize="Subtitle"/>
                                 <Button Text="Finalizar" 
                                         WidthRequest="150" 
-                                        HorizontalOptions="End"/>
+                                        HorizontalOptions="End"
+                                        Command="{Binding EndCommand}"/>
                             </Grid>
-                            <CollectionView ItemsSource="{Binding Tasks}"
+                            <CollectionView 
                                             x:Name="TaskCollection"
                                             VerticalOptions="FillAndExpand">
                                 <CollectionView.ItemTemplate>

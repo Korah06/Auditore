@@ -9,10 +9,12 @@
     <Grid ColumnDefinitions="*,*">
         <StackLayout Grid.Column="0">
                 <Label Text="Categorias" 
-                   FontSize="Medium" 
+                       FontFamily="Prompt"
+                   FontSize="Large" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-            
+            <Path Fill="#292931" Stroke="#292931" StrokeThickness="2" Aspect="Fill"
+                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
             <!--#region Categories -->
             <StackLayout Orientation="Horizontal">
                 <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
@@ -33,7 +35,7 @@
                                                      ProgressColor=
                                                      "{Binding Color, Converter={StaticResource ColorConverter}}"/>
                                         <Grid>
-                                            <Image Source="deleteicon.png"
+                                            <Image Source="delete_icon.png"
                                                    HorizontalOptions="End"
                                                    HeightRequest="30">
                                                 <Image.GestureRecognizers>
@@ -59,7 +61,8 @@
             <!--#endregion-->
             <Grid Margin="10,0,10,10">
                 <Label Text="Tareas Pendientes" 
-                   FontSize="Medium"
+                       FontFamily="Prompt"
+                   FontSize="Large"
                    HorizontalOptions="Start"/>
                 <Button Text="Crear Tarea" 
                         HorizontalOptions="End"
@@ -67,6 +70,8 @@
                         HeightRequest="10"
                         Command="{Binding CreateTaskCommand}"/>
             </Grid>
+            <Path Fill="#292931" Stroke="#292931" StrokeThickness="2" Aspect="Fill"
+                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
             
             <!--#region Tasks -->
             <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">

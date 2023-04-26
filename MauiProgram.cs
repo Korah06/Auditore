@@ -16,6 +16,7 @@ public static class MauiProgram
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("Cairo-Regular.ttf", "Cairo");
+				fonts.AddFont("Prompt-Medium.ttf", "Prompt");
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});

@@ -20,9 +20,9 @@
 
 
     <!--#region DarkTheme Colors -->
-    <Color x:Key="DarkBackground">#1b1b21</Color>
-    <Color x:Key="DarkContentsBackground">#292931</Color>
-    <Color x:Key="DarkButtonBackground">#373742</Color>
+    <Color x:Key="DarkBackground">#33325c</Color>
+    <Color x:Key="DarkContentsBackground">#404272</Color>
+    <Color x:Key="DarkButtonBackground">#8a62f7</Color>
     <!--#endregion-->
 
     <!--#region LightTheme Colors -->

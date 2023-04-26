@@ -74,7 +74,7 @@ public partial class TasksDesktop : ContentPage
                 {
                     Text = "Eliminar Tarea",
                     HorizontalOptions = LayoutOptions.End,
-                    BackgroundColor = Color.FromArgb("#6a040f")
+                    BackgroundColor = Color.FromArgb("#f99aaa")
                 };
                 deleteButton.SetBinding(Button.CommandProperty, new Binding("DeleteTask"));
                 deleteButton.Clicked += Button_Clicked;

@@ -13,7 +13,7 @@
                    FontSize="Large" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
-            <Path Fill="#292931" Stroke="#292931" StrokeThickness="2" Aspect="Fill"
+            <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
             <!--#region Categories -->
             <StackLayout Orientation="Horizontal">
@@ -70,7 +70,7 @@
                         HeightRequest="10"
                         Command="{Binding CreateTaskCommand}"/>
             </Grid>
-            <Path Fill="#292931" Stroke="#292931" StrokeThickness="2" Aspect="Fill"
+            <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
             
             <!--#region Tasks -->

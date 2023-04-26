@@ -19,6 +19,10 @@
             <ShellContent Route="Chrono"
                           x:Name="chronoPage"/>
         </Tab>
+        <Tab Title="Calendar">
+            <ShellContent Route="Calendar"
+                          x:Name="calendarPage"/>
+        </Tab>
     </TabBar>
 
 </Shell>

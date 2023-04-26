@@ -35,6 +35,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CreateTaskDesktop>();
 		builder.Services.AddTransient<ChronoDesktop>();
 		builder.Services.AddTransient<CreateChronoDesktop>();
+		builder.Services.AddTransient<CalendarDesktop>();
 
         //viewModels
         builder.Services.AddSingleton<LoginViewModel>();
@@ -43,6 +44,7 @@ public static class MauiProgram
         builder.Services.AddSingleton<CreateTaskViewModel>();
         builder.Services.AddSingleton<ChronosViewModel>();
         builder.Services.AddSingleton<CreateChronoViewModel>();
+        builder.Services.AddSingleton<CalendarViewModel>();
 
 #if DEBUG
         builder.Logging.AddDebug();

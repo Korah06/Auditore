@@ -9,15 +9,19 @@ public partial class ChronoDesktop : ContentPage
     private readonly ITaskService _taskService;
     private readonly ICategoryService _categoryService;
     private readonly IChronoService _chronoService;
+    private readonly INotificationService _notificationService;
     private ChronosViewModel _viewModel;
 
     private Chrono _selected;
-    public ChronoDesktop(ITaskService taskService, ICategoryService categoryService, IChronoService chronoService)
+    public ChronoDesktop
+        (ITaskService taskService, ICategoryService categoryService, 
+        IChronoService chronoService, INotificationService notificationService)
 	{   
         _taskService = taskService;
         _categoryService = categoryService;
         _chronoService = chronoService;
-        _viewModel = new ChronosViewModel(_chronoService, _taskService, _categoryService);
+        _notificationService = notificationService;
+        _viewModel = new ChronosViewModel(_chronoService, _taskService, _categoryService,_notificationService);
 		InitializeComponent();
         this.BindingContext = _viewModel;
         Appearing += MyPage_AppearingAsync;

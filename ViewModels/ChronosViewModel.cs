@@ -49,12 +49,15 @@ namespace Auditore.ViewModels
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IChronoService _chronoService;
+        private readonly INotificationService _notificationService;
         public ChronosViewModel
-            (IChronoService chronoService, ITaskService taskService, ICategoryService categoryService) 
+            (IChronoService chronoService, ITaskService taskService, 
+            ICategoryService categoryService, INotificationService notificationService) 
         {
             _categoryService = categoryService;
             _taskService = taskService;
             _chronoService = chronoService;
+            _notificationService = notificationService;
             ObtainChronos();
         }
 
@@ -166,6 +169,11 @@ namespace Auditore.ViewModels
                         " secs: " + totalSeconds + "reset: " + isReset);
                 }
                 
+            }
+
+            if (totalSeconds == 0)
+            {
+                await _notificationService.EndChrono();
             }
 
 

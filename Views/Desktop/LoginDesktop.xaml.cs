@@ -1,5 +1,7 @@
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 
 namespace Auditore.Views.Desktop;
 
@@ -17,4 +19,5 @@ public partial class LoginDesktop : ContentPage
     {
         Shell.Current.GoToAsync("//Login/RegisterDesktop");
     }
+
 }

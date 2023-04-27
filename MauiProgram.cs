@@ -2,7 +2,9 @@
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
 using Auditore.Views.Desktop;
+using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
+using Plugin.LocalNotification;
 
 namespace Auditore;
 
@@ -13,7 +15,9 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
-			.ConfigureFonts(fonts =>
+            //.UseLocalNotification()
+            .UseMauiCommunityToolkit()
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("Cairo-Regular.ttf", "Cairo");
 				fonts.AddFont("Prompt-Medium.ttf", "Prompt");
@@ -23,6 +27,7 @@ public static class MauiProgram
 
 		//Services
         builder.Services.AddSingleton<ITaskService, TaskService>();
+        builder.Services.AddSingleton<Services.Interfaces.INotificationService, NotificationService>();
         builder.Services.AddSingleton<IChronoService, ChronoService>();
         builder.Services.AddSingleton<ICategoryService, CategoryService>();
         builder.Services.AddSingleton<IUserService, UserService>();

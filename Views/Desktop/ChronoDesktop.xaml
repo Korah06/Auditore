@@ -37,10 +37,10 @@
                     <DataTemplate x:DataType="models:Chrono">
                         <Frame WidthRequest="250" Margin="10">
                             <VerticalStackLayout>
-                                <Label Text="{Binding Name}"
+                                <Label Text="{Binding name}"
                                        FontSize="Subtitle"
                                        HorizontalOptions="Center"/>
-                                <Label Text="{Binding Minutes, StringFormat='{0}:00 minutos'}"
+                                <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
                                        HorizontalOptions="Center"/>
                                 <Image Source="delete_icon.png"
                                                    HorizontalOptions="End"

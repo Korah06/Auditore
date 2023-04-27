@@ -104,13 +104,16 @@ namespace Auditore.ViewModels
         private bool isChanging = false;
         private bool Finished = true;
         int totalSeconds = 0;
+
+        
+
         public async void Countdown()
         {
             totalSeconds = 0;
 
             if(_selectedChrono != null)
             {
-                totalSeconds = _selectedChrono.Minutes * 60;
+                totalSeconds = _selectedChrono.minutes * 60;
                 
             }
             int minutesLeft;
@@ -176,9 +179,134 @@ namespace Auditore.ViewModels
                 await _notificationService.EndChrono();
             }
 
+            init = false;
+            Finished = true;
 
         }
 
+        private int _repeats = 2;
+        public int Repeats
+        {
+            get { return _repeats; }
+            set { _repeats = value; }
+        }
+        private int sleepSeconds = 0;
+        public async void Pomodoro()
+        {
+            totalSeconds = 0;
+            sleepSeconds = 300;
+            if (_selectedChrono != null)
+            {
+                totalSeconds = _selectedChrono.minutes * 60;
+
+            }
+
+            int minutesLeft;
+            int secondsLeft;
+
+            for (int i = 0;i<Repeats;i++)
+            {
+                if (i!=0)
+                {
+                    while (sleepSeconds > 0)
+                    {
+                        if (isRunning)
+                        {
+                            minutesLeft = sleepSeconds / 60;
+                            secondsLeft = sleepSeconds % 60;
+
+                            ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+                            sleepSeconds--;
+                            await Task.Delay(1000);
+                            if (isReset)
+                            {
+
+                                isReset = false;
+                                return;
+                            }
+                        }
+                        else
+                        {
+                            if (isReset)
+                            {
+
+                                isReset = false;
+                                return;
+                            }
+                            await Task.Delay(50);
+                            Debug.WriteLine
+                            ("Soy false: " + isRunning + " reset: " + isReset +
+                            " secs: " + totalSeconds + "reset: " + isReset);
+                        }
+                    }
+                    //reasignar valor de sleepSeconds
+                    sleepSeconds = 300;
+                    await _notificationService.EndRest();
+                }
+
+                while (totalSeconds > 0)
+                {
+                    Debug.WriteLine("Inicio: " + isRunning);
+                    if (isRunning)
+                    {
+                        Debug.WriteLine("Soy true: " + isRunning);
+                        minutesLeft = totalSeconds / 60;
+                        secondsLeft = totalSeconds % 60;
+
+                        ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+
+                        totalSeconds--;
+                        await Task.Delay(1000);
+
+
+                        Debug.WriteLine("____________" + totalSeconds + "______________" + ShowTime + "reset: " + isReset);
+
+                        if (isReset)
+                        {
+
+                            isReset = false;
+                            return;
+                        }
+                        if (isChanging)
+                        {
+                            totalSeconds = 0;
+                            return;
+                        }
+                        Debug.WriteLine
+                            ("Soy false: " + isRunning + " reset: " + isReset +
+                            " secs: " + totalSeconds + "reset: " + isReset);
+                    }
+                    else
+                    {
+
+                        await Task.Delay(50);
+                        if (isReset)
+                        {
+
+                            isReset = false;
+                            return;
+                        }
+                        if (isChanging)
+                        {
+                            totalSeconds = 0;
+                            return;
+                        }
+                        Debug.WriteLine
+                            ("Soy false: " + isRunning + " reset: " + isReset +
+                            " secs: " + totalSeconds + "reset: " + isReset);
+                    }
+
+                }
+
+                await _notificationService.EndWorkTime();
+            }
+
+            init = false;
+            Finished = true;
+            await _notificationService.EndPomodoro();
+
+
+        }
         
         #region Showtime
         
@@ -227,8 +355,8 @@ namespace Auditore.ViewModels
                 {
                     _selectedChrono = obj as Chrono;
                 }
-                int minutesLeft = _selectedChrono.Minutes;
-                int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
+                int minutesLeft = _selectedChrono.minutes;
+                int secondsLeft = (_selectedChrono.minutes * 60) % 60;
 
                 ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
             }
@@ -248,8 +376,15 @@ namespace Auditore.ViewModels
             {
                 Finished = false;
                 isRunning = true;
-                init = true;
-                Countdown();
+                init = true; 
+                if (_selectedChrono.IsPomodoro)
+                {
+                    Pomodoro();
+                }
+                else
+                {
+                    Countdown();
+                }
                 Debug.WriteLine("Started");
             }
         });
@@ -271,12 +406,19 @@ namespace Auditore.ViewModels
                 Debug.WriteLine("Reset: "+ isReset);
                 isReset = true;
                 await Task.Delay(50);
-                int minutesLeft = _selectedChrono.Minutes;
-                int secondsLeft = (_selectedChrono.Minutes * 60) % 60;
+                int minutesLeft = _selectedChrono.minutes;
+                int secondsLeft = (_selectedChrono.minutes * 60) % 60;
 
                 ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
                 isRunning = false;
-                Countdown();
+                if (_selectedChrono.IsPomodoro)
+                {
+                    Pomodoro();
+                }
+                else
+                {
+                    Countdown();
+                }
             }
                 
         });
@@ -287,7 +429,7 @@ namespace Auditore.ViewModels
             Categories.Clear();
             await Task.Run(async () =>
             {
-                _tasks = await _taskService.GetTasksCategory(_selectedChrono.CategoryId,Preferences.Default.Get("token", ""));
+                _tasks = await _taskService.GetTasksCategory(_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
                 _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
                 if(_tasks != null )

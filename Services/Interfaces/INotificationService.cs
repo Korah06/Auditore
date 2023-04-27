@@ -9,5 +9,8 @@ namespace Auditore.Services.Interfaces
     public interface INotificationService
     {
         Task EndChrono();
+        Task EndRest();
+        Task EndWorkTime();
+        Task EndPomodoro();
     }
 }

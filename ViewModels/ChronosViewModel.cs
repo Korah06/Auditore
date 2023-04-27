@@ -206,6 +206,10 @@ namespace Auditore.ViewModels
 
             for (int i = 0;i<Repeats;i++)
             {
+                if (Finished)
+                {
+                    return;
+                }
                 if (i!=0)
                 {
                     while (sleepSeconds > 0)
@@ -224,6 +228,10 @@ namespace Auditore.ViewModels
                                 isReset = false;
                                 return;
                             }
+                            if (Finished)
+                            {
+                                return;
+                            }
                         }
                         else
                         {
@@ -233,10 +241,18 @@ namespace Auditore.ViewModels
                                 isReset = false;
                                 return;
                             }
+                            if (Finished)
+                            {
+                                return;
+                            }
                             await Task.Delay(50);
                             Debug.WriteLine
                             ("Soy false: " + isRunning + " reset: " + isReset +
                             " secs: " + totalSeconds + "reset: " + isReset);
+                        }
+                        if (Finished)
+                        {
+                            return;
                         }
                     }
                     //reasignar valor de sleepSeconds
@@ -256,6 +272,10 @@ namespace Auditore.ViewModels
                         ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
 
                         totalSeconds--;
+                        if (Finished)
+                        {
+                            return;
+                        }
                         await Task.Delay(1000);
 
 
@@ -270,6 +290,10 @@ namespace Auditore.ViewModels
                         if (isChanging)
                         {
                             totalSeconds = 0;
+                            return;
+                        }
+                        if (Finished)
+                        {
                             return;
                         }
                         Debug.WriteLine
@@ -289,6 +313,10 @@ namespace Auditore.ViewModels
                         if (isChanging)
                         {
                             totalSeconds = 0;
+                            return;
+                        }
+                        if (Finished)
+                        {
                             return;
                         }
                         Debug.WriteLine

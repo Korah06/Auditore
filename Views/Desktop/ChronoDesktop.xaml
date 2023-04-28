@@ -105,7 +105,13 @@
                           IsVisible="false">
                         <VerticalStackLayout Spacing="10">
                             <Label x:Name="lblName"
-                                   FontSize="Title"/>
+                                   FontSize="Large"
+                                   Margin="0,0,0,-20"
+                                   FontAttributes="Bold"/>
+                            <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" 
+                                  Aspect="Fill" WidthRequest="400"
+                                  Margin="-400,0,0,0"
+                                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
                             <Label x:Name="lblCrono"
                                    FontSize="50"
                                    HorizontalOptions="Center"/>
@@ -124,14 +130,16 @@
                                     HorizontalOptions="Center"/>
                             </Grid>
                             <Grid>
-                                <Label Text="Tareas" FontSize="Subtitle"/>
+                                <Label Text="Tareas" FontSize="Subtitle"
+                                       VerticalOptions="Center"/>
                                 <Button Text="Finalizar" 
                                         WidthRequest="150" 
                                         HorizontalOptions="End"
                                         Command="{Binding EndCommand}"/>
                             </Grid>
-                            <CollectionView 
-                                            x:Name="TaskCollection"
+                            <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
+                                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
+                            <CollectionView x:Name="TaskCollection"
                                             VerticalOptions="FillAndExpand">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:MyTask">

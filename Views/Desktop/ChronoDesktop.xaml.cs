@@ -47,7 +47,7 @@ public partial class ChronoDesktop : ContentPage
         {
             chronoFounded.IsVisible = false;
             contentGrid.IsVisible = true;
-            lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.Name"));
+            lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.name"));
             lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
             _viewModel.getTasksForChrono();
             TaskCollection.SetBinding(CollectionView.ItemsSourceProperty, new Binding("Tasks"));

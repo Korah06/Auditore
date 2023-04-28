@@ -53,6 +53,8 @@
 	  <None Remove="Resources\Fonts\Prompt-Medium.ttf" />
 	  <None Remove="Resources\Images\Auditore.png" />
 	  <None Remove="Resources\Images\delete_icon.png" />
+	  <None Remove="Resources\Images\pomodoro_icon.png" />
+	  <None Remove="Resources\Images\timer_icon.png" />
 	  <None Remove="Resources\Images\trash_icon.svg" />
 	</ItemGroup>
 

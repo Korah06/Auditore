@@ -34,15 +34,43 @@
                     <GridItemsLayout Span="2" Orientation="Vertical"/>
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
+
                     <DataTemplate x:DataType="models:Chrono">
                         <Frame WidthRequest="250" Margin="10">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#5F5187" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
                             <VerticalStackLayout>
-                                <Label Text="{Binding name}"
+                                <Grid HeightRequest="30">
+                                    <Label Text="{Binding name}"
                                        FontSize="Subtitle"
-                                       HorizontalOptions="Center"/>
+                                           HorizontalOptions="Center"/>
+                                    <Image HorizontalOptions="End"
+                                           Margin="0,0,-15,0">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="timer_icon.png" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsPomodoro}" 
+                                                                 TargetType="Image" Value="True">
+                                                        <Setter Property="Source" Value="pomodoro_icon.png" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
                                 <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
                                        HorizontalOptions="Center"/>
                                 <Image Source="delete_icon.png"
+                                       Margin="0,0,-15,0"
                                                    HorizontalOptions="End"
                                                    HeightRequest="30">
                                     <Image.GestureRecognizers>

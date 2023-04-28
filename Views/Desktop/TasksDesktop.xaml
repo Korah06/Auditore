@@ -117,7 +117,7 @@
             </RefreshView>
             <!--#endregion-->
         </StackLayout>
-        <StackLayout Grid.Column="1">
+        <StackLayout Grid.Column="1" Margin="7,10,7,0">
             <Frame>
                 <VerticalStackLayout>
                     <Label Text="No se encuentra ninguna tarea seleccionada" 

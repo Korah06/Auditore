@@ -27,18 +27,38 @@
                             TitleColor="{StaticResource LightBackground}"
                             HorizontalOptions="Start"
                             ItemDisplayBinding="{Binding Name}"/>
-                        <Label Text="Minutos del cronometro"
-                           HorizontalOptions="Start"
-                           FontSize="Medium"/>
+                        
                         <HorizontalStackLayout>
                             <CheckBox IsChecked="{Binding ChronoPomodoro}" x:Name="PomodoroCheckbox"/>
                                 <Label Text="Sistema Pomodoro"
                                        VerticalOptions="Center"/>
                         </HorizontalStackLayout>
-                        <Label FontSize="11"
-                            Margin="0,-10,0,10"
-                            Text="(Al seleccionar esta opción se aplicará un descanso de 5 minutos)"/>
-                        
+
+                        <Grid IsVisible="{Binding ChronoPomodoro}">
+                            <Grid.Triggers>
+                                <DataTrigger Binding="{Binding Source={x:Reference PomodoroCheckbox}, 
+                                                Path=IsChecked}"
+                                                     TargetType="Grid"
+                                                     Value="True">
+                                    <Setter Property="IsVisible" Value="True"/>
+                                </DataTrigger>
+                            </Grid.Triggers>
+
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Escriba el numero de minutos de descanso del pomodoro"
+                           HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                           FontSize="Micro"/>
+                                <Entry HorizontalOptions="Center" 
+                           WidthRequest="300"
+                           Text="{Binding ChronoRestMinutes}"/>
+                            </VerticalStackLayout>
+
+                        </Grid>
+
+                        <Label Text="Minutos del cronometro"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
                         <Entry HorizontalOptions="Center" 
                            WidthRequest="300"
                            Text="{Binding ChronoMinutes, StringFormat='{0}'}"/>

@@ -25,6 +25,12 @@ namespace Auditore.ViewModels
             get { return _chronoMinutes; }
             set { _chronoMinutes = value; }
         }
+        private int _chronoRestMinutes = 0;
+        public int ChronoRestMinutes
+        {
+            get { return _chronoRestMinutes; }
+            set { _chronoRestMinutes = value; }
+        }
         private Category _selectedCat;
         public Category SelectedCat
         {
@@ -72,7 +78,8 @@ namespace Auditore.ViewModels
                 categoryId = _selectedCat._id,
                 minutes = _chronoMinutes,
                 name = _chronoName,
-                IsPomodoro = _chronoPomodoro
+                IsPomodoro = _chronoPomodoro,
+                restMinutes = _chronoRestMinutes,
             };
             bool created = await _chronoService.CreateChrono(dto, Preferences.Default.Get("token", ""));
             if (created)

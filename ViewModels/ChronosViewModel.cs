@@ -460,46 +460,14 @@ namespace Auditore.ViewModels
                 _tasks = await _taskService.GetTasksCategory(_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
                 _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
-                if(_tasks != null )
+                if(_tasks == null ){return;}
+
+                foreach (var task in _tasks)
                 {
-                    App.Current.Dispatcher.Dispatch(() =>
-                    {
-                        foreach (var category in _categories)
-                        {
-                            var tasks = from t in _tasks
-                                        where t.CategoryId == category._id
-                                        select t;
 
-                            var completed = from t in tasks
-                                            where t.Completed == true
-                                            select t;
-
-                            var notCompleted = from t in tasks
-                                               where t.Completed == false
-                                               select t;
-
-
-
-                            category.PendingTasks = notCompleted.Count();
-                            category.Percentage = (float)completed.Count() / (float)tasks.Count();
-                            Categories.Add(category);
-                        }
-
-                        foreach (var task in _tasks)
-                        {
-                            var catColor =
-                            (from c in Categories
-                             where c._id == task.CategoryId
-                             select c.Color).FirstOrDefault();
-
-                            task.TaskColor = catColor;
-                            Tasks.Add(task);
-                        }
-
-                    });
+                    Tasks.Add(task);
                 }
 
-                
             });
         }
 

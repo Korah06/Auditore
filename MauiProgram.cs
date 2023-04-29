@@ -25,34 +25,40 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		//Services
-        builder.Services.AddSingleton<ITaskService, TaskService>();
-        builder.Services.AddSingleton<Services.Interfaces.INotificationService, NotificationService>();
-        builder.Services.AddSingleton<IChronoService, ChronoService>();
-        builder.Services.AddSingleton<ICategoryService, CategoryService>();
-        builder.Services.AddSingleton<IUserService, UserService>();
-        builder.Services.AddSingleton<IHttpsClientHandlerService, HttpsClientHandlerService>();
 
-		//views
+		#region Services
+		builder.Services.AddSingleton<ITaskService, TaskService>();
+		builder.Services.AddSingleton<Services.Interfaces.INotificationService, NotificationService>();
+		builder.Services.AddSingleton<IChronoService, ChronoService>();
+		builder.Services.AddSingleton<ICategoryService, CategoryService>();
+		builder.Services.AddSingleton<IUserService, UserService>();
+		builder.Services.AddSingleton<IHttpsClientHandlerService, HttpsClientHandlerService>();
+		#endregion
+
+		#region Views
 		builder.Services.AddSingleton<LoginDesktop>();
-        builder.Services.AddSingleton<RegisterDesktop>();
+		builder.Services.AddSingleton<RegisterDesktop>();
 		builder.Services.AddTransient<TasksDesktop>();
 		builder.Services.AddTransient<CreateTaskDesktop>();
 		builder.Services.AddTransient<ChronoDesktop>();
 		builder.Services.AddTransient<CreateChronoDesktop>();
 		builder.Services.AddTransient<CalendarDesktop>();
+		builder.Services.AddTransient<ProfileDesktop>();
+		#endregion
 
-        //viewModels
-        builder.Services.AddSingleton<LoginViewModel>();
-        builder.Services.AddSingleton<RegisterViewModel>();
-        builder.Services.AddSingleton<TasksViewModel>();
-        builder.Services.AddSingleton<CreateTaskViewModel>();
-        builder.Services.AddSingleton<ChronosViewModel>();
-        builder.Services.AddSingleton<CreateChronoViewModel>();
-        builder.Services.AddSingleton<CalendarViewModel>();
+		#region ViewModels
+		builder.Services.AddSingleton<LoginViewModel>();
+		builder.Services.AddSingleton<RegisterViewModel>();
+		builder.Services.AddSingleton<TasksViewModel>();
+		builder.Services.AddSingleton<CreateTaskViewModel>();
+		builder.Services.AddSingleton<ChronosViewModel>();
+		builder.Services.AddSingleton<CreateChronoViewModel>();
+		builder.Services.AddSingleton<CalendarViewModel>(); 
+		builder.Services.AddSingleton<ProfileViewModel>(); 
+		#endregion
 
 #if DEBUG
-        builder.Logging.AddDebug();
+		builder.Logging.AddDebug();
 #endif
 
 		return builder.Build();

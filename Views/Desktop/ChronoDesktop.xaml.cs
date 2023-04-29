@@ -50,7 +50,7 @@ public partial class ChronoDesktop : ContentPage
             lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.name"));
             lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
             _viewModel.getTasksForChrono();
-            TaskCollection.SetBinding(CollectionView.ItemsSourceProperty, new Binding("Tasks"));
+            //TaskCollection.SetBinding(CollectionView.ItemsSourceProperty, new Binding("Tasks"));
             _selected = _viewModel.SelectedChrono;
         }
     }

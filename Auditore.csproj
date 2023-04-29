@@ -87,6 +87,9 @@
 	  <MauiXaml Update="Views\Desktop\LoginDesktop.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Desktop\ProfileDesktop.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Desktop\RegisterDesktop.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

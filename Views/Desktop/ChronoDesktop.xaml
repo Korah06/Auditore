@@ -140,6 +140,7 @@
                             <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
                                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
                             <CollectionView x:Name="TaskCollection"
+                                            ItemsSource="{Binding Tasks}"
                                             VerticalOptions="FillAndExpand">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:MyTask">
@@ -152,8 +153,7 @@
                                               Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
                                                     <Label Text="{Binding Name}"
                                            VerticalOptions="Center"
-                                           FontSize="Small" 
-                                            TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
+                                           FontSize="Small">
                                                         <Label.Triggers>
                                                             <DataTrigger Binding="{Binding Source={x:Reference TaskCheckbox}, 
                                                 Path=IsChecked}"

@@ -23,6 +23,10 @@
             <ShellContent Route="Calendar"
                           x:Name="calendarPage"/>
         </Tab>
+        <Tab Title="User">
+            <ShellContent Route="Profile"
+                          x:Name="profilePage"/>
+        </Tab>
     </TabBar>
 
 </Shell>

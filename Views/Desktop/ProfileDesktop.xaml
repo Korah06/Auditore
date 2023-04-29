@@ -5,10 +5,125 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:ProfileViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Profile!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+            <Frame Grid.Row="0" BorderColor="Black" VerticalOptions="Start" 
+                   HeightRequest="160" WidthRequest="600"
+                   IsClippedToBounds="True" HasShadow="False" CornerRadius="20" 
+                   Margin="0,45,0,20" Padding="0">
+                <Image Source="userbanner.png" Aspect="AspectFill"/>
+            </Frame>
+            <Border Stroke="Transparent"
+                    Margin="0,130,380,0"
+                    Grid.Row="0"
+                    StrokeThickness="1"
+                    WidthRequest="110"
+                    HeightRequest="110"
+                    StrokeShape="RoundRectangle 50">
+                <Image Source="treeprofile.png"
+                       Aspect="AspectFill"/>
+            </Border>
+
+            <Frame Grid.Row="1" VerticalOptions="Start"
+                   HeightRequest="25" WidthRequest="130"
+                   IsClippedToBounds="True" CornerRadius="10" 
+                   Margin="390,-65,0,0" Padding="0">
+                <Label Text="Juan" HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       Margin="0,-2,0,0"/>
+            </Frame>
+
+        <Frame Grid.Row="2" VerticalOptions="Start"
+                       HeightRequest="120" WidthRequest="530"
+                       IsClippedToBounds="True" CornerRadius="20" 
+                       Margin="0,3,0,0" Padding="0">
+            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <HorizontalStackLayout Spacing="10">
+                    <VerticalStackLayout>
+                        <Label Text="Tareas" HorizontalOptions="Center"/>
+                        <Label Text="Totales" HorizontalOptions="Center"/>
+                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Image Source="taskcompleted.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Tareas" HorizontalOptions="Center"/>
+                        <Label Text="Completadas" HorizontalOptions="Center"/>
+                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Image Source="taskcompleted.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Categorias" HorizontalOptions="Center"/>
+                        <Label Text="Creadas" HorizontalOptions="Center"/>
+                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Image Source="taskcompleted.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Cronometros" HorizontalOptions="Center"/>
+                        <Label Text="creados" HorizontalOptions="Center"/>
+                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Image Source="taskcompleted.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"/>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout>
+                        <Label Text="Pomodoros" HorizontalOptions="Center"/>
+                        <Label Text="creados" HorizontalOptions="Center"/>
+                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Image Source="taskcompleted.png"
+                                   WidthRequest="20"
+                                   HeightRequest="20"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Frame>
+
+        <Frame Grid.Row="3" VerticalOptions="Start"
+                   HeightRequest="100" WidthRequest="530"
+                   IsClippedToBounds="True" CornerRadius="20" 
+                   Margin="0,10,0,0" Padding="0">
+            <Grid RowDefinitions="0.35*,0.65*">
+                <Label Text="Tareas Completadas"
+                       FontSize="Title"
+                       Grid.Row="0" Margin="10,0,0,0"/>
+                <ProgressBar Grid.Row="1" Progress="0.2" 
+                             ProgressColor="#FBC05D" WidthRequest="500"/>
+            </Grid>
+
+        </Frame>
+
+        <Frame Grid.Row="5" VerticalOptions="Start"
+                   HeightRequest="100" WidthRequest="530"
+                   IsClippedToBounds="True" CornerRadius="20" 
+                   Margin="0,10,0,0" Padding="0">
+            <Grid RowDefinitions="0.35*,0.65*">
+                <Label Text="Tareas a punto de finalizar"
+                       FontSize="Title"
+                       Grid.Row="0" Margin="10,0,0,0"/>
+                <StackLayout Orientation="Horizontal">
+                    <CollectionView ItemsSource="{Binding NearlyTasks}"
+                                HorizontalOptions="FillAndExpand"
+                                x:Name="CollectionCat"
+                                SelectionMode="Single">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:MyTask">
+                                <Frame WidthRequest="200" Margin="10">
+                                    
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+            </Grid>
+
+        </Frame>
+
+    </Grid>
 </ContentPage>

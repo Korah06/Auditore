@@ -54,8 +54,12 @@
 	  <None Remove="Resources\Images\Auditore.png" />
 	  <None Remove="Resources\Images\delete_icon.png" />
 	  <None Remove="Resources\Images\pomodoro_icon.png" />
+	  <None Remove="Resources\Images\profile.jpg" />
+	  <None Remove="Resources\Images\taskcompleted.png" />
 	  <None Remove="Resources\Images\timer_icon.png" />
 	  <None Remove="Resources\Images\trash_icon.svg" />
+	  <None Remove="Resources\Images\treeprofile.png" />
+	  <None Remove="Resources\Images\UserBanner.png" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -41,7 +41,7 @@
                     <VerticalStackLayout>
                         <Label Text="Tareas" HorizontalOptions="Center"/>
                         <Label Text="Totales" HorizontalOptions="Center"/>
-                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Tasks.Count}" HorizontalOptions="Center"/>
                         <Image Source="taskcompleted.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
@@ -49,7 +49,7 @@
                     <VerticalStackLayout>
                         <Label Text="Tareas" HorizontalOptions="Center"/>
                         <Label Text="Completadas" HorizontalOptions="Center"/>
-                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Label Text="{Binding CompletedTasks.Count}" HorizontalOptions="Center"/>
                         <Image Source="taskcompleted.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
@@ -57,7 +57,7 @@
                     <VerticalStackLayout>
                         <Label Text="Categorias" HorizontalOptions="Center"/>
                         <Label Text="Creadas" HorizontalOptions="Center"/>
-                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Categories.Count}" HorizontalOptions="Center"/>
                         <Image Source="taskcompleted.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
@@ -65,7 +65,7 @@
                     <VerticalStackLayout>
                         <Label Text="Cronometros" HorizontalOptions="Center"/>
                         <Label Text="creados" HorizontalOptions="Center"/>
-                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Chronos.Count}" HorizontalOptions="Center"/>
                         <Image Source="taskcompleted.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
@@ -73,7 +73,7 @@
                     <VerticalStackLayout>
                         <Label Text="Pomodoros" HorizontalOptions="Center"/>
                         <Label Text="creados" HorizontalOptions="Center"/>
-                        <Label Text="10" HorizontalOptions="Center"/>
+                        <Label Text="{Binding Pomodoros.Count}" HorizontalOptions="Center"/>
                         <Image Source="taskcompleted.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
@@ -90,8 +90,8 @@
                 <Label Text="Tareas Completadas"
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
-                <ProgressBar Grid.Row="1" Progress="0.2" 
-                             ProgressColor="#FBC05D" WidthRequest="500"/>
+                <ProgressBar Grid.Row="1" Progress="{Binding TaskPercentage}" 
+                             ProgressColor="#FBC05D" WidthRequest="500" x:Name="progressTasks"/>
             </Grid>
 
         </Frame>

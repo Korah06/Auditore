@@ -3,6 +3,7 @@ using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,8 @@ namespace Auditore.ViewModels
 {
     public class ProfileViewModel
     {
+
+
         #region Collections
         private List<MyTask> _tasks;
         private List<MyTask> _completedTasks;
@@ -24,6 +27,29 @@ namespace Auditore.ViewModels
         public ObservableCollection<Chrono> Chronos { get; set; } = new ObservableCollection<Chrono>();
         public ObservableCollection<Chrono> Pomodoros { get; set; } = new ObservableCollection<Chrono>();
         #endregion
+
+        private double _taskPercentage;
+
+        public double TaskPercentage
+        {
+            get { return _taskPercentage; }
+            set 
+            {
+                if(_taskPercentage != value)
+                {
+                    _taskPercentage = value;
+                    OnPropertyChanged(nameof(TaskPercentage));
+                }
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IChronoService _chronoService;
@@ -33,6 +59,7 @@ namespace Auditore.ViewModels
             _taskService = taskService;
             _categoryService = categoryService;
             _chronoService = chronoService;
+            GetClassifyInfo();
         }
 
         public static List<MyTask> ObtainNearlyTasks(List<MyTask> tasks)
@@ -51,6 +78,13 @@ namespace Auditore.ViewModels
 
         public async void GetClassifyInfo()
         {
+            Tasks.Clear();
+            Categories.Clear();
+            Chronos.Clear();
+            Pomodoros.Clear();
+            NearlyTasks.Clear();
+            CompletedTasks.Clear();
+
             _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
             _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
             _chronos = await _chronoService.GetChronos(Preferences.Default.Get("token", ""));
@@ -63,6 +97,8 @@ namespace Auditore.ViewModels
                 }
                 Tasks.Add(task);
             }
+
+            //TaskPercentage = (double)CompletedTasks.Count/(double)Tasks.Count;
 
             _nearlyTasks = ObtainNearlyTasks(_tasks);
             foreach(var task in _nearlyTasks)

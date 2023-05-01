@@ -104,7 +104,7 @@
                 <Label Text="Tareas a punto de finalizar"
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Grid.Row="1" Orientation="Horizontal">
                     <CollectionView ItemsSource="{Binding NearlyTasks}"
                                 HorizontalOptions="FillAndExpand"
                                 x:Name="CollectionCat"
@@ -115,7 +115,7 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:MyTask">
                                 <Frame WidthRequest="200" Margin="10">
-                                    
+                                    <Label Text="{Binding Name}"/>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

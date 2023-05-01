@@ -89,41 +89,46 @@ namespace Auditore.ViewModels
             _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
             _chronos = await _chronoService.GetChronos(Preferences.Default.Get("token", ""));
 
-            foreach (var task in _tasks)
+            if(_tasks != null)
             {
-                if (task.Completed)
+                foreach (var task in _tasks)
                 {
-                    CompletedTasks.Add(task);
+                    if (task.Completed)
+                    {
+                        CompletedTasks.Add(task);
+                    }
+                    Tasks.Add(task);
                 }
-                Tasks.Add(task);
-            }
-
-            //TaskPercentage = (double)CompletedTasks.Count/(double)Tasks.Count;
-
-            _nearlyTasks = ObtainNearlyTasks(_tasks);
-            foreach(var task in _nearlyTasks)
-            {
-                NearlyTasks.Add(task);
-            }
-
-            foreach (var category in _categories)
-            {
-                Categories.Add(category);
-            }
-            foreach(var chrono in _chronos)
-            {
-                if (chrono.IsPomodoro)
+                _nearlyTasks = ObtainNearlyTasks(_tasks);
+                foreach (var task in _nearlyTasks)
                 {
-                    Pomodoros.Add(chrono);
+                    NearlyTasks.Add(task);
                 }
-                else
-                {
-                    Chronos.Add(chrono);
-                }
-                
-            }
+                //TaskPercentage = (double)CompletedTasks.Count/(double)Tasks.Count;
 
+            }
+            if(_categories != null)
+            {
+                foreach (var category in _categories)
+                {
+                    Categories.Add(category);
+                }
+            }
+            
+            if (_chronos != null)
+            {
+                foreach (var chrono in _chronos)
+                {
+                    if (chrono.IsPomodoro)
+                    {
+                        Pomodoros.Add(chrono);
+                    }
+                    else
+                    {
+                        Chronos.Add(chrono);
+                    }
+                }
+            }
         }
-
     }
 }

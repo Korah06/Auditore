@@ -110,6 +110,7 @@ namespace Auditore.ViewModels
             }
         });
 
+        #region ObtainCategories
         private void ObtainCategories()
         {
             Task.Run(async () =>
@@ -117,15 +118,18 @@ namespace Auditore.ViewModels
 
                 _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
-                App.Current.Dispatcher.Dispatch(() =>
+                if (_categories != null)
                 {
-                    foreach (var category in _categories)
+                    App.Current.Dispatcher.Dispatch(() =>
                     {
-                        Categories.Add(category);
-
-                    }
-                });
+                        foreach (var category in _categories)
+                        {
+                            Categories.Add(category);
+                        }
+                    });
+                }
             });
-        }
+        } 
+        #endregion
     }
 }

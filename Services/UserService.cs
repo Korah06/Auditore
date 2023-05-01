@@ -1,11 +1,13 @@
 ﻿using Auditore.Constants;
 using Auditore.Dtos.Request;
 using Auditore.Dtos.Response;
+using Auditore.Models;
 using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -106,6 +108,31 @@ namespace Auditore.Services
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
+            }
+        }
+
+        public async Task<User> GetUser(string token)
+        {
+            UserDto dto = new UserDto();
+            Uri uri = new Uri(string.Format(HttpUris.getUser, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    dto = JsonSerializer.Deserialize<UserDto>(content, _serializerOptions);
+                    User user = dto.user;
+                    return user;
+                }
+                return null;
+            } catch(Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return null;
             }
         }
     }

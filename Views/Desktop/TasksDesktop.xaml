@@ -86,6 +86,16 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="models:MyTask">
                             <Frame Margin="10,5,10,5">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#5F5187" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
                                 <Grid ColumnDefinitions="*,*">
                                     <HorizontalStackLayout Grid.Column="0">
                                         <CheckBox IsChecked="{Binding Completed}"

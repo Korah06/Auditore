@@ -5,25 +5,25 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:ProfileViewModel">
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
-            <Frame Grid.Row="0" BorderColor="Black" VerticalOptions="Start" 
-                   HeightRequest="160" WidthRequest="600"
-                   IsClippedToBounds="True" HasShadow="False" CornerRadius="20" 
-                   Margin="0,45,0,20" Padding="0">
-                <Image Source="userbanner.png" Aspect="AspectFill"/>
-            </Frame>
-            <Border Stroke="Transparent"
-                    Margin="0,130,380,0"
-                    Grid.Row="0"
-                    StrokeThickness="1"
-                    WidthRequest="110"
-                    HeightRequest="110"
-                    StrokeShape="RoundRectangle 50">
-                <Image Source="treeprofile.png"
-                       Aspect="AspectFill"/>
-            </Border>
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto">
+        <Frame Grid.Row="0" BorderColor="Black" VerticalOptions="Start" 
+                HeightRequest="160" WidthRequest="600"
+                IsClippedToBounds="True" HasShadow="False" CornerRadius="20" 
+                Margin="0,45,0,20" Padding="0">
+            <Image Source="userbanner.png" Aspect="AspectFill"/>
+        </Frame>
+        <Border Stroke="Transparent"
+                Margin="0,130,380,0"
+                Grid.Row="0"
+                StrokeThickness="1"
+                WidthRequest="110"
+                HeightRequest="110"
+                StrokeShape="RoundRectangle 50">
+            <Image Source="treeprofile.png"
+                    Aspect="AspectFill"/>
+        </Border>
 
-            <Frame Grid.Row="1" VerticalOptions="Start"
+        <Frame Grid.Row="1" VerticalOptions="Start"
                    HeightRequest="25" WidthRequest="130"
                    IsClippedToBounds="True" CornerRadius="10" 
                    Margin="390,-65,0,0" Padding="0">
@@ -81,26 +81,11 @@
                 </HorizontalStackLayout>
             </VerticalStackLayout>
         </Frame>
-
-        <Frame Grid.Row="3" VerticalOptions="Start"
-                   HeightRequest="100" WidthRequest="530"
-                   IsClippedToBounds="True" CornerRadius="20" 
-                   Margin="0,10,0,0" Padding="0">
-            <Grid RowDefinitions="0.35*,0.65*">
-                <Label Text="Tareas Completadas"
-                       FontSize="Title"
-                       Grid.Row="0" Margin="10,0,0,0"/>
-                <ProgressBar Grid.Row="1" Progress="{Binding TaskPercentage}" 
-                             ProgressColor="#FBC05D" WidthRequest="500" x:Name="progressTasks"/>
-            </Grid>
-
-        </Frame>
-
         <Frame Grid.Row="5" VerticalOptions="Start"
-                   HeightRequest="100" WidthRequest="530"
+                   HeightRequest="170" WidthRequest="530"
                    IsClippedToBounds="True" CornerRadius="20" 
                    Margin="0,10,0,0" Padding="0">
-            <Grid RowDefinitions="0.35*,0.65*">
+            <Grid RowDefinitions="0.30*,0.70*">
                 <Label Text="Tareas a punto de finalizar"
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
@@ -108,22 +93,30 @@
                     <CollectionView ItemsSource="{Binding NearlyTasks}"
                                 HorizontalOptions="FillAndExpand"
                                 x:Name="CollectionCat"
-                                SelectionMode="Single">
+                                Margin="0,-30,0,0">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:MyTask">
-                                <Frame WidthRequest="200" Margin="10">
-                                    <Label Text="{Binding Name}"/>
+                                <Frame WidthRequest="200" HeightRequest="100" Margin="10"
+                                       BackgroundColor="#5F5187">
+                                    <VerticalStackLayout>
+                                        <Label Text="{Binding Name}" 
+                                               HorizontalOptions="Center"
+                                               FontSize="Subtitle"
+                                               VerticalOptions="Center"/>
+                                        <Label Grid.Column="1" HorizontalOptions="Center" 
+                                               VerticalOptions="Center"
+                                           Text="{Binding EndDate, 
+                                            StringFormat='Finalización: {0:d}'}"/>
+                                    </VerticalStackLayout>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
             </Grid>
-
         </Frame>
-
     </Grid>
 </ContentPage>

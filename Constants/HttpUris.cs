@@ -32,6 +32,7 @@ namespace Auditore.Constants
         #region USERS
         public static string Login = "http://localhost:3000/auth/login";
         public static string Register = "http://localhost:3000/auth/register"; 
+        public static string getUser = "http://localhost:3000/users/myuser";
         #endregion
     }
 }

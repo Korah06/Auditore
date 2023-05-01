@@ -28,37 +28,25 @@ namespace Auditore.ViewModels
         public ObservableCollection<Chrono> Pomodoros { get; set; } = new ObservableCollection<Chrono>();
         #endregion
 
-        private double _taskPercentage;
-
-        public double TaskPercentage
+        private User _user;
+        public User User
         {
-            get { return _taskPercentage; }
-            set 
-            {
-                if(_taskPercentage != value)
-                {
-                    _taskPercentage = value;
-                    OnPropertyChanged(nameof(TaskPercentage));
-                }
-            }
+            get { return _user; }
+            set { _user = value; }
         }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
         private readonly IChronoService _chronoService;
+        private readonly IUserService _userService;
         public ProfileViewModel
-            (ITaskService taskService, ICategoryService categoryService, IChronoService chronoService)
+            (ITaskService taskService, ICategoryService categoryService, 
+            IChronoService chronoService, IUserService userService)
         {
             _taskService = taskService;
             _categoryService = categoryService;
             _chronoService = chronoService;
+            _userService = userService;
             GetClassifyInfo();
         }
 

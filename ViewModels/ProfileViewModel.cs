@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Auditore.ViewModels
 {
-    public class ProfileViewModel
+    public class ProfileViewModel : INotifyPropertyChanged
     {
 
 
@@ -32,8 +32,20 @@ namespace Auditore.ViewModels
         public User User
         {
             get { return _user; }
-            set { _user = value; }
+            set 
+            { 
+                if(_user == value) { return; }
+                    _user = value;
+                    OnPropertyChanged(nameof(User));
+                
+            }
         }
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
 
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
@@ -66,6 +78,8 @@ namespace Auditore.ViewModels
 
         public async void GetClassifyInfo()
         {
+            User = await _userService.GetUser(Preferences.Default.Get("token", ""));
+
             Tasks.Clear();
             Categories.Clear();
             Chronos.Clear();

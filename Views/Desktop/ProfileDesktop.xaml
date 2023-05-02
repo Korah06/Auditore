@@ -23,13 +23,12 @@
                     Aspect="AspectFill"/>
         </Border>
 
-        <Frame Grid.Row="1" VerticalOptions="Start"
+        <Frame Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Center"
                    HeightRequest="25" WidthRequest="130"
                    IsClippedToBounds="True" CornerRadius="10" 
                    Margin="390,-65,0,0" Padding="0">
-                <Label Text="Juan" HorizontalOptions="Center"
-                       VerticalOptions="Center"
-                       Margin="0,-2,0,0"/>
+                <Label Text="{Binding User.username}" HorizontalOptions="Center"
+                       VerticalOptions="Center" Margin="0,-2,0,0"/>
             </Frame>
 
         <Frame Grid.Row="2" VerticalOptions="Start"

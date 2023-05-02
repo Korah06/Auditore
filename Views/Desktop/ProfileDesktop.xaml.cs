@@ -15,7 +15,6 @@ public partial class ProfileDesktop : ContentPage
         _profileViewModel = new ProfileViewModel(taskService,categoryService,chronoService,userService);
 		InitializeComponent();
 		this.BindingContext = _profileViewModel;
-		
     }
 
 }

@@ -115,7 +115,14 @@
                             <Label x:Name="lblCrono"
                                    FontSize="50"
                                    HorizontalOptions="Center"/>
+                            
                             <Grid>
+                                <HorizontalStackLayout>
+                                    <Label Text="Repeticiones" FontSize="20" 
+                                       VerticalOptions="Center" Margin="0,0,10,0"/>
+                                    <Entry Text="{Binding Repeats}" HorizontalOptions="Start"
+                                           HorizontalTextAlignment="Center" FontSize="20"/>
+                                </HorizontalStackLayout>
                                 <Button x:Name="startButton"
                                     Text="Empezar/Pausar"
                                     Margin="0,0,180,0"

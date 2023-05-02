@@ -184,7 +184,7 @@ namespace Auditore.ViewModels
 
         }
 
-        private int _repeats = 2;
+        private int _repeats = 3;
         public int Repeats
         {
             get { return _repeats; }
@@ -194,10 +194,10 @@ namespace Auditore.ViewModels
         public async void Pomodoro()
         {
             totalSeconds = 0;
-            sleepSeconds = 300;
             if (_selectedChrono != null)
             {
                 totalSeconds = _selectedChrono.minutes * 60;
+                sleepSeconds = _selectedChrono.restMinutes * 60;
 
             }
 
@@ -210,7 +210,7 @@ namespace Auditore.ViewModels
                 {
                     return;
                 }
-                if (i!=0)
+                if (i>0)
                 {
                     while (sleepSeconds > 0)
                     {
@@ -256,7 +256,7 @@ namespace Auditore.ViewModels
                         }
                     }
                     //reasignar valor de sleepSeconds
-                    sleepSeconds = 300;
+                    sleepSeconds = _selectedChrono.restMinutes * 60;
                     await _notificationService.EndRest();
                 }
 
@@ -325,7 +325,7 @@ namespace Auditore.ViewModels
                     }
 
                 }
-
+                totalSeconds = _selectedChrono.minutes * 60;
                 await _notificationService.EndWorkTime();
             }
 

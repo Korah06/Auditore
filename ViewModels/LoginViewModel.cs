@@ -1,4 +1,5 @@
 ﻿using Auditore.Dtos.Request;
+using Auditore.Services;
 using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -46,6 +47,7 @@ namespace Auditore.ViewModels
             if(token != null)
             {
                 Preferences.Default.Set("token", token);
+                Role.GetRole(_userService);
                 await Shell.Current.GoToAsync("//Tasks");
             }
 

@@ -135,5 +135,31 @@ namespace Auditore.Services
                 return null;
             }
         }
+
+        public async Task<bool> GetRole(string token)
+        {
+            bool isAdmin = false;
+            Uri uri = new Uri(string.Format(HttpUris.getRole, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    MyRoleDto dto = JsonSerializer.Deserialize<MyRoleDto>(content, _serializerOptions);
+                    isAdmin = dto.role;
+                    return isAdmin;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
+        }
     }
 }

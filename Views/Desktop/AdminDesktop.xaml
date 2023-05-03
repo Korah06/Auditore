@@ -2,10 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Auditore.Views.Desktop.AdminDesktop">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Admin Dashboard"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <Grid ColumnDefinitions="0.2*,0.6*,0.2*">
+        <VerticalStackLayout Grid.Column="1" Spacing="10">
+            <CollectionView VerticalOptions="FillAndExpand">
+                
+            </CollectionView>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

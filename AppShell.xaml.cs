@@ -21,7 +21,8 @@ public partial class AppShell : Shell
 		tasksPage.ContentTemplate = new DataTemplate(typeof(TasksDesktop));
 		chronoPage.ContentTemplate = new DataTemplate(typeof(ChronoDesktop));
 		calendarPage.ContentTemplate = new DataTemplate(typeof(CalendarDesktop));
-		profilePage.ContentTemplate = new DataTemplate (typeof(ProfileDesktop));
+		profilePage.ContentTemplate = new DataTemplate(typeof(ProfileDesktop));
+		adminPage.ContentTemplate = new DataTemplate(typeof(AdminDesktop));
 #endif
 	}
 }

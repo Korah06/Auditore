@@ -32,7 +32,7 @@ namespace Auditore.ViewModels
             while (true)
             {
                 Admin = Role.IsAdmin;
-                await Task.Delay(100);
+                await Task.Delay(1);
             }
         }
 

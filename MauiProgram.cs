@@ -48,6 +48,7 @@ public static class MauiProgram
 
 		#region ViewModels
 		builder.Services.AddSingleton<LoginViewModel>();
+		builder.Services.AddSingleton<ShellViewModel>();
 		builder.Services.AddSingleton<RegisterViewModel>();
 		builder.Services.AddSingleton<TasksViewModel>();
 		builder.Services.AddSingleton<CreateTaskViewModel>();

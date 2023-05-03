@@ -4,8 +4,13 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Auditore"
-    Shell.FlyoutBehavior="Disabled">
+    Shell.FlyoutBehavior="Disabled"
+    xmlns:viewmodels="clr-namespace:Auditore.ViewModels">
 
+    <Shell.BindingContext>
+        <viewmodels:ShellViewModel/>
+    </Shell.BindingContext>
+    
     <ShellContent 
         x:Name="loginPage"
         Route="Login" />
@@ -26,6 +31,10 @@
         <Tab Title="User">
             <ShellContent Route="Profile"
                           x:Name="profilePage"/>
+        </Tab>
+        <Tab Title="Admin" IsVisible="{Binding Admin}">
+            <ShellContent Route="Admin"
+                          x:Name="adminPage"/>
         </Tab>
     </TabBar>
 

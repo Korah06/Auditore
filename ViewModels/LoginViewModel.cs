@@ -48,6 +48,7 @@ namespace Auditore.ViewModels
             {
                 Preferences.Default.Set("token", token);
                 Role.GetRole(_userService);
+                await Task.Delay(5);
                 await Shell.Current.GoToAsync("//Tasks");
             }
 

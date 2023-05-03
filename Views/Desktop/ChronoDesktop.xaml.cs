@@ -47,6 +47,11 @@ public partial class ChronoDesktop : ContentPage
         {
             chronoFounded.IsVisible = false;
             contentGrid.IsVisible = true;
+
+            if (_viewModel.SelectedChrono.IsPomodoro)
+            {stackRepeat.IsVisible = true;}
+            else{stackRepeat.IsVisible = false;}
+
             lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.name"));
             lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
             _viewModel.getTasksForChrono();

@@ -117,7 +117,7 @@
                                    HorizontalOptions="Center"/>
                             
                             <Grid>
-                                <HorizontalStackLayout>
+                                <HorizontalStackLayout x:Name="stackRepeat">
                                     <Label Text="Repeticiones" FontSize="20" 
                                        VerticalOptions="Center" Margin="0,0,10,0"/>
                                     <Entry Text="{Binding Repeats}" HorizontalOptions="Start"

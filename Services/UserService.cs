@@ -162,6 +162,30 @@ namespace Auditore.Services
             }
         }
 
+        public async Task<bool> DeleteUser(string userId, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.deleteUser, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", userId);
+                HttpResponseMessage response = await _client.DeleteAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Eliminado", "El usuario ha sido eliminado correctamente", "Aceptar");
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return false;
+
+        }
+
         public async Task<List<User>> GetUsers(string token)
         {
             Uri uri = new Uri(string.Format(HttpUris.getUsers, string.Empty));

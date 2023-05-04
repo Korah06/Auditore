@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Auditore.ViewModels
 {
@@ -23,6 +24,7 @@ namespace Auditore.ViewModels
 
         public async void GetData()
         {
+            Users.Clear();
             _users = await _userService.GetUsers(Preferences.Default.Get("token",""));
             foreach(var user in _users)
             {
@@ -30,5 +32,22 @@ namespace Auditore.ViewModels
             }
         }
 
+        public ICommand DeleteUser => new Command(async (obj) =>
+        {
+            bool answer = await Application.Current.MainPage
+                        .DisplayAlert("Eliminar", "Te gustaria eliminar el usuario?", "Si", "No");
+            if (answer)
+            {
+                User user = obj as User;
+                bool deleted = await _userService.DeleteUser(user._id, Preferences.Default.Get("token", ""));
+                if (deleted) { GetData(); }
+            }
+        });
+
+        public ICommand UpdateUser => new Command(async (obj) =>
+        {
+            User user = obj as User;
+            await _userService.DeleteUser(user._id, Preferences.Default.Get("token", ""));
+        });
     }
 }

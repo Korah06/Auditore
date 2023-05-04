@@ -15,5 +15,6 @@ namespace Auditore.Services.Interfaces
         Task<User> GetUser(string token);
         Task<bool> GetRole(string token);
         Task<List<User>> GetUsers(string token);
+        Task<bool> DeleteUser(string userId, string token);
     }
 }

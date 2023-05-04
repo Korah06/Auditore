@@ -12,4 +12,5 @@ public partial class AdminDesktop : ContentPage
 		InitializeComponent();
 		this.BindingContext = _adminViewModel;
 	}
+
 }

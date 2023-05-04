@@ -161,5 +161,27 @@ namespace Auditore.Services
                 return false;
             }
         }
+
+        public async Task<List<User>> GetUsers(string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.getUsers, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    GetUsersDto dto = JsonSerializer.Deserialize<GetUsersDto>(content, _serializerOptions);
+                    return dto.users;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return null;
+        }
     }
 }

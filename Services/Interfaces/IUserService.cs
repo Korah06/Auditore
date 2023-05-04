@@ -14,5 +14,6 @@ namespace Auditore.Services.Interfaces
         Task<bool> Register(RegisterRequest user);
         Task<User> GetUser(string token);
         Task<bool> GetRole(string token);
+        Task<List<User>> GetUsers(string token);
     }
 }

@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Auditore.Views.Desktop.AdminDesktop">
+             x:Class="Auditore.Views.Desktop.AdminDesktop"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:AdminViewModel">
 
     <Grid ColumnDefinitions="0.2*,0.6*,0.2*">
         <VerticalStackLayout Grid.Column="1" Spacing="10">
-            <CollectionView VerticalOptions="FillAndExpand">
+            <Label Text="Panel del Administrador" 
+                       FontFamily="Prompt"
+                   FontSize="Large" 
+                   HorizontalOptions="Start"
+                   Margin="10,0,0,0"/>
+            <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
+                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
+            <CollectionView VerticalOptions="FillAndExpand" 
+                            ItemsSource="{Binding Users}">
                 
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:User">
+                        <Grid ColumnDefinitions=".1*,.1*,.1*,.1*,.1*,.1*,.4*"
+                              RowDefinitions="*,*,*"
+                              Margin="5">
+                            <Frame Grid.RowSpan="3"
+                                   Grid.Column="1"
+                                   Grid.ColumnSpan="6"
+                                   CornerRadius="15"
+                                   MaximumHeightRequest="95">
+                            </Frame>
+                            <Border Stroke="Transparent"
+                                    Margin="-30,0,0,0"
+                                    Grid.RowSpan="3"
+                                    Grid.ColumnSpan="2"
+                                    StrokeThickness="1"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    StrokeShape="RoundRectangle 50">
+                                <Image Source="treeprofile.png"
+                                       Aspect="AspectFill"/>
+                            </Border>
+                            
+                            <Label Text="Username"
+                                   Grid.Column="2" VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Grid.Row="0"/>
+                            
+                            <Label Text="{Binding username}"
+                                   Grid.Column="2" VerticalOptions="Center"
+                                   HorizontalOptions="Center"
+                                   Grid.Row="1"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
             </CollectionView>
         </VerticalStackLayout>
     </Grid>

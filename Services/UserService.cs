@@ -186,6 +186,36 @@ namespace Auditore.Services
 
         }
 
+        public async Task<bool> ModifyTask(User user, string token)
+        {
+            Uri uri = new Uri(string.Format(HttpUris.modifyUser, string.Empty));
+            ModifyTaskRequest dto = new ModifyTaskRequest
+            {
+                
+            };
+
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", task._id);
+                using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await _client.PutAsync(uri, jsonContent);
+                if (response.IsSuccessStatusCode)
+                {
+                    await Application.Current.MainPage
+                        .DisplayAlert("Modificado", "La tarea ha sido modificada correctamente", "Aceptar");
+                    return true;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                return false;
+            }
+
+        }
+
         public async Task<List<User>> GetUsers(string token)
         {
             Uri uri = new Uri(string.Format(HttpUris.getUsers, string.Empty));

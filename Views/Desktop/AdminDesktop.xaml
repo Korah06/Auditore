@@ -6,7 +6,8 @@
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:AdminViewModel">
 
-    <Grid ColumnDefinitions="0.2*,0.6*,0.2*">
+    <Grid ColumnDefinitions="0.05*,0.6*,0.35*">
+        <!--#region Users -->
         <StackLayout Grid.Column="1" Spacing="10">
             <Label Text="Panel del Administrador" 
                        FontFamily="Prompt"
@@ -17,11 +18,14 @@
                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
             <CollectionView VerticalOptions="FillAndExpand" 
                             ItemsSource="{Binding Users}"
+                            SelectionChanged="collectionUsers_SelectionChanged"
+                            SelectionChangedCommand="{Binding SelectCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference collectionUsers}}"
                             SelectionMode="Single"
                             x:Name="collectionUsers">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:User">
-                        <Grid ColumnDefinitions=".1*,.12*,.1*,.1*,.1*,.1*,.1*"
+                        <Grid ColumnDefinitions=".1*,.12*,.1*,.1*,.1*,.1*"
                               RowDefinitions="*,*,*"
                               Margin="5">
                             <Frame Grid.RowSpan="3"
@@ -41,17 +45,17 @@
                                 <Image Source="treeprofile.png"
                                        Aspect="AspectFill"/>
                             </Border>
-                            
+
                             <Label Text="Username"
                                    Grid.Column="1" VerticalOptions="Center"
                                    HorizontalOptions="Center" FontSize="Small"
                                    Grid.Row="0" Margin="0,12,-20,0"/>
-                            
+
                             <Label Text="{Binding username}"
                                    Grid.Column="1" VerticalOptions="Start"
                                    HorizontalOptions="Center" Margin="0,0,-20,0"
                                    Grid.Row="1"/>
-                            
+
                             <Label Text="Correo"
                                    Grid.Column="2" VerticalOptions="Center"
                                    HorizontalOptions="Center" FontSize="Small"
@@ -61,7 +65,7 @@
                                    Grid.Column="2" VerticalOptions="Start"
                                    HorizontalOptions="Center" Margin="0,0,-20,0"
                                    Grid.Row="1" />
-                            
+
                             <Label Text="Nombre"
                                    Grid.Column="3" VerticalOptions="Center"
                                    HorizontalOptions="Center" FontSize="Small"
@@ -71,7 +75,7 @@
                                    Grid.Column="3" VerticalOptions="Start"
                                    HorizontalOptions="Center" Margin="0,0,-20,0"
                                    Grid.Row="1"/>
-                            
+
                             <Label Text="Apellidos"
                                    Grid.Column="4" VerticalOptions="Center"
                                    HorizontalOptions="Center" FontSize="Small"
@@ -91,41 +95,59 @@
                                    Grid.Column="5" VerticalOptions="Start"
                                    HorizontalOptions="Center" Margin="0,0,-20,0"
                                    Grid.Row="1"/>
-                            <Button Text="Modificar" Grid.Row="0" 
-                                    Grid.Column="6" WidthRequest="90"
-                                    HeightRequest="20" Margin="0,0,0,-25"
-                                    Command="{Binding Source= 
-                                            {RelativeSource AncestorType= {x:Type viewmodels:AdminViewModel}}, 
-                                            Path=UpdateUser}"
-                                            CommandParameter=
-                                            "{Binding SelectedItem,
-                                            Source={x:Reference collectionUsers}}"/>
-                            <!--<Button Text="Eliminar" Grid.Row="2" 
-                                    Grid.Column="6" WidthRequest="90"
-                                    HeightRequest="20" Margin="0,-25,0,0"
-                                    BackgroundColor="#f99aaa"
-                                    Command="{Binding Source= 
-                                            {RelativeSource AncestorType= {x:Type viewmodels:AdminViewModel}}, 
-                                            Path=DeleteUser}"
-                                            CommandParameter=
-                                            "{Binding SelectedItem,
-                                            Source={x:Reference collectionUsers}}"/>-->
-                            <Image Source="delete_icon.png" Grid.Row="2" 
-                                    Grid.Column="6" WidthRequest="40"
-                                    HeightRequest="40" Margin="0,-25,0,0">
-                                <Image.GestureRecognizers>
-                                    <TapGestureRecognizer 
-                                    Command="{Binding Source= 
-                                    {RelativeSource AncestorType= {x:Type viewmodels:AdminViewModel}}, 
-                                    Path=DeleteUser}"
-                                    CommandParameter=
-                                    "{Binding SelectedItem,Source={x:Reference collectionUsers}}"/>
-                                </Image.GestureRecognizers>
-                            </Image>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </StackLayout>
+        <!--#endregion-->
+
+        <StackLayout Grid.Column="2" Margin="7,10,7,0">
+            <Frame>
+                <VerticalStackLayout>
+                    <Grid x:Name="ContentGrid" IsVisible="false">
+                        <VerticalStackLayout Spacing="10" x:Name="VerticalDad">
+                            <Label Text="Usuario"/>
+                            <Entry Text="{Binding ItemSelected.username}"
+                                       x:Name="lblusername"/>
+                            
+                            <Label Text="Nombre"/>
+                            <Entry Text="{Binding ItemSelected.name}"
+                                       x:Name="lblname"/>
+
+                            <Label Text="Apellidos"/>
+                            <Entry Text="{Binding ItemSelected.surname}"
+                                       x:Name="surnamelbl"/>
+
+                            <Label Text="correo electronico"/>
+                            <Entry Text="{Binding ItemSelected.email}"
+                                       x:Name="emaillbl"/>
+                            
+                            <Label Text="Roles"/>
+                            <Picker ItemsSource="{Binding Roles}"
+                                        x:Name="userRoles"
+                                        WidthRequest="200"
+                                        SelectedItem="{Binding SelectedRol}"
+                                        HorizontalOptions="Start"/>
+
+                            <Grid Margin="0,10,0,0">
+
+                                    <Button Text="Actualizar Usuario"
+                                            HorizontalOptions="Start"
+                                            Command="{Binding UpdateUser}"/>
+                            
+                                    <Button Text="Eliminar Usuario"
+                                            HorizontalOptions="End"
+                                            BackgroundColor="#6a040f"
+                                            Command="{Binding DeleteUser}"/>
+                            </Grid>
+
+
+                        </VerticalStackLayout>
+                    </Grid>
+                </VerticalStackLayout>
+            </Frame>
+        </StackLayout>
+
     </Grid>
 </ContentPage>

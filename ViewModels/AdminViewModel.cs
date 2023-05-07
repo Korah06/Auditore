@@ -12,6 +12,23 @@ namespace Auditore.ViewModels
 {
     public class AdminViewModel
     {
+
+        private User _itemSelected;
+        public User ItemSelected
+        {
+            get { return _itemSelected; }
+            set { _itemSelected = value; }
+        }
+
+        public ObservableCollection<string> Roles { get; set; } = new ObservableCollection<string>();
+
+        private string _selectedRol;
+        public string SelectedRol
+        {
+            get { return _selectedRol; }
+            set { _selectedRol = value; }
+        }
+
         private List<User> _users;
         public ObservableCollection<User> Users { get; set; } = new ObservableCollection<User>();
 
@@ -24,6 +41,8 @@ namespace Auditore.ViewModels
 
         public async void GetData()
         {
+            Roles.Add("admin");
+            Roles.Add("basic");
             Users.Clear();
             _users = await _userService.GetUsers(Preferences.Default.Get("token",""));
             foreach(var user in _users)
@@ -32,6 +51,11 @@ namespace Auditore.ViewModels
             }
         }
 
+        public ICommand SelectCommand => new Command<object>((obj) =>
+        {
+            _itemSelected = obj as User;
+            _selectedRol = _itemSelected.rol;
+        });
         public ICommand DeleteUser => new Command(async (obj) =>
         {
             bool answer = await Application.Current.MainPage
@@ -44,10 +68,10 @@ namespace Auditore.ViewModels
             }
         });
 
-        public ICommand UpdateUser => new Command(async (obj) =>
+        public ICommand UpdateUser => new Command(async () =>
         {
-            User user = obj as User;
-            await _userService.DeleteUser(user._id, Preferences.Default.Get("token", ""));
+            _itemSelected.rol = _selectedRol;
+            //await _userService.DeleteUser(_itemSelected._id, Preferences.Default.Get("token", ""));
         });
     }
 }

@@ -13,4 +13,24 @@ public partial class AdminDesktop : ContentPage
 		this.BindingContext = _adminViewModel;
 	}
 
+    private void collectionUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+		if (sender != null)
+		{
+            ContentGrid.IsVisible = true;
+
+            lblusername.SetBinding(Entry.TextProperty, new Binding("ItemSelected.username"));
+            lblname.SetBinding(Entry.TextProperty, new Binding("ItemSelected.name"));
+            surnamelbl.SetBinding(Entry.TextProperty, new Binding("ItemSelected.surname"));
+            emaillbl.SetBinding(Entry.TextProperty, new Binding("ItemSelected.email"));
+            if(_adminViewModel.ItemSelected.rol == "admin")
+            {
+                userRoles.SelectedItem = "admin";
+            }
+            else
+            {
+                userRoles.SelectedItem = "basic";
+            }
+        }
+    }
 }

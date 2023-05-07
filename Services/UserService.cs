@@ -197,7 +197,7 @@ namespace Auditore.Services
             try
             {
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-                _client.DefaultRequestHeaders.Add("id", task._id);
+                _client.DefaultRequestHeaders.Add("id", user._id);
                 using StringContent jsonContent = new(JsonSerializer.Serialize(dto), Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await _client.PutAsync(uri, jsonContent);
                 if (response.IsSuccessStatusCode)

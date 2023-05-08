@@ -71,7 +71,7 @@ namespace Auditore.ViewModels
         public ICommand UpdateUser => new Command(async () =>
         {
             _itemSelected.rol = _selectedRol;
-            //await _userService.DeleteUser(_itemSelected._id, Preferences.Default.Get("token", ""));
+            await _userService.ModifyUser(_itemSelected, Preferences.Default.Get("token", ""));
         });
     }
 }

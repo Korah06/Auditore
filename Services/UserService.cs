@@ -186,12 +186,17 @@ namespace Auditore.Services
 
         }
 
-        public async Task<bool> ModifyTask(User user, string token)
+        public async Task<bool> ModifyUser(User user, string token)
         {
             Uri uri = new Uri(string.Format(HttpUris.modifyUser, string.Empty));
-            ModifyTaskRequest dto = new ModifyTaskRequest
+            ModifyUserRequest dto = new ModifyUserRequest
             {
-                
+                email = user.email, 
+                password = user.password, 
+                username = user.username,
+                name = user.name,
+                rol = user.rol,
+                surname = user.surname
             };
 
             try
@@ -203,9 +208,11 @@ namespace Auditore.Services
                 if (response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage
-                        .DisplayAlert("Modificado", "La tarea ha sido modificada correctamente", "Aceptar");
+                        .DisplayAlert("Modificado", "El usuario ha sido modificado correctamente", "Aceptar");
                     return true;
                 }
+                await Application.Current.MainPage
+                        .DisplayAlert("Error", "Ha ocurrido algun tipo de error", "Aceptar");
                 return false;
             }
             catch (Exception ex)

@@ -56,14 +56,13 @@ namespace Auditore.ViewModels
             _itemSelected = obj as User;
             _selectedRol = _itemSelected.rol;
         });
-        public ICommand DeleteUser => new Command(async (obj) =>
+        public ICommand DeleteUser => new Command(async () =>
         {
             bool answer = await Application.Current.MainPage
                         .DisplayAlert("Eliminar", "Te gustaria eliminar el usuario?", "Si", "No");
             if (answer)
             {
-                User user = obj as User;
-                bool deleted = await _userService.DeleteUser(user._id, Preferences.Default.Get("token", ""));
+                bool deleted = await _userService.DeleteUser(_itemSelected._id, Preferences.Default.Get("token", ""));
                 if (deleted) { GetData(); }
             }
         });

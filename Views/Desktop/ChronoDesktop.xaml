@@ -14,6 +14,11 @@
                    FontSize="Large" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
+                <Image Source="pomodoro_icon.png" WidthRequest="23" Margin="0,-25,0,0"/>
+                <Label Text="Pomodoro" HorizontalOptions="Center" Margin="0,0,-100,0"/>
+                <Image Source="timer_icon.png" WidthRequest="23" Margin="0,0,0,-25"/>
+                <Label Text="Cronometro" HorizontalOptions="Center" Margin="0,23,-100,0"/>
+
                 <Button Text="Crear Crono" 
                         WidthRequest="120"
                         Margin="0,0,20,0"
@@ -48,11 +53,13 @@
                                 </VisualStateGroup>
                             </VisualStateManager.VisualStateGroups>
                             <VerticalStackLayout>
+                                <Label Text="{Binding name}"
+                                       FontSize="17"
+                                       HorizontalOptions="Center"/>
+                                <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
+                                       HorizontalOptions="Center"/>
                                 <Grid HeightRequest="30">
-                                    <Label Text="{Binding name}"
-                                       FontSize="Subtitle"
-                                           HorizontalOptions="Center"/>
-                                    <Image HorizontalOptions="End"
+                                    <Image HorizontalOptions="Start"
                                            Margin="0,0,-15,0">
                                         <Image.Style>
                                             <Style TargetType="Image">
@@ -66,15 +73,12 @@
                                             </Style>
                                         </Image.Style>
                                     </Image>
-                                </Grid>
-                                <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
-                                       HorizontalOptions="Center"/>
-                                <Image Source="delete_icon.png"
+                                    <Image Source="delete_icon.png"
                                        Margin="0,0,-15,0"
                                                    HorizontalOptions="End"
                                                    HeightRequest="30">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer 
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer 
                                                         Command=
                                                         "{Binding Source=
                                                         {RelativeSource AncestorType=
@@ -83,8 +87,9 @@
                                                         CommandParameter=
                                                         "{Binding SelectedItem,
                                                         Source={x:Reference ChronoCollection}}"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
+                                        </Image.GestureRecognizers>
+                                    </Image>
+                                </Grid>
                             </VerticalStackLayout>
                         </Frame>
                     </DataTemplate>

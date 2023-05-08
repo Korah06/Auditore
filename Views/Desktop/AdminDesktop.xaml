@@ -102,10 +102,10 @@
         </StackLayout>
         <!--#endregion-->
 
-        <StackLayout Grid.Column="2" Margin="7,10,7,0">
+        <StackLayout Grid.Column="2" Margin="7,10,7,0" x:Name="ContentGrid" IsVisible="false">
             <Frame>
                 <VerticalStackLayout>
-                    <Grid x:Name="ContentGrid" IsVisible="false">
+                    <Grid >
                         <VerticalStackLayout Spacing="10" x:Name="VerticalDad">
                             <Label Text="Usuario"/>
                             <Entry Text="{Binding ItemSelected.username}"

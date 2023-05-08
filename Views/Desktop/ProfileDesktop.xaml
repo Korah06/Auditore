@@ -41,7 +41,7 @@
                         <Label Text="Tareas" HorizontalOptions="Center"/>
                         <Label Text="Totales" HorizontalOptions="Center"/>
                         <Label Text="{Binding Tasks.Count}" HorizontalOptions="Center"/>
-                        <Image Source="taskcompleted.png"
+                        <Image Source="tasks.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
                     </VerticalStackLayout>
@@ -57,7 +57,7 @@
                         <Label Text="Categorias" HorizontalOptions="Center"/>
                         <Label Text="Creadas" HorizontalOptions="Center"/>
                         <Label Text="{Binding Categories.Count}" HorizontalOptions="Center"/>
-                        <Image Source="taskcompleted.png"
+                        <Image Source="categories.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
                     </VerticalStackLayout>
@@ -65,7 +65,7 @@
                         <Label Text="Cronometros" HorizontalOptions="Center"/>
                         <Label Text="creados" HorizontalOptions="Center"/>
                         <Label Text="{Binding Chronos.Count}" HorizontalOptions="Center"/>
-                        <Image Source="taskcompleted.png"
+                        <Image Source="timer_icon.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
                     </VerticalStackLayout>
@@ -73,7 +73,7 @@
                         <Label Text="Pomodoros" HorizontalOptions="Center"/>
                         <Label Text="creados" HorizontalOptions="Center"/>
                         <Label Text="{Binding Pomodoros.Count}" HorizontalOptions="Center"/>
-                        <Image Source="taskcompleted.png"
+                        <Image Source="pomodoro_icon.png"
                                    WidthRequest="20"
                                    HeightRequest="20"/>
                     </VerticalStackLayout>

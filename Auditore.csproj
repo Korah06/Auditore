@@ -49,6 +49,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <AndroidResource Remove="Conversores\**" />
+	  <Compile Remove="Conversores\**" />
+	  <EmbeddedResource Remove="Conversores\**" />
+	  <MauiCss Remove="Conversores\**" />
+	  <MauiXaml Remove="Conversores\**" />
+	  <None Remove="Conversores\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Resources\Fonts\Cairo-Regular.ttf" />
 	  <None Remove="Resources\Fonts\Prompt-Medium.ttf" />
 	  <None Remove="Resources\Images\Auditore.png" />
@@ -73,7 +82,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Conversores\" />
 	  <Folder Include="Resources\Styles\ViewsStyles\" />
 	</ItemGroup>
 

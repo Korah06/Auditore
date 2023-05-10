@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace Auditore.ViewModels
 {
@@ -62,7 +63,11 @@ namespace Auditore.ViewModels
             GetClassifyInfo();
         }
 
-        public static List<MyTask> ObtainNearlyTasks(List<MyTask> tasks)
+        public ICommand ChangeIconCommand => new Command(async () =>
+        {
+            string i = await Application.Current.MainPage.DisplayActionSheet("Seleccione un nuevo avatar","Cancel",null,"Sakura Tree", "Ejemplo");
+        });
+            public static List<MyTask> ObtainNearlyTasks(List<MyTask> tasks)
         {
             tasks.Sort((task1, task2) =>
             {

@@ -29,6 +29,7 @@ namespace Auditore.ViewModels
             set { _selectedChrono = value; }
         }
 
+        private Diagnostic diagnostic;
 
         private string _timer;
         public string Timer
@@ -50,14 +51,17 @@ namespace Auditore.ViewModels
         private readonly ICategoryService _categoryService;
         private readonly IChronoService _chronoService;
         private readonly INotificationService _notificationService;
+        private readonly IDiagnosticService _diagnosticService;
         public ChronosViewModel
             (IChronoService chronoService, ITaskService taskService, 
-            ICategoryService categoryService, INotificationService notificationService) 
+            ICategoryService categoryService, INotificationService notificationService,
+            IDiagnosticService diagnosticService) 
         {
             _categoryService = categoryService;
             _taskService = taskService;
             _chronoService = chronoService;
             _notificationService = notificationService;
+            _diagnosticService = diagnosticService;
             ObtainChronos();
         }
 
@@ -132,6 +136,10 @@ namespace Auditore.ViewModels
                     ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
 
                     totalSeconds--;
+                    if (totalSeconds % 60 == 0)
+                    {
+                        diagnostic.workMinutes++;
+                    }
                     await Task.Delay(1000);
 
                     
@@ -221,6 +229,10 @@ namespace Auditore.ViewModels
 
                             ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
                             sleepSeconds--;
+                            if (sleepSeconds % 60 == 0)
+                            {
+                                diagnostic.restMinutes++;
+                            }
                             await Task.Delay(1000);
                             if (isReset)
                             {
@@ -272,6 +284,10 @@ namespace Auditore.ViewModels
                         ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
 
                         totalSeconds--;
+                        if (totalSeconds % 60 == 0)
+                        {
+                            diagnostic.workMinutes++;
+                        }
                         if (Finished)
                         {
                             return;
@@ -404,7 +420,11 @@ namespace Auditore.ViewModels
             {
                 Finished = false;
                 isRunning = true;
-                init = true; 
+                init = true;
+                diagnostic = new ();
+                diagnostic.idCategory = _selectedChrono.categoryId;
+                diagnostic.idUser = _selectedChrono.userId;
+                diagnostic.repeats = Repeats;
                 if (_selectedChrono.IsPomodoro)
                 {
                     Pomodoro();
@@ -423,6 +443,8 @@ namespace Auditore.ViewModels
                 totalSeconds = 0;
                 init = false;
                 Finished = true;
+                //enviar diagnostic
+                _diagnosticService.CreateDiagnostic(diagnostic,Preferences.Default.Get("token",""));
                 Debug.WriteLine("Finished");
             }
         });
@@ -439,6 +461,12 @@ namespace Auditore.ViewModels
 
                 ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
                 isRunning = false;
+                diagnostic = new()
+                {
+                    idCategory = _selectedChrono.categoryId,
+                    idUser = _selectedChrono.userId,
+                    repeats = Repeats
+                };
                 if (_selectedChrono.IsPomodoro)
                 {
                     Pomodoro();

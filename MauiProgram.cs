@@ -28,6 +28,7 @@ public static class MauiProgram
 
 		#region Services
 		builder.Services.AddSingleton<ITaskService, TaskService>();
+		builder.Services.AddSingleton<IDiagnosticService, DiagnosticService>();
 		builder.Services.AddSingleton<Services.Interfaces.INotificationService, NotificationService>();
 		builder.Services.AddSingleton<IChronoService, ChronoService>();
 		builder.Services.AddSingleton<ICategoryService, CategoryService>();

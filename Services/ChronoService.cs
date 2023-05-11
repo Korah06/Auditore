@@ -88,6 +88,7 @@ namespace Auditore.Services
 
         public async Task<bool> DeleteChrono(string id, string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.DeleteChrono, string.Empty));
             try
             {

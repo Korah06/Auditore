@@ -102,6 +102,7 @@ namespace Auditore.Services
 
         public async Task<bool> UpdateTasks(List<MyTask> tasks, string token)
         {
+            _client = new HttpClient();
             List<UpdateTask> Utasks = new List<UpdateTask>();
             foreach(var task in tasks)
             {
@@ -168,6 +169,7 @@ namespace Auditore.Services
 
         public async Task<bool> DeleteTask(string taskId,string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.DeleteTask, string.Empty));
             try
             {
@@ -192,6 +194,7 @@ namespace Auditore.Services
 
         public async Task<bool> ModifyTask(MyTask task ,string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.ModifyTask, string.Empty));
             ModifyTaskRequest dto = new ModifyTaskRequest
             {

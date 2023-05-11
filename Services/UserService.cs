@@ -190,6 +190,7 @@ namespace Auditore.Services
 
         public async Task<bool> ModifyUser(User user, string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.modifyUser, string.Empty));
             ModifyUserRequest dto = new ModifyUserRequest
             {

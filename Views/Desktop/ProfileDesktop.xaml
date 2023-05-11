@@ -11,7 +11,7 @@
                 HeightRequest="160" WidthRequest="600"
                 IsClippedToBounds="True" HasShadow="False" CornerRadius="20" 
                 Margin="0,45,0,20" Padding="0">
-            <Image Source="vicesky.png" Aspect="AspectFill"/>
+            <Image Source="{Binding Banner}" Aspect="AspectFill"/>
         </Frame>
         <Border Stroke="#404272"
                 BackgroundColor="#404272"
@@ -24,7 +24,7 @@
             <Image Source="edit.png"
                     Aspect="AspectFill">
                 <Image.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding ChangeIconCommand}"/>
+                    <TapGestureRecognizer Command="{Binding ChangeBannerCommand}"/>
                 </Image.GestureRecognizers>
             </Image>
         </Border>
@@ -36,7 +36,7 @@
                 WidthRequest="110"
                 HeightRequest="110"
                 StrokeShape="RoundRectangle 50">
-            <Image Source="treeprofile.png"
+            <Image Source="{Binding Icon}"
                     Aspect="AspectFill"/>
         </Border>
         <Border Stroke="#404272"

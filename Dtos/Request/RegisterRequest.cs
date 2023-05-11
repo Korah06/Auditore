@@ -14,6 +14,8 @@ namespace Auditore.Dtos.Request
         public string Email { get; set; }
         public string Password { get; set; }
         public string Rol { get; set; }
+        public string avatar { get; set; }
+        public string banner { get; set; }
 
         public RegisterRequest(string username,string name, string surname, string email, string password, string rol) 
         {

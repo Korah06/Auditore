@@ -83,6 +83,8 @@ namespace Auditore.Services
             Uri uri = new Uri(string.Format(HttpUris.Register, string.Empty));
             try
             {
+                user.avatar = "treeprofile";
+                user.banner = "vicesky";
                 string json = JsonSerializer.Serialize<RegisterRequest>(user, _serializerOptions);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
 
@@ -196,7 +198,9 @@ namespace Auditore.Services
                 username = user.username,
                 name = user.name,
                 rol = user.rol,
-                surname = user.surname
+                surname = user.surname,
+                avatar = user.avatar,
+                banner = user.banner
             };
 
             try

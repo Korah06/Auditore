@@ -29,6 +29,30 @@ namespace Auditore.ViewModels
         public ObservableCollection<Chrono> Pomodoros { get; set; } = new ObservableCollection<Chrono>();
         #endregion
 
+        private string _icon = "treeprofile.png";
+        public string Icon
+        {
+            get { return _icon; }
+            set
+            {
+                if (_icon == value) { return; }
+                _icon = value;
+                OnPropertyChanged(nameof(Icon));
+
+            }
+        }
+        private string _banner = "vicesky.png";
+        public string Banner
+        {
+            get { return _banner; }
+            set
+            {
+                if (_banner == value) { return; }
+                _banner = value;
+                OnPropertyChanged(nameof(Banner));
+
+            }
+        }
         private User _user;
         public User User
         {
@@ -65,9 +89,27 @@ namespace Auditore.ViewModels
 
         public ICommand ChangeIconCommand => new Command(async () =>
         {
-            string i = await Application.Current.MainPage.DisplayActionSheet("Seleccione un nuevo avatar","Cancel",null,"Sakura Tree", "Ejemplo");
+            string i = await Application.Current.MainPage.DisplayActionSheet("Seleccione un nuevo avatar","Cancel",null,"treeprofile", "waveprofile","astronautprofile");
+            if(i == "Cancel")
+            {
+                return;
+            }
+            User.avatar = i;
+            await _userService.ModifyUser(User, Preferences.Default.Get("token", ""));
+            GetClassifyInfo();
         });
-            public static List<MyTask> ObtainNearlyTasks(List<MyTask> tasks)
+        public ICommand ChangeBannerCommand => new Command(async () =>
+        {
+            string i = await Application.Current.MainPage.DisplayActionSheet("Seleccione un nuevo banner", "Cancel", null, "vicesky", "redmoon", "spaceboy");
+            if (i == "Cancel")
+            {
+                return;
+            }
+            User.banner = i;
+            await _userService.ModifyUser(User, Preferences.Default.Get("token", ""));
+            GetClassifyInfo();
+        });
+        public static List<MyTask> ObtainNearlyTasks(List<MyTask> tasks)
         {
             tasks.Sort((task1, task2) =>
             {
@@ -84,6 +126,9 @@ namespace Auditore.ViewModels
         public async void GetClassifyInfo()
         {
             User = await _userService.GetUser(Preferences.Default.Get("token", ""));
+
+            Banner = User.banner+".png";
+            Icon = User.avatar+".png";
 
             Tasks.Clear();
             Categories.Clear();

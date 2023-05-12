@@ -348,7 +348,7 @@ namespace Auditore.ViewModels
             init = false;
             Finished = true;
             await _notificationService.EndPomodoro();
-
+            await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
 
         }
         
@@ -436,7 +436,7 @@ namespace Auditore.ViewModels
                 Debug.WriteLine("Started");
             }
         });
-        public ICommand EndCommand => new Command(() =>
+        public ICommand EndCommand => new Command( async () =>
         {
             if (init)
             {
@@ -444,7 +444,7 @@ namespace Auditore.ViewModels
                 init = false;
                 Finished = true;
                 //enviar diagnostic
-                _diagnosticService.CreateDiagnostic(diagnostic,Preferences.Default.Get("token",""));
+                await _diagnosticService.CreateDiagnostic(diagnostic,Preferences.Default.Get("token",""));
                 Debug.WriteLine("Finished");
             }
         });

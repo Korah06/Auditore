@@ -8,40 +8,50 @@ namespace Auditore.Constants
 {
     public static class HttpUris
     {
+
+        private static readonly string uri = "http://localhost:3000/";
+
+        private static readonly string auth = uri+"auth/";
+        private static readonly string users = uri+"users/";
+        private static readonly string tasks = uri+"tasks/";
+        private static readonly string chronos = uri+"chrono/";
+        private static readonly string categories = uri+"categories/";
+        private static readonly string diagnositcs = uri+ "diagnostics/";
+
         #region TASKS
-        public static string GetMyTasks = "http://localhost:3000/tasks/mytasks";
-        public static string GetMyCategoryTasks = "http://localhost:3000/tasks/mytasksCategory";
-        public static string DeleteTask = "http://localhost:3000/tasks/";
-        public static string ModifyTask = "http://localhost:3000/tasks/";
-        public static string UpdateMyTasks = "http://localhost:3000/tasks/updatetasks";
-        public static string CreateTask = "http://localhost:3000/tasks/";
+        public static string GetMyTasks = tasks+"mytasks";
+        public static string GetMyCategoryTasks = tasks + "mytasksCategory";
+        public static string DeleteTask = tasks;
+        public static string ModifyTask = tasks;
+        public static string UpdateMyTasks = tasks + "updatetasks";
+        public static string CreateTask = tasks;
         #endregion
 
         #region CHRONOS
-        public static string GetChronos = "http://localhost:3000/chrono/";
-        public static string CreateChronos = "http://localhost:3000/chrono/";
-        public static string DeleteChrono = "http://localhost:3000/chrono/";
+        public static string GetChronos = chronos;
+        public static string CreateChronos = chronos;
+        public static string DeleteChrono = chronos;
         #endregion
 
         #region CATEGORIES
-        public static string GetMyCategories = "http://localhost:3000/categories/mycategories";
-        public static string CreateCategory = "http://localhost:3000/categories/";
-        public static string DeleteCategory = "http://localhost:3000/categories/";
+        public static string GetMyCategories = categories+"mycategories";
+        public static string CreateCategory = categories;
+        public static string DeleteCategory = categories;
         #endregion
 
         #region USERS
-        public static string Login = "http://localhost:3000/auth/login";
-        public static string Register = "http://localhost:3000/auth/register"; 
+        public static string Login = auth+"login";
+        public static string Register = auth+"register"; 
 
-        public static string getUser = "http://localhost:3000/users/myuser";
-        public static string getUsers = "http://localhost:3000/users/allusers";
-        public static string deleteUser = "http://localhost:3000/users/";
-        public static string modifyUser = "http://localhost:3000/users/";
-        public static string getRole = "http://localhost:3000/users/myrole";
+        public static string getUser = users+"myuser";
+        public static string getUsers = users + "allusers";
+        public static string deleteUser = users;
+        public static string modifyUser = users;
+        public static string getRole = users + "myrole";
         #endregion
 
         #region DIAGNOSTICS
-        public static string CreateDiagnostic = "http://localhost:3000/diagnostics/create";
+        public static string CreateDiagnostic = diagnositcs+"create";
         #endregion
 
     }

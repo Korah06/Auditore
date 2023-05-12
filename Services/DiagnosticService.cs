@@ -1,4 +1,5 @@
 ﻿using Auditore.Constants;
+using Auditore.Dtos.Response;
 using Auditore.Models;
 using Auditore.Services.Interfaces;
 using System;
@@ -61,6 +62,34 @@ namespace Auditore.Services
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
                 return false;
             }
+        }
+
+        public async Task<List<Diagnostic>> GetDiagnostics(string token)
+        {
+            DiagnosticsDto dto = new ();
+            Uri uri = new Uri(string.Format(HttpUris.GetMyTasks, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    dto = JsonSerializer.Deserialize<DiagnosticsDto>(content, _serializerOptions);
+                    
+                    return dto.diagnostics;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+
+            return null;
         }
 
 

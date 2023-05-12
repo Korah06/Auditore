@@ -21,12 +21,14 @@ namespace Auditore.ViewModels
         private List<MyTask> _nearlyTasks;
         private List<Category> _categories;
         private List<Chrono> _chronos;
+        private List<Diagnostic> _diagnostics;
         public ObservableCollection<MyTask> CompletedTasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<MyTask> Tasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<MyTask> NearlyTasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
         public ObservableCollection<Chrono> Chronos { get; set; } = new ObservableCollection<Chrono>();
         public ObservableCollection<Chrono> Pomodoros { get; set; } = new ObservableCollection<Chrono>();
+        public ObservableCollection<Diagnostic> Diagnostics { get; set; } = new ObservableCollection<Diagnostic>();
         #endregion
 
         private string _icon = "treeprofile.png";
@@ -76,14 +78,16 @@ namespace Auditore.ViewModels
         private readonly ICategoryService _categoryService;
         private readonly IChronoService _chronoService;
         private readonly IUserService _userService;
+        private readonly IDiagnosticService _diagnosticService;
         public ProfileViewModel
             (ITaskService taskService, ICategoryService categoryService, 
-            IChronoService chronoService, IUserService userService)
+            IChronoService chronoService, IUserService userService, IDiagnosticService diagnosticService)
         {
             _taskService = taskService;
             _categoryService = categoryService;
             _chronoService = chronoService;
             _userService = userService;
+            _diagnosticService = diagnosticService;
             GetClassifyInfo();
         }
 
@@ -136,12 +140,14 @@ namespace Auditore.ViewModels
             Pomodoros.Clear();
             NearlyTasks.Clear();
             CompletedTasks.Clear();
+            Diagnostics.Clear();
 
             _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
             _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
             _chronos = await _chronoService.GetChronos(Preferences.Default.Get("token", ""));
+            _diagnostics = await _diagnosticService.GetDiagnostics(Preferences.Default.Get("token", ""));
 
-            if(_tasks != null)
+            if (_tasks != null)
             {
                 foreach (var task in _tasks)
                 {
@@ -179,6 +185,13 @@ namespace Auditore.ViewModels
                     {
                         Chronos.Add(chrono);
                     }
+                }
+            }
+            if(_diagnostics != null)
+            {
+                foreach(var diagnostic in _diagnostics)
+                {
+                    Diagnostics.Add(diagnostic);
                 }
             }
         }

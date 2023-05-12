@@ -67,7 +67,7 @@ namespace Auditore.Services
         public async Task<List<Diagnostic>> GetDiagnostics(string token)
         {
             DiagnosticsDto dto = new ();
-            Uri uri = new Uri(string.Format(HttpUris.GetMyTasks, string.Empty));
+            Uri uri = new Uri(string.Format(HttpUris.GetDiagnostics, string.Empty));
             try
             {
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

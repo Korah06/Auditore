@@ -10,5 +10,6 @@ namespace Auditore.Services.Interfaces
     public interface IDiagnosticService
     {
         Task<bool> CreateDiagnostic(Diagnostic dto, string token);
+        Task<List<Diagnostic>> GetDiagnostics(string token);
     }
 }

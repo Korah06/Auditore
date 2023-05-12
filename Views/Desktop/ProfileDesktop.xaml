@@ -160,7 +160,7 @@
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
-                    <CollectionView ItemsSource="{Binding NearlyTasks}"
+                    <CollectionView ItemsSource="{Binding Diagnostics}"
                                 HorizontalOptions="FillAndExpand"
                                 x:Name="CollectionDiagnostics"
                                 Margin="0,-30,0,0">
@@ -168,18 +168,14 @@
                             <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="models:MyTask">
+                            <DataTemplate x:DataType="models:Diagnostic">
                                 <Frame WidthRequest="200" HeightRequest="100" Margin="10"
                                        BackgroundColor="#5F5187">
                                     <VerticalStackLayout>
-                                        <Label Text="{Binding Name}" 
+                                        <Label Text="{Binding Id}" 
                                                HorizontalOptions="Center"
                                                FontSize="Subtitle"
                                                VerticalOptions="Center"/>
-                                        <Label Grid.Column="1" HorizontalOptions="Center" 
-                                               VerticalOptions="Center"
-                                           Text="{Binding EndDate, 
-                                            StringFormat='Finalización: {0:d}'}"/>
                                     </VerticalStackLayout>
                                 </Frame>
                             </DataTemplate>

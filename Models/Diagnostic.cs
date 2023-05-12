@@ -10,6 +10,7 @@ namespace Auditore.Models
     public class Diagnostic
     {
         public int Id { get; set; }
+        public string name { get; set; }
         public int workMinutes { get; set; }
         public int restMinutes { get; set; }
         public int repeats { get; set; }

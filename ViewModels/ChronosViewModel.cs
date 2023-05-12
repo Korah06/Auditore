@@ -421,10 +421,13 @@ namespace Auditore.ViewModels
                 Finished = false;
                 isRunning = true;
                 init = true;
-                diagnostic = new ();
-                diagnostic.idCategory = _selectedChrono.categoryId;
-                diagnostic.idUser = _selectedChrono.userId;
-                diagnostic.repeats = Repeats;
+                diagnostic = new()
+                {
+                    idCategory = _selectedChrono.categoryId,
+                    idUser = _selectedChrono.userId,
+                    repeats = Repeats,
+                    name = _selectedChrono.name + "-" + DateTime.Now.ToString("d")
+                };
                 if (_selectedChrono.IsPomodoro)
                 {
                     Pomodoro();
@@ -465,7 +468,8 @@ namespace Auditore.ViewModels
                 {
                     idCategory = _selectedChrono.categoryId,
                     idUser = _selectedChrono.userId,
-                    repeats = Repeats
+                    repeats = Repeats,
+                    name = _selectedChrono.name + "-" + DateTime.Now
                 };
                 if (_selectedChrono.IsPomodoro)
                 {

@@ -9,14 +9,16 @@ namespace Auditore.Constants
     public static class HttpUris
     {
 
+        #region BASIC URIS
         private static readonly string uri = "http://localhost:3000/";
 
-        private static readonly string auth = uri+"auth/";
-        private static readonly string users = uri+"users/";
-        private static readonly string tasks = uri+"tasks/";
-        private static readonly string chronos = uri+"chrono/";
-        private static readonly string categories = uri+"categories/";
-        private static readonly string diagnositcs = uri+ "diagnostics/";
+        private static readonly string auth = uri + "auth/";
+        private static readonly string users = uri + "users/";
+        private static readonly string tasks = uri + "tasks/";
+        private static readonly string chronos = uri + "chrono/";
+        private static readonly string categories = uri + "categories/";
+        private static readonly string diagnostics = uri + "diagnostics/"; 
+        #endregion
 
         #region TASKS
         public static string GetMyTasks = tasks+"mytasks";
@@ -51,7 +53,8 @@ namespace Auditore.Constants
         #endregion
 
         #region DIAGNOSTICS
-        public static string CreateDiagnostic = diagnositcs+"create";
+        public static string CreateDiagnostic = diagnostics + "create";
+        public static string GetDiagnostics = diagnostics;
         #endregion
 
     }

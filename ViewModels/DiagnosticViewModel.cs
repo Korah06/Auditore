@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Auditore.ViewModels
 {
-    public class DiagnosticViewModel
+    public class DiagnosticViewModel : INotifyPropertyChanged
     {
         private Diagnostic _diagnostic;
         public Diagnostic Diagnostic
@@ -20,6 +20,31 @@ namespace Auditore.ViewModels
                 if (_diagnostic == value) { return; }
                 _diagnostic = value;
                 OnPropertyChanged(nameof(Diagnostic));
+
+            }
+        }
+
+        private string _date;
+        public string Date
+        {
+            get { return _date; }
+            set
+            {
+                if (_date == value) { return; }
+                _date = value;
+                OnPropertyChanged(nameof(Date));
+
+            }
+        }
+        private string _chronoName;
+        public string ChronoName
+        {
+            get { return _chronoName; }
+            set
+            {
+                if (_chronoName == value) { return; }
+                _chronoName = value;
+                OnPropertyChanged(nameof(ChronoName));
 
             }
         }
@@ -41,6 +66,10 @@ namespace Auditore.ViewModels
         {
             Diagnostic = await _diagnosticService.GetDiagnostic(
                 Preferences.Default.Get("diagnosticId", ""), Preferences.Default.Get("token", ""));
+
+            string[] strings = Diagnostic.name.Split("-");
+            ChronoName = strings[0];
+            Date = strings[1];
         }
     }
 }

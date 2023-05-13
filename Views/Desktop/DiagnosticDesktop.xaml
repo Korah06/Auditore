@@ -5,7 +5,21 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:DiagnosticViewModel">
-    <VerticalStackLayout>
-        <Label Text="Diagnostico" FontSize="Title"/>
+    <VerticalStackLayout VerticalOptions="Center">
+
+        <Label Text="{Binding Diagnostic.name}" FontSize="Large"
+               HorizontalOptions="Center"/>
+        <Frame VerticalOptions="Center" HorizontalOptions="Center"
+                HeightRequest="550" WidthRequest="530"
+                IsClippedToBounds="True" CornerRadius="20">
+            <VerticalStackLayout>
+                <Label Text="{Binding Diagnostic.repeats, StringFormat='Numero de repeticiones: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding Diagnostic.workMinutes, StringFormat='Tiempo trabajado: {0} minutos'}" FontSize="Title"/>
+                <Label Text="{Binding Diagnostic.restMinutes, StringFormat='Tiempo de descanso: {0} minutos'}" FontSize="Title"/>
+                <Label Text="{Binding ChronoName, StringFormat='Nombre del cronometro: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding Date, StringFormat='Fecha del cronometro: {0}'}" FontSize="Title"/>
+                <Label Text="Tareas:" FontSize="Title"/>
+            </VerticalStackLayout>
+        </Frame>
     </VerticalStackLayout>
 </ContentPage>

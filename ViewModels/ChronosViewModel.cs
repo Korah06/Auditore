@@ -391,14 +391,28 @@ namespace Auditore.ViewModels
 
 
 
-        public ICommand SelectCommand => new Command<object>((obj) =>
+        public ICommand SelectCommand => new Command<object>(async (obj) =>
         {
             if (Finished)
             {
                 if (obj != null)
                 {
                     _selectedChrono = obj as Chrono;
+
+                    Tasks.Clear();
+                    _tasks = await _taskService.GetTasksCategory
+                    (_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
+
+                    if(_tasks != null)
+                    {
+                        foreach (var task in _tasks)
+                        {
+                            Tasks.Add(task);
+                        }
+                    }
+                    
                 }
+
                 int minutesLeft = _selectedChrono.minutes;
                 int secondsLeft = (_selectedChrono.minutes * 60) % 60;
 

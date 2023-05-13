@@ -151,12 +151,22 @@
                             </Grid>
                             <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
                                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
-                            <CollectionView x:Name="TaskCollection"
-                                            ItemsSource="{Binding Tasks}"
-                                            VerticalOptions="FillAndExpand">
+                            <CollectionView ItemsSource="{Binding Tasks}"
+                                            x:Name="TaskCollection"
+                                            VerticalOptions="FillAndExpand" >
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:MyTask">
                                         <Frame Margin="10,5,10,5">
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup Name="CommonStates">
+                                                    <VisualState x:Name="Normal" />
+                                                    <VisualState Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="BackgroundColor" Value="#5F5187" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
                                             <Grid ColumnDefinitions="*,*">
                                                 <HorizontalStackLayout Grid.Column="0">
                                                     <CheckBox IsChecked="{Binding Completed}"
@@ -165,7 +175,8 @@
                                               Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
                                                     <Label Text="{Binding Name}"
                                            VerticalOptions="Center"
-                                           FontSize="Small">
+                                           FontSize="Small" 
+                                            TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
                                                         <Label.Triggers>
                                                             <DataTrigger Binding="{Binding Source={x:Reference TaskCheckbox}, 
                                                 Path=IsChecked}"

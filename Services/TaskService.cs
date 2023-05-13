@@ -73,6 +73,7 @@ namespace Auditore.Services
 
         public async Task<List<MyTask>> GetTasksCategory(string catId,string token)
         {
+            _client = new HttpClient();
             TasksDto = new MyTaskDto();
             Uri uri = new Uri(string.Format(HttpUris.GetMyCategoryTasks, string.Empty));
             try

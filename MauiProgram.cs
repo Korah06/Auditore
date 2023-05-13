@@ -46,6 +46,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CalendarDesktop>();
 		builder.Services.AddTransient<ProfileDesktop>();
 		builder.Services.AddTransient<AdminDesktop>();
+		builder.Services.AddTransient<DiagnosticDesktop>();
 		#endregion
 
 		#region ViewModels
@@ -59,6 +60,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<CalendarViewModel>(); 
 		builder.Services.AddSingleton<ProfileViewModel>(); 
 		builder.Services.AddSingleton<AdminViewModel>(); 
+		builder.Services.AddSingleton<DiagnosticViewModel>(); 
 		#endregion
 
 #if DEBUG

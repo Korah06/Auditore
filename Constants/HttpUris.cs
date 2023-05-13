@@ -55,6 +55,7 @@ namespace Auditore.Constants
         #region DIAGNOSTICS
         public static string CreateDiagnostic = diagnostics + "create";
         public static string GetDiagnostics = diagnostics;
+        public static string GetDiagnostic = diagnostics + "single";
         #endregion
 
     }

@@ -102,6 +102,22 @@ namespace Auditore.ViewModels
             await _userService.ModifyUser(User, Preferences.Default.Get("token", ""));
             GetClassifyInfo();
         });
+        public ICommand SelectCommand => new Command<object>(async (obj) =>
+        {
+            if(obj == null)
+            {
+                return;
+            }
+            Diagnostic selected = obj as Diagnostic;
+            if (Preferences.Default.Get("diagnosticId", "")!="")
+            {
+                Preferences.Default.Remove("diagnosticId");
+            }
+            Preferences.Default.Set("diagnosticId",selected._id);
+
+            await Shell.Current.GoToAsync("//Profile/DiagnosticDesktop");
+
+        });
         public ICommand ChangeBannerCommand => new Command(async () =>
         {
             string i = await Application.Current.MainPage.DisplayActionSheet("Seleccione un nuevo banner", "Cancel", null, "vicesky", "redmoon", "spaceboy");
@@ -126,6 +142,7 @@ namespace Auditore.ViewModels
 
             return tasks.Where(task => task.EndDate>= DateTime.Now).Take(3).ToList();
         }
+
 
         public async void GetClassifyInfo()
         {

@@ -11,5 +11,6 @@ namespace Auditore.Services.Interfaces
     {
         Task<bool> CreateDiagnostic(Diagnostic dto, string token);
         Task<List<Diagnostic>> GetDiagnostics(string token);
+        Task<Diagnostic> GetDiagnostic(string id, string token);
     }
 }

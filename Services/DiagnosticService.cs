@@ -92,6 +92,36 @@ namespace Auditore.Services
             return null;
         }
 
+        public async Task<Diagnostic> GetDiagnostic(string id, string token)
+        {
+            DiagnosticDto dto = new();
+            _client = new HttpClient();
+            Uri uri = new Uri(string.Format(HttpUris.GetDiagnostic, string.Empty));
+            try
+            {
+                _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                _client.DefaultRequestHeaders.Add("id", id);
+
+                HttpResponseMessage response = await _client.GetAsync(uri);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+                    dto = JsonSerializer.Deserialize<DiagnosticDto>(content, _serializerOptions);
+
+                    return dto.diagnostic;
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+
+
+            return null;
+        }
+
 
     }
 }

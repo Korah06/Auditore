@@ -18,9 +18,14 @@ public partial class ProfileDesktop : ContentPage
 		this.BindingContext = _profileViewModel;
         Appearing += ProfileDesktop_Appearing;
     }
-
+    private bool init = true;
     private void ProfileDesktop_Appearing(object sender, EventArgs e)
     {
-        _profileViewModel.GetClassifyInfo();
+        if (!init)
+        {
+            _profileViewModel.GetClassifyInfo();
+        }
+        else{init = false;}
+        
     }
 }

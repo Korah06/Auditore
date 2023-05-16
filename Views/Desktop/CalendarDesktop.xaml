@@ -8,24 +8,57 @@
     <Grid ColumnDefinitions=".2*,.6*,.2*">
 
         <Frame Grid.Column="1" Margin="0,10,0,10">
-            <VerticalStackLayout>
-                <Grid Margin="0,0,0,5">
-                    <Label Text="Calendar" FontSize="40" 
+
+            <Grid RowDefinitions=".15*,.85*">
+
+                <VerticalStackLayout Grid.Row="0">
+                    <Grid Margin="0,0,0,5">
+                        <Label Text="Calendar" FontSize="40" 
                            HorizontalOptions="StartAndExpand" 
                            VerticalOptions="EndAndExpand"
                            Margin="0,0,0,-10"/>
-                    <HorizontalStackLayout Spacing="10" HorizontalOptions="EndAndExpand">
-                        <VerticalStackLayout VerticalOptions="CenterAndExpand">
-                            <Label Text="{Binding CurrentDate, StringFormat='{0:dddd}'}"/>
-                            <Label Text="{Binding CurrentDate, StringFormat='{0:MMM yyyy}'}"/>
-                        </VerticalStackLayout>
-                        <DatePicker FontAttributes="Bold" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
-                    </HorizontalStackLayout>
-                </Grid>
-                <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" 
+                        <Picker HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+
+                        <HorizontalStackLayout Spacing="10" HorizontalOptions="EndAndExpand">
+                            <VerticalStackLayout VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding CurrentDate, StringFormat='{0:dddd}'}"/>
+                                <Label Text="{Binding CurrentDate, StringFormat='{0:MMM yyyy}'}"/>
+                            </VerticalStackLayout>
+                            <DatePicker FontAttributes="Bold" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
+                        </HorizontalStackLayout>
+                    </Grid>
+                    <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" 
                                   Aspect="Fill" WidthRequest="900"
                                   Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <Grid RowDefinitions=".1*,.9*" Grid.Row="1">
+                    <Label Text="Tareas que finalizan hoy:" FontSize="Title"
+                    Grid.Row="0"/>
+                    <CollectionView 
+                        ItemsSource="{Binding EndTasks}"
+                        x:Name="TaskCollection"
+                        Grid.Row="1"
+                        VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:MyTask">
+                                <Frame Margin="10,5,10,5" BackgroundColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
+                                    <Grid ColumnDefinitions="*,*">
+                                        <HorizontalStackLayout Grid.Column="0">
+                                            <Label Text="{Binding Name}"
+                                VerticalOptions="Center"
+                                FontSize="Small" 
+                                TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
+                                        </HorizontalStackLayout>
+                                        <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
+                            Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
         </Frame>
         
         

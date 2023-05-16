@@ -37,6 +37,7 @@ namespace Auditore.ViewModels
         private readonly ITaskService _taskService;
         private readonly ICategoryService _categoryService;
 
+        #region Collections
         private List<MyTask> _tasks;
         private List<Category> _categories;
 
@@ -45,6 +46,7 @@ namespace Auditore.ViewModels
         public ObservableCollection<MyTask> StartTasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<MyTask> BetweenTasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
+        #endregion
         public CalendarViewModel(ITaskService taskService, ICategoryService categoryService)
         {
             _taskService = taskService;
@@ -55,54 +57,59 @@ namespace Auditore.ViewModels
 
         public async Task GetData()
         {
-            _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
-            _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
-
-            if (_categories != null && _tasks != null)
+            await Task.Run(async () =>
             {
-                App.Current.Dispatcher.Dispatch(() =>
+                _tasks = await _taskService.GetTasks(Preferences.Default.Get("token", ""));
+                _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
+
+                if (_categories != null && _tasks != null)
                 {
-
-                    foreach (var category in _categories)
+                    App.Current.Dispatcher.Dispatch(() =>
                     {
-                        var tasks = from t in _tasks
-                                    where t.CategoryId == category._id
-                                    select t;
 
-                        var completed = from t in tasks
-                                        where t.Completed == true
+                        foreach (var category in _categories)
+                        {
+                            var tasks = from t in _tasks
+                                        where t.CategoryId == category._id
                                         select t;
 
-                        var notCompleted = from t in tasks
-                                           where t.Completed == false
-                                           select t;
+                            var completed = from t in tasks
+                                            where t.Completed == true
+                                            select t;
+
+                            var notCompleted = from t in tasks
+                                               where t.Completed == false
+                                               select t;
 
 
 
-                        category.PendingTasks = notCompleted.Count();
-                        category.Percentage = (float)completed.Count() / (float)tasks.Count();
-                        Categories.Add(category);
-                    }
+                            category.PendingTasks = notCompleted.Count();
+                            category.Percentage = (float)completed.Count() / (float)tasks.Count();
+                            Categories.Add(category);
+                        }
 
-                    foreach (var task in _tasks)
-                    {
-                        var catColor =
-                        (from c in Categories
-                         where c._id == task.CategoryId
-                         select c.Color).FirstOrDefault();
+                        foreach (var task in _tasks)
+                        {
+                            var catColor =
+                            (from c in Categories
+                             where c._id == task.CategoryId
+                             select c.Color).FirstOrDefault();
 
-                        task.TaskColor = catColor;
-                        Tasks.Add(task);
-                    }
+                            task.TaskColor = catColor;
+                            Tasks.Add(task);
+                        }
 
-                });
-                FilterTasksOfTheDay();
-            }
-            
+                    });
+                    FilterTasksOfTheDay();
+                }
+            });
         }
 
         public void FilterTasksOfTheDay()
         {
+            StartTasks.Clear();
+            BetweenTasks.Clear();
+            EndTasks.Clear();
             var filterEndTasks = _tasks.Where(task => task.EndDate.Date == CurrentDate.Date).ToList();
             var filterStartTasks = _tasks.Where(task => task.StartDate.Date == CurrentDate.Date).ToList();
             var filterBetweenTasks = 
@@ -122,7 +129,6 @@ namespace Auditore.ViewModels
             {
                 EndTasks.Add(task);
             }
-
         }
     }
 }

@@ -37,7 +37,7 @@ public partial class ChronoDesktop : ContentPage
         if (init)
         {
             _viewModel.OnRefresh();
-            _viewModel.SelectedChrono = _selected;
+            //_viewModel.SelectedChrono = _selected;
         }
         else
         {
@@ -58,8 +58,8 @@ public partial class ChronoDesktop : ContentPage
 
             lblName.SetBinding(Label.TextProperty, new Binding("SelectedChrono.name"));
             lblCrono.SetBinding(Label.TextProperty, new Binding("ShowTime"));
-            _viewModel.getTasksForChrono();
-            TaskCollection.SetBinding(CollectionView.ItemsSourceProperty, new Binding("Tasks"));
+            //_viewModel.getTasksForChrono();
+            //TaskCollection.SetBinding(CollectionView.ItemsSourceProperty, "Tasks");
             _selected = _viewModel.SelectedChrono;
         }
     }

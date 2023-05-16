@@ -399,18 +399,23 @@ namespace Auditore.ViewModels
                 {
                     _selectedChrono = obj as Chrono;
 
-                    Tasks.Clear();
-                    _tasks = await _taskService.GetTasksCategory
-                    (_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
-
-                    if(_tasks != null)
+                    await Task.Run( async() =>
                     {
-                        foreach (var task in _tasks)
+                        Tasks.Clear();
+                        _tasks = await _taskService.GetTasksCategory
+                        (_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
+                        if (_tasks != null)
                         {
-                            Tasks.Add(task);
+                            App.Current.Dispatcher.Dispatch(() =>
+                            {
+                                foreach (var task in _tasks)
+                                {
+                                    Tasks.Add(task);
+                                }
+                            });
                         }
-                    }
-                    
+                        OnRefresh();
+                    });
                 }
 
                 int minutesLeft = _selectedChrono.minutes;
@@ -497,25 +502,25 @@ namespace Auditore.ViewModels
                 
         });
 
-        public async void getTasksForChrono()
-        {
-            Tasks.Clear();
-            Categories.Clear();
-            await Task.Run(async () =>
-            {
-                _tasks = await _taskService.GetTasksCategory(_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
-                _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
+        //public async void getTasksForChrono()
+        //{
+        //    Tasks.Clear();
+        //    Categories.Clear();
+        //    await Task.Run(async () =>
+        //    {
+        //        _tasks = await _taskService.GetTasksCategory(_selectedChrono.categoryId, Preferences.Default.Get("token", ""));
+        //        _categories = await _categoryService.GetCategories(Preferences.Default.Get("token", ""));
 
-                if(_tasks == null ){return;}
+        //        if(_tasks == null ){return;}
 
-                foreach (var task in _tasks)
-                {
+        //        foreach (var task in _tasks)
+        //        {
 
-                    Tasks.Add(task);
-                }
+        //            Tasks.Add(task);
+        //        }
 
-            });
-        }
+        //    });
+        //}
 
     }
 }

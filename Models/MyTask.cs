@@ -10,8 +10,7 @@ using System.Threading.Tasks;
 
 namespace Auditore.Models
 {
-    [AddINotifyPropertyChangedInterface]
-    public class MyTask : INotifyPropertyChanged
+    public class MyTask : ObservableObject
     {
         public string _id { get; set; }
         public string Name { get; set; }
@@ -24,6 +23,5 @@ namespace Auditore.Models
         public string TaskColor { get; set; }
         public long V { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }

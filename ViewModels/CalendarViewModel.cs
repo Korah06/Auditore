@@ -29,6 +29,7 @@ namespace Auditore.ViewModels
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            Task.Run(async () => await GetData());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -48,6 +49,8 @@ namespace Auditore.ViewModels
         {
             _taskService = taskService;
             _categoryService = categoryService;
+
+            Task.Run(async () =>await GetData());
         }
 
         public async Task GetData()
@@ -119,7 +122,6 @@ namespace Auditore.ViewModels
             {
                 EndTasks.Add(task);
             }
-
 
         }
     }

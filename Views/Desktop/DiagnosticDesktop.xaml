@@ -19,6 +19,15 @@
                 <Label Text="{Binding ChronoName, StringFormat='Nombre del cronometro: {0}'}" FontSize="Title"/>
                 <Label Text="{Binding Date, StringFormat='Fecha del cronometro: {0}'}" FontSize="Title"/>
                 <Label Text="Tareas:" FontSize="Title"/>
+                <CollectionView ItemsSource="{Binding Tasks}"
+                                            x:Name="TaskCollection"
+                                            VerticalOptions="FillAndExpand" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding}" FontSize="Subtitle"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
             </VerticalStackLayout>
         </Frame>
     </VerticalStackLayout>

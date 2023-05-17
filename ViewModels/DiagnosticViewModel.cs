@@ -2,6 +2,7 @@
 using Auditore.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -61,12 +62,16 @@ namespace Auditore.ViewModels
             _diagnosticService = diagnosticService;
             GetDiagnostic();
         }
-
+        public ObservableCollection<string> Tasks { get; set; } = new ObservableCollection<string>();
         public async void GetDiagnostic()
         {
             Diagnostic = await _diagnosticService.GetDiagnostic(
                 Preferences.Default.Get("diagnosticId", ""), Preferences.Default.Get("token", ""));
 
+            foreach(string d in Diagnostic.tasksId)
+            {
+                Tasks.Add(d);
+            }
             string[] strings = Diagnostic.name.Split("-");
             ChronoName = strings[0];
             Date = strings[1];

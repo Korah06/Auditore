@@ -199,6 +199,12 @@ namespace Auditore.ViewModels
                 }
             }
             await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
+            List<MyTask> nTasks = new List<MyTask>();
+            foreach (MyTask task in Tasks)
+            {
+                nTasks.Add(task);
+            }
+            await _taskService.UpdateTasks(nTasks, Preferences.Default.Get("token", ""));
 
         } 
         #endregion
@@ -368,7 +374,12 @@ namespace Auditore.ViewModels
                 }
             }
             await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
-
+            List<MyTask> nTasks = new List<MyTask>();
+            foreach (MyTask task in Tasks)
+            {
+                nTasks.Add(task);
+            }
+            await _taskService.UpdateTasks(nTasks, Preferences.Default.Get("token", ""));
         } 
         #endregion
 
@@ -499,6 +510,12 @@ namespace Auditore.ViewModels
                 }
                 await _diagnosticService.CreateDiagnostic(diagnostic,Preferences.Default.Get("token",""));
                 Debug.WriteLine("Finished");
+                List<MyTask> nTasks = new List<MyTask>();
+                foreach (MyTask task in Tasks)
+                {
+                    nTasks.Add(task);
+                }
+                await _taskService.UpdateTasks(nTasks, Preferences.Default.Get("token", ""));
             }
         });
 

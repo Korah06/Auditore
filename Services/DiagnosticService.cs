@@ -40,9 +40,23 @@ namespace Auditore.Services
             };
         }
 
-        public async Task<bool> CreateDiagnostic(Diagnostic dto, string token)
+        public async Task<bool> CreateDiagnostic(Diagnostic diagnostic, string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.CreateDiagnostic, string.Empty));
+            string[] arr = new string[diagnostic.tasksId.Count()];
+            arr = diagnostic.tasksId.ToArray();
+            Dtos.Request.CreateDiagnostic dto = new Dtos.Request.CreateDiagnostic
+            {
+                tasksId = arr,
+                idCategory = diagnostic.idCategory,
+                idUser = diagnostic.idUser,
+                name = diagnostic.name,
+                repeats = diagnostic.repeats,
+                restMinutes = diagnostic.restMinutes,
+                workMinutes = diagnostic.workMinutes,
+                _id = diagnostic._id
+            };
             try
             {
 

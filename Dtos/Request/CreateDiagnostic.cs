@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Auditore.Models
+namespace Auditore.Dtos.Request
 {
-    public class Diagnostic
+    public class CreateDiagnostic
     {
         public string _id { get; set; }
         public string name { get; set; }
@@ -16,6 +15,6 @@ namespace Auditore.Models
         public int repeats { get; set; }
         public string idCategory { get; set; }
         public string idUser { get; set; }
-        public List<string> tasksId { get; set; }
+        public string[] tasksId { get; set; }
     }
 }

@@ -109,23 +109,24 @@ namespace Auditore.ViewModels
         private bool Finished = true;
         int totalSeconds = 0;
 
-        
 
+
+        #region Countdown
         public async void Countdown()
         {
             totalSeconds = 0;
 
-            if(_selectedChrono != null)
+            if (_selectedChrono != null)
             {
                 totalSeconds = _selectedChrono.minutes * 60;
-                
+
             }
             int minutesLeft;
             int secondsLeft;
 
             while (totalSeconds > 0)
             {
-                
+
                 Debug.WriteLine("Inicio: " + isRunning);
                 if (isRunning)
                 {
@@ -142,8 +143,8 @@ namespace Auditore.ViewModels
                     }
                     await Task.Delay(1000);
 
-                    
-                    Debug.WriteLine("____________"+totalSeconds+"______________" + ShowTime + "reset: " + isReset);
+
+                    Debug.WriteLine("____________" + totalSeconds + "______________" + ShowTime + "reset: " + isReset);
 
                     if (isReset)
                     {
@@ -162,7 +163,7 @@ namespace Auditore.ViewModels
                 }
                 else
                 {
-                    
+
                     await Task.Delay(50);
                     if (isReset)
                     {
@@ -176,10 +177,10 @@ namespace Auditore.ViewModels
                         return;
                     }
                     Debug.WriteLine
-                        ("Soy false: " + isRunning + " reset: " + isReset + 
+                        ("Soy false: " + isRunning + " reset: " + isReset +
                         " secs: " + totalSeconds + "reset: " + isReset);
                 }
-                
+
             }
 
             if (totalSeconds == 0)
@@ -190,7 +191,17 @@ namespace Auditore.ViewModels
             init = false;
             Finished = true;
 
-        }
+            foreach (MyTask task in Tasks)
+            {
+                if (task.Completed)
+                {
+                    diagnostic.tasksId.Add(task.Name);
+                }
+            }
+            await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
+
+        } 
+        #endregion
 
         private int _repeats = 3;
         public int Repeats
@@ -199,6 +210,7 @@ namespace Auditore.ViewModels
             set { _repeats = value; }
         }
         private int sleepSeconds = 0;
+        #region Pomodoro
         public async void Pomodoro()
         {
             totalSeconds = 0;
@@ -212,13 +224,13 @@ namespace Auditore.ViewModels
             int minutesLeft;
             int secondsLeft;
 
-            for (int i = 0;i<Repeats;i++)
+            for (int i = 0; i < Repeats; i++)
             {
                 if (Finished)
                 {
                     return;
                 }
-                if (i>0)
+                if (i > 0)
                 {
                     while (sleepSeconds > 0)
                     {
@@ -348,12 +360,20 @@ namespace Auditore.ViewModels
             init = false;
             Finished = true;
             await _notificationService.EndPomodoro();
+            foreach (MyTask task in Tasks)
+            {
+                if (task.Completed)
+                {
+                    diagnostic.tasksId.Add(task.Name);
+                }
+            }
             await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
 
-        }
-        
+        } 
+        #endregion
+
         #region Showtime
-        
+
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -390,7 +410,7 @@ namespace Auditore.ViewModels
         });
 
 
-
+        private List<MyTask> _tasks_not_completed;
         public ICommand SelectCommand => new Command<object>(async (obj) =>
         {
             if (Finished)
@@ -408,7 +428,9 @@ namespace Auditore.ViewModels
                         {
                             App.Current.Dispatcher.Dispatch(() =>
                             {
-                                foreach (var task in _tasks)
+                                _tasks_not_completed = _tasks.FindAll(t => !t.Completed);
+
+                                foreach (var task in _tasks_not_completed)
                                 {
                                     Tasks.Add(task);
                                 }
@@ -427,6 +449,7 @@ namespace Auditore.ViewModels
 
         });
 
+        
         private bool init = false;
         public ICommand StartPauseCommand => new Command(() =>
         {
@@ -445,7 +468,8 @@ namespace Auditore.ViewModels
                     idCategory = _selectedChrono.categoryId,
                     idUser = _selectedChrono.userId,
                     repeats = Repeats,
-                    name = _selectedChrono.name + "-" + DateTime.Now.ToString("d")
+                    name = _selectedChrono.name + "-" + DateTime.Now.ToString("d"),
+                    tasksId = new List<string>()
                 };
                 if (_selectedChrono.IsPomodoro)
                 {
@@ -466,6 +490,13 @@ namespace Auditore.ViewModels
                 init = false;
                 Finished = true;
                 //enviar diagnostic
+                foreach (MyTask task in Tasks) 
+                {
+                    if (task.Completed)
+                    {
+                        diagnostic.tasksId.Add(task.Name);
+                    }
+                }
                 await _diagnosticService.CreateDiagnostic(diagnostic,Preferences.Default.Get("token",""));
                 Debug.WriteLine("Finished");
             }

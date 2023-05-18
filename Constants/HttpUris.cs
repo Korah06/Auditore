@@ -8,9 +8,14 @@ namespace Auditore.Constants
 {
     public static class HttpUris
     {
-
         #region BASIC URIS
-        private static readonly string uri = "http://localhost:3000/";
+
+#if ANDROID || IOS
+        private static readonly string uri = "http://192.168.218.86:3000/";
+#else
+                private static readonly string uri = "http://localhost:3000/";
+#endif
+
 
         private static readonly string auth = uri + "auth/";
         private static readonly string users = uri + "users/";

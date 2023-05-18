@@ -18,6 +18,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("DiagnosticDesktop", typeof(DiagnosticDesktop));
 #if ANDROID || IOS
         loginPage.ContentTemplate = new DataTemplate(typeof(LoginPhone));
+        tasksPage.ContentTemplate = new DataTemplate(typeof(TasksPhone));
 #else
 		loginPage.ContentTemplate= new DataTemplate(typeof(LoginDesktop));
 		tasksPage.ContentTemplate = new DataTemplate(typeof(TasksDesktop));

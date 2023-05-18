@@ -5,10 +5,63 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:RegisterViewModel">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to Register!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    
+    <VerticalStackLayout VerticalOptions="Center" Spacing="5">
+        <!--#region Title -->
+        <Label  Text="Registrarse"
+                FontSize="30"
+                HorizontalOptions="Center"/>
+        <!--#endregion-->
+
+        <!--#region Form -->
+        <Frame HorizontalOptions="Center" MinimumHeightRequest="500" Margin="20,0,20,0">
+            <Frame.Content>
+                <VerticalStackLayout>
+                    <Label Text="Correo Electronico"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           Text="{Binding email}"
+                           Placeholder="email@example.com"/>
+                    <Label Text="Username"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center"
+                           WidthRequest="270"
+                           Text="{Binding username}"/>
+                    <Label Text="Nombre"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center"
+                           WidthRequest="270"
+                           Text="{Binding name}"/>
+                    <Label Text="Apellidos"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center"
+                           WidthRequest="270"
+                           Text="{Binding surname}"/>
+                    <Label Text="Contraseña"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           IsPassword="True"
+                           Text="{Binding password}"/>
+                    <Label Text="Repita la Contraseña"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                    <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           IsPassword="True"
+                           Text="{Binding Cpassword}"/>
+                    <Button Text="Registrarse"
+                            Margin="0,10,0,10"
+                            Command="{Binding RegisterCommand}"/>
+                </VerticalStackLayout>
+            </Frame.Content>
+        </Frame>
+        <!--#endregion-->
     </VerticalStackLayout>
 </ContentPage>

@@ -2,6 +2,7 @@
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
 using Auditore.Views.Desktop;
+using Auditore.Views.Phone;
 using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Plugin.LocalNotification;
@@ -47,10 +48,14 @@ public static class MauiProgram
 		builder.Services.AddTransient<ProfileDesktop>();
 		builder.Services.AddTransient<AdminDesktop>();
 		builder.Services.AddTransient<DiagnosticDesktop>();
-		#endregion
 
-		#region ViewModels
-		builder.Services.AddSingleton<LoginViewModel>();
+        builder.Services.AddSingleton<LoginPhone>();
+        builder.Services.AddSingleton<RegisterPhone>();
+
+        #endregion
+
+        #region ViewModels
+        builder.Services.AddSingleton<LoginViewModel>();
 		builder.Services.AddSingleton<ShellViewModel>();
 		builder.Services.AddSingleton<RegisterViewModel>();
 		builder.Services.AddSingleton<TasksViewModel>();

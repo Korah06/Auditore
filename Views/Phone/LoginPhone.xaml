@@ -2,11 +2,62 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Auditore.Views.Phone.LoginPhone"
-             Title="LoginPhone">
-    <VerticalStackLayout>
-        <Label 
-            Text="Phone!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:LoginViewModel">
+    <Grid>
+        <BoxView Rotation="45" WidthRequest="300" HeightRequest="300"
+                 Color="{StaticResource DarkContentsBackground}" CornerRadius="40"
+                 Margin="0,-720,0,0"/>
+        <VerticalStackLayout VerticalOptions="Center">
+
+            
+            <!--#region Title -->
+            <Image Source="auditore.png" 
+                HeightRequest="70" 
+                WidthRequest="70"
+                HorizontalOptions="Center">
+                <Image.Clip>
+                    <EllipseGeometry RadiusX="35" RadiusY="35" Center="35,35"/>
+                </Image.Clip>
+            </Image>
+            <Label Text="Auditore"
+                    FontSize="50"
+                    HorizontalOptions="Center"/>
+            <!--#endregion-->
+
+            <!--#region FORM -->
+            <Frame HorizontalOptions="Center" MinimumHeightRequest="320" Margin="20,0,20,0">
+                <Frame.Content>
+                    <VerticalStackLayout>
+                        <Label Text="Correo Electronico"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           Text="{Binding email}"
+                           Placeholder="email@example.com"/>
+                        <Label Text="Contraseña"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           IsPassword="True"
+                           Text="{Binding password}"/>
+                        <Button Text="Iniciar Sesion"
+                            Margin="0,10,0,10"
+                            Command="{Binding LoginCommand}"/>
+                        <Label Text="¿No tiene cuenta? Registrese"
+                           TextColor="LightGray"
+                           TextDecorations="Underline">
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="GoToRegisterAsync"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </VerticalStackLayout>
+                </Frame.Content>
+            </Frame>
+            <!--#endregion-->
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

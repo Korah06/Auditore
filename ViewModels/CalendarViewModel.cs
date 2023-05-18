@@ -14,7 +14,20 @@ namespace Auditore.ViewModels
     public partial class CalendarViewModel : INotifyPropertyChanged
     {
 
-        private DateTime _currentDate = DateTime.Now;
+        public ObservableCollection<string> Types { get; set; } = new ObservableCollection<string>();
+
+        private string _selectedType;
+        public string SelectedType
+        {
+            get { return _selectedType; }
+            set
+            {
+                if (_selectedType == value) { return; }
+                _selectedType = value;
+            }
+        }
+
+        private DateTime _currentDate;
         public DateTime CurrentDate
         {
             get { return _currentDate; }
@@ -42,18 +55,20 @@ namespace Auditore.ViewModels
         private List<Category> _categories;
 
         public ObservableCollection<MyTask> Tasks { get; set; } = new ObservableCollection<MyTask>();
-        public ObservableCollection<MyTask> EndTasks { get; set; } = new ObservableCollection<MyTask>();
-        public ObservableCollection<MyTask> StartTasks { get; set; } = new ObservableCollection<MyTask>();
-        public ObservableCollection<MyTask> BetweenTasks { get; set; } = new ObservableCollection<MyTask>();
+        public ObservableCollection<MyTask> FilteredTasks { get; set; } = new ObservableCollection<MyTask>();
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
         #endregion
         public CalendarViewModel(ITaskService taskService, ICategoryService categoryService)
         {
             _taskService = taskService;
             _categoryService = categoryService;
-
-            Task.Run(async () =>await GetData());
+            Types.Add("End");
+            Types.Add("Start");
+            Types.Add("Between");
+            SelectedType = "End";
+            CurrentDate = DateTime.Now;
         }
+
 
         public async Task GetData()
         {
@@ -98,18 +113,17 @@ namespace Auditore.ViewModels
                             task.TaskColor = catColor;
                             Tasks.Add(task);
                         }
-
+                        FilterTasksOfTheDay();
                     });
-                    FilterTasksOfTheDay();
+
                 }
             });
         }
 
-        public void FilterTasksOfTheDay()
+        public async void FilterTasksOfTheDay()
         {
-            StartTasks.Clear();
-            BetweenTasks.Clear();
-            EndTasks.Clear();
+            FilteredTasks.Clear();
+
             var filterEndTasks = _tasks.Where(task => task.EndDate.Date == CurrentDate.Date).ToList();
             var filterStartTasks = _tasks.Where(task => task.StartDate.Date == CurrentDate.Date).ToList();
             var filterBetweenTasks = 
@@ -117,17 +131,27 @@ namespace Auditore.ViewModels
                 .ToList();
             filterStartTasks.RemoveAll(task => filterEndTasks.Any(endTask => endTask._id == task._id));
 
-            foreach(var task in filterStartTasks)
+
+            if (SelectedType == "End")
             {
-                StartTasks.Add(task);
+                foreach(var task in filterEndTasks)
+                {
+                FilteredTasks.Add(task);
+                }
             }
-            foreach(var task in filterBetweenTasks)
+            if (SelectedType == "Start")
             {
-                BetweenTasks.Add(task);
+                foreach (var task in filterStartTasks)
+                {
+                    FilteredTasks.Add(task);
+                }
             }
-            foreach(var task in filterEndTasks)
+            if (SelectedType == "Between")
             {
-                EndTasks.Add(task);
+                foreach (var task in filterBetweenTasks)
+                {
+                FilteredTasks.Add(task);
+                }
             }
         }
     }

@@ -17,7 +17,12 @@
                            HorizontalOptions="StartAndExpand" 
                            VerticalOptions="EndAndExpand"
                            Margin="0,0,0,-10"/>
-                        <Picker HorizontalOptions="Center" VerticalOptions="EndAndExpand"/>
+                        <Picker ItemsSource="{Binding Types}"
+                                x:Name="userRoles"
+                                WidthRequest="200"
+                                SelectedItem="{Binding SelectedType}"
+                                HorizontalOptions="Center" 
+                                VerticalOptions="EndAndExpand"/>
 
                         <HorizontalStackLayout Spacing="10" HorizontalOptions="EndAndExpand">
                             <VerticalStackLayout VerticalOptions="CenterAndExpand">
@@ -33,25 +38,21 @@
                 </VerticalStackLayout>
 
                 <Grid RowDefinitions=".1*,.9*" Grid.Row="1">
-                    <Label Text="Tareas que finalizan hoy:" FontSize="Title"
-                    Grid.Row="0"/>
-                    <CollectionView 
-                        ItemsSource="{Binding EndTasks}"
-                        x:Name="TaskCollection"
-                        Grid.Row="1"
-                        VerticalOptions="FillAndExpand">
+                    <Label Text="Tareas que finalizan hoy:" FontSize="Title" Grid.Row="0"/>
+                    <CollectionView ItemsSource="{Binding FilteredTasks}"
+                                    VerticalOptions="FillAndExpand"
+                                    Grid.Row="1">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:MyTask">
-                                <Frame Margin="10,5,10,5" BackgroundColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
+                                <Frame Margin="10,5,10,5">
                                     <Grid ColumnDefinitions="*,*">
-                                        <HorizontalStackLayout Grid.Column="0">
-                                            <Label Text="{Binding Name}"
-                                VerticalOptions="Center"
-                                FontSize="Small" 
-                                TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
-                                        </HorizontalStackLayout>
-                                        <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
-                            Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                        <Label Text="{Binding Name}" VerticalOptions="Center"/>
+                                        <VerticalStackLayout Grid.Column="1" Spacing="10">
+                                            <Label VerticalOptions="Center" HorizontalOptions="End"
+                                                   Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                            <Label VerticalOptions="Center" HorizontalOptions="End"
+                                                   Text="{Binding StartDate, StringFormat='Fecha de Inicio: {0:d}'}"/>
+                                        </VerticalStackLayout>
                                     </Grid>
                                 </Frame>
                             </DataTemplate>

@@ -5,7 +5,13 @@
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:TasksViewModel"
              x:Class="Auditore.Views.Desktop.TasksDesktop"
+             xmlns:converters="clr-namespace:Auditore.Services"
              Shell.TabBarIsVisible="True">
+
+    <ContentPage.Resources>
+        <converters:ColorConverter x:Key="ColorConverter"/>
+    </ContentPage.Resources>
+    
     <Grid ColumnDefinitions="*,*">
         <StackLayout Grid.Column="0">
                 <Label Text="Categorias" 

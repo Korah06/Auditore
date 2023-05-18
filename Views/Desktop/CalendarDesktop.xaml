@@ -4,7 +4,13 @@
              x:Class="Auditore.Views.Desktop.CalendarDesktop"
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              xmlns:models="clr-namespace:Auditore.Models"
+             xmlns:converters="clr-namespace:Auditore.Services"
              x:DataType="viewmodels:CalendarViewModel">
+
+    <ContentPage.Resources>
+        <converters:ColorConverter x:Key="ColorConverter"/>
+    </ContentPage.Resources>
+    
     <Grid ColumnDefinitions=".2*,.6*,.2*">
 
         <Frame Grid.Column="1" Margin="0,10,0,10">
@@ -44,7 +50,7 @@
                                     Grid.Row="1">
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="models:MyTask">
-                                <Frame Margin="10,5,10,5">
+                                <Frame Margin="10,5,10,5" BackgroundColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
                                     <Grid ColumnDefinitions="*,*">
                                         <Label Text="{Binding Name}" VerticalOptions="Center"/>
                                         <VerticalStackLayout Grid.Column="1" Spacing="10">
@@ -61,7 +67,5 @@
                 </Grid>
             </Grid>
         </Frame>
-        
-        
     </Grid>
 </ContentPage>

@@ -51,6 +51,7 @@ public static class MauiProgram
 
         builder.Services.AddSingleton<LoginPhone>();
         builder.Services.AddSingleton<RegisterPhone>();
+        builder.Services.AddTransient<TasksPhone>();
 
         #endregion
 

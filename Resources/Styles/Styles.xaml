@@ -21,6 +21,21 @@
         <Setter Property="Clip" Value="{StaticResource circle}"/>
     </Style>
 
+    <EllipseGeometry x:Key="circlePhone"
+                     Center="30,30"
+                     RadiusX="20"
+                     RadiusY="20"/>
+
+    <Style x:Key="CircularButtonPhone" TargetType="Button">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="Medium"/>
+        <Setter Property="HeightRequest" Value="60"/>
+        <Setter Property="WidthRequest" Value="60"/>
+        <Setter Property="VerticalOptions" Value="End"/>
+        <Setter Property="HorizontalOptions" Value="End"/>
+        <Setter Property="Clip" Value="{StaticResource circlePhone}"/>
+    </Style>
+
 
 
     <Style TargetType="ActivityIndicator">

@@ -152,7 +152,6 @@ namespace Auditore.ViewModels
         public ICommand SelectCommand => new Command<object>((obj) =>
         {
             _itemSelected = obj as MyTask;
-            
         });
 
         public ICommand DeleteTask => new Command(async() =>

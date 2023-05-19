@@ -54,6 +54,11 @@
         <Grid Grid.Row="1" RowDefinitions=".1*, .7*">
             <Label FontSize="30" Text="Tareas pendientes"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Tasks}"
+                            x:Name="TaskCollection"
+                            SelectionMode="Single"
+                            SelectionChanged="CollectionView_SelectionChanged"
+                            SelectionChangedCommand="{Binding SelectCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference TaskCollection}}"
                             ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MyTask">
@@ -63,9 +68,11 @@
                                     <CheckBox IsChecked="{Binding Completed}"
                                               x:Name="TaskCheckbox"
                                               VerticalOptions="Center"
+                                              HorizontalOptions="Start"
                                               Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
                                     <Label Text="{Binding Name}"
                                            VerticalOptions="Center"
+                                           HorizontalOptions="Start"
                                            FontSize="Small" 
                                             TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
                                         <Label.Triggers>
@@ -79,7 +86,7 @@
                                     </Label>
                                 </HorizontalStackLayout>
                                 <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
-                                           Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                           Text="{Binding EndDate, StringFormat='Entrega: {0:d}'}"/>
                             </Grid>
 
                         </Frame>

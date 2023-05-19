@@ -1,5 +1,6 @@
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
+using CommunityToolkit.Maui.Views;
 
 namespace Auditore.Views.Phone;
 
@@ -30,5 +31,10 @@ public partial class TasksPhone : ContentPage
         {
             init = true;
         }
+    }
+
+    private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        await this.ShowPopupAsync(new TaskInfoPopUp(_viewModel));
     }
 }

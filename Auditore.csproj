@@ -127,6 +127,9 @@
 	  <MauiXaml Update="Views\Phone\RegisterPhone.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Phone\TaskInfoPopUp.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Phone\TasksPhone.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

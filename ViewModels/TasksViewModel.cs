@@ -139,7 +139,14 @@ namespace Auditore.ViewModels
         #region Commands
         public ICommand CreateTaskCommand => new Command(async () =>
         {
+
+#if ANDROID || IOS
+            await Shell.Current.GoToAsync("//Tasks/CreateTaskPhone");
+
+#else
             await Shell.Current.GoToAsync("//Tasks/CreateTaskDesktop");
+
+#endif
         });
 
         public ICommand SelectCommand => new Command<object>((obj) =>

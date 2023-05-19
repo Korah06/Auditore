@@ -118,6 +118,9 @@
 	  <MauiXaml Update="Views\Desktop\TasksDesktop.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Phone\CreateTaskPhone.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Phone\LoginPhone.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

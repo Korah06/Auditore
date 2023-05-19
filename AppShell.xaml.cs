@@ -12,6 +12,7 @@ public partial class AppShell : Shell
 
 		Routing.RegisterRoute("RegisterDesktop", typeof(RegisterDesktop));
 		Routing.RegisterRoute("RegisterPhone", typeof(RegisterPhone));
+		Routing.RegisterRoute("CreateTaskPhone", typeof(CreateTaskPhone));
 
 		Routing.RegisterRoute("CreateTaskDesktop", typeof(CreateTaskDesktop));
 		Routing.RegisterRoute("CreateChronoDesktop", typeof(CreateChronoDesktop));

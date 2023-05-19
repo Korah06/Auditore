@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.CreateTaskPhone"
+             xmlns:models="clr-namespace:Auditore.Models"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             x:DataType="viewmodels:CreateTaskViewModel">
+    <VerticalStackLayout VerticalOptions="Center" Spacing="5" Margin="0,0,0,0">
+        <Label  Text="Creador de Tareas"
+                FontSize="30"
+                HorizontalOptions="Center"/>
+        <Frame HorizontalOptions="Center" MinimumHeightRequest="500" Margin="20,0,20,0">
+            <Frame.Content>
+                <ScrollView >
+
+                    <VerticalStackLayout >
+                        <Label Text="Nombre de la tarea"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           Text="{Binding TaskName}"/>
+                        <Picker ItemsSource="{Binding Categories}"
+                            WidthRequest="270"
+                            Title="Categorias"
+                            SelectedItem="{Binding SelectedCat}"
+                            TitleColor="{StaticResource LightBackground}"
+                            HorizontalOptions="Start"
+                            ItemDisplayBinding="{Binding Name}"/>
+                        <HorizontalStackLayout>
+                            <CheckBox IsChecked="{Binding CategoryFactory}" x:Name="CategoryCheckbox"/>
+                            <Label Text="Crear categoria"/>
+                        </HorizontalStackLayout>
+                        <Grid IsVisible="{Binding CategoryFactory}">
+                            <Grid.Triggers>
+                                <DataTrigger Binding="{Binding Source={x:Reference CategoryCheckbox}, 
+                                                Path=IsChecked}"
+                                                     TargetType="Grid"
+                                                     Value="True">
+                                    <Setter Property="IsVisible" Value="True"/>
+                                </DataTrigger>
+                            </Grid.Triggers>
+
+                            <VerticalStackLayout Spacing="5">
+                                <Label Text="Escriba el nombre de la nueva categoria"
+                           HorizontalOptions="Start"
+                               VerticalOptions="Center"
+                           FontSize="Micro"/>
+                                <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           Text="{Binding CategoryName}"/>
+                            </VerticalStackLayout>
+
+                        </Grid>
+                        <Label Text="Descripción"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <Entry HorizontalOptions="Center" 
+                           WidthRequest="270"
+                           Text="{Binding Description}"/>
+                        <Label Text="Fecha final"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <DatePicker Date="{Binding EndDate}"
+                                x:Name="endPicker"
+                                DateSelected="endPicker_DateSelected"/>
+                        <Label Text="Fecha inicio"
+                           HorizontalOptions="Start"
+                           FontSize="Medium"/>
+                        <DatePicker Date="{Binding StartDate}"
+                                x:Name="startPicker"
+                                DateSelected="startPicker_DateSelected"/>
+                        <Button Text="Crear"
+                            Margin="0,10,0,10"
+                            Command="{Binding CreateTaskCommand}"/>
+                    </VerticalStackLayout>
+                </ScrollView>
+
+
+            </Frame.Content>
+        </Frame>
+    </VerticalStackLayout>
+</ContentPage>

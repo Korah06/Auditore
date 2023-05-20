@@ -32,9 +32,18 @@ public partial class TasksPhone : ContentPage
             init = true;
         }
     }
-
+    private bool initSelect = true;
     private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        await this.ShowPopupAsync(new TaskInfoPopUp(_viewModel));
+        if (initSelect)
+        {
+            await this.ShowPopupAsync(new TaskInfoPopUp(_viewModel));
+            initSelect = false;
+            TaskCollection.SelectedItem = null;
+        }
+        else
+        {
+            initSelect = true;
+        }
     }
 }

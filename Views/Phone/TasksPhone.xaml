@@ -62,8 +62,23 @@
                             ItemsUpdatingScrollMode="KeepLastItemInView">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MyTask">
-                        <Frame Margin="10,5,10,5">
-                            <Grid ColumnDefinitions="*,*">
+
+                        <Border Stroke="#404272"
+                                StrokeThickness="4"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                Background="#404272">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup Name="CommonStates">
+                                    <VisualState Name="Normal"></VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#404272"></Setter>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid ColumnDefinitions="*,*" BackgroundColor="#404272" Margin="0,5,0,5" Padding="5">
+                                
                                 <HorizontalStackLayout Grid.Column="0">
                                     <CheckBox IsChecked="{Binding Completed}"
                                               x:Name="TaskCheckbox"
@@ -88,8 +103,7 @@
                                 <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
                                            Text="{Binding EndDate, StringFormat='Entrega: {0:d}'}"/>
                             </Grid>
-
-                        </Frame>
+                        </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

@@ -52,7 +52,13 @@
             </CollectionView>
         </Grid>
         <Grid Grid.Row="1" RowDefinitions=".1*, .7*">
-            <Label FontSize="30" Text="Tareas pendientes"/>
+            <Grid>
+                <Label FontSize="30" Text="Tareas pendientes"/>
+                <Button Grid.Row="1"
+                Command="{Binding CreateTaskCommand}"
+                Text="+"
+                Style="{StaticResource CircularButtonPhone}"/>
+            </Grid>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Tasks}"
                             x:Name="TaskCollection"
                             SelectionMode="Single"
@@ -108,9 +114,6 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
         </Grid>
-        <Button Grid.Row="1"
-                Command="{Binding CreateTaskCommand}"
-                Text="+"
-                Style="{StaticResource CircularButtonPhone}"/>
+        
     </Grid>
 </ContentPage>

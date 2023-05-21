@@ -400,7 +400,12 @@ namespace Auditore.ViewModels
 
         public ICommand CreateChronoCommand => new Command(async () =>
         {
+#if ANDROID || IOS
+            await Shell.Current.GoToAsync("//Chrono/CreateChronoPhone");
+#else
             await Shell.Current.GoToAsync("//Chrono/CreateChronoDesktop");
+
+#endif
         });
 
         public ICommand DeleteChrono => new Command<object>(async (obj) =>

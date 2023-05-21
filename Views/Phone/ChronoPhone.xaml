@@ -33,46 +33,45 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Chrono">
-                    <Frame WidthRequest="180" Margin="10">
-
-                        <VerticalStackLayout>
-                            <Label Text="{Binding name}"
+                    <Border Stroke="#404272"
+                                StrokeThickness="4"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                Background="#404272">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal"></VisualState>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#404272"></Setter>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid BackgroundColor="#404272" Margin="0,5,0,5" Padding="5">
+                            <VerticalStackLayout>
+                                <Label Text="{Binding name}"
                                        FontSize="17"
                                        HorizontalOptions="Center"/>
-                            <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
+                                <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
                                        HorizontalOptions="Center"/>
-                            <Grid HeightRequest="30">
-                                <Image HorizontalOptions="Start">
-                                    <Image.Style>
-                                        <Style TargetType="Image">
-                                            <Setter Property="Source" Value="timer_icon.png" />
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsPomodoro}" 
+                                <Grid HeightRequest="30">
+                                    <Image HorizontalOptions="Start">
+                                        <Image.Style>
+                                            <Style TargetType="Image">
+                                                <Setter Property="Source" Value="timer_icon.png" />
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding IsPomodoro}" 
                                                                  TargetType="Image" Value="True">
-                                                    <Setter Property="Source" Value="pomodoro_icon.png" />
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Image.Style>
-                                </Image>
-                                <Image Source="delete_icon.png"
-                                                   HorizontalOptions="End"
-                                                   HeightRequest="30">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer 
-                                                        Command=
-                                                        "{Binding Source=
-                                                        {RelativeSource AncestorType=
-                                                        {x:Type viewmodels:ChronosViewModel}}, 
-                                                        Path=DeleteChrono}"
-                                                        CommandParameter=
-                                                        "{Binding SelectedItem,
-                                                        Source={x:Reference ChronoCollection}}"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
-                            </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
+                                                        <Setter Property="Source" Value="pomodoro_icon.png" />
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Image.Style>
+                                    </Image>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

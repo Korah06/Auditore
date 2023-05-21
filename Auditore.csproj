@@ -131,6 +131,9 @@
 	  <MauiXaml Update="Views\Phone\ChronoPhone.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Phone\CreateChronoPhone.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Phone\CreateTaskPhone.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

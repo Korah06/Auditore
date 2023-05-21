@@ -20,6 +20,13 @@ public partial class AppShell : Shell
 #if ANDROID || IOS
         loginPage.ContentTemplate = new DataTemplate(typeof(LoginPhone));
         tasksPage.ContentTemplate = new DataTemplate(typeof(TasksPhone));
+        chronoPage.ContentTemplate = new DataTemplate(typeof(ChronoPhone));
+
+		tasksTab.Icon = "tasks";
+		chronoTab.Icon = "timer_icon";
+		calendarTab.Icon = "calendar";
+		userTab.Icon = "user";
+		adminTab.Icon = "admin";
 #else
 		loginPage.ContentTemplate= new DataTemplate(typeof(LoginDesktop));
 		tasksPage.ContentTemplate = new DataTemplate(typeof(TasksDesktop));

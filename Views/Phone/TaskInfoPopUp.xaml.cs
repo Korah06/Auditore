@@ -12,10 +12,24 @@ public partial class TaskInfoPopUp : Popup
 		InitializeComponent();
         _viewModel = viewModel;
         this.BindingContext = _viewModel;
-	}
+        SelectedCat();
+    }
 
     private void CloseButton(object sender, EventArgs e)
     {
         Close(true);
+    }
+
+    private void SelectedCat()
+    {
+        Category cat;
+        foreach (Category item in _viewModel.Categories)
+        {
+            if (item._id == _viewModel.ItemSelected.CategoryId)
+            {
+                cat = item;
+                TaskCategory.SelectedItem = cat;
+            }
+        }
     }
 }

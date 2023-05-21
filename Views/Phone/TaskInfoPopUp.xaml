@@ -8,13 +8,51 @@
              x:DataType="viewmodels:TasksViewModel"
              CanBeDismissedByTappingOutsideOfPopup="False"
              Color="Transparent">
+    
     <Border StrokeThickness="0" StrokeShape="RoundRectangle 40,40,40,40"  
             BackgroundColor="{StaticResource DarkContentsBackground}" 
             VerticalOptions="End">
-        <Frame WidthRequest="360" HeightRequest="600" HasShadow="False">
+        <Frame WidthRequest="360" HeightRequest="450" HasShadow="False">
             <VerticalStackLayout>
                 <Button Text="X" Style="{StaticResource CircularButtonPhone}" Clicked="CloseButton"/>
-                
+                <Label Text="Tarea"/>
+                <Entry Text="{Binding ItemSelected.Name}"
+                                       x:Name="TaskName"/>
+                <HorizontalStackLayout HorizontalOptions="Center" Spacing="2">
+                    <Label Text="Fecha Inicio"
+                                           VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding ItemSelected.StartDate}"
+                                                x:Name="StartDate"
+                                                Margin="0,0,70,0"/>
+                    <Label Text="Fecha Final"
+                                           VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding ItemSelected.EndDate}"
+                                                x:Name="EndDate"/>
+                </HorizontalStackLayout>
+                <Label Text="Descripción"/>
+                <Entry Text="{Binding ItemSelected.Description}"
+                                       x:Name="TaskDescription"/>
+                <Label Text="Categorias"/>
+                <Picker ItemsSource="{Binding Categories}"
+                                        x:Name="TaskCategory"
+                                        WidthRequest="200"
+                                        SelectedItem="{Binding SelectedCat}"
+                                        TitleColor="{StaticResource LightBackground}"
+                                        HorizontalOptions="Start"
+                                        ItemDisplayBinding="{Binding Name}"/>
+                <Grid Margin="0,10,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button x:Name="updateButton" Text="Actualizar Tarea" HorizontalOptions="Start"
+                            Command="{Binding UpdateTask}" />
+
+                    <Button x:Name="deleteButton" Text="Eliminar Tarea" HorizontalOptions="End"
+                            BackgroundColor="#f99aaa" Command="{Binding DeleteTask}"
+                            Grid.Column="1" />
+                </Grid>
             </VerticalStackLayout>
         </Frame>
     </Border>

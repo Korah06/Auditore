@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.ChronoPhone"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:ChronosViewModel">
+    
+    <StackLayout>
+        <Label Text="Cronometros" 
+                FontFamily="Prompt"
+                FontSize="Large" 
+                HorizontalOptions="Start"
+                Margin="10,0,10,0"/>
+        <Image Source="pomodoro_icon.png" WidthRequest="23" Margin="10,0,0,0" HorizontalOptions="Start"/>
+        <Label Text="Pomodoro" HorizontalOptions="Start" Margin="40,-26,0,0"/>
+        <Image Source="timer_icon.png" WidthRequest="23" Margin="10,0,0,0" HorizontalOptions="Start"/>
+        <Label Text="Cronometro" HorizontalOptions="Start" Margin="40,-26,0,0"/>
+        <!--#region ChronoCollection -->
+        <CollectionView ItemsSource="{Binding Chronos}"
+                            VerticalOptions="FillAndExpand"
+                            SelectionMode="Single"
+                            x:Name="ChronoCollection"
+                            SelectionChangedCommand="{Binding SelectCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ChronoCollection}}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Span="2" Orientation="Vertical"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Chrono">
+                    <Frame WidthRequest="180" Margin="10">
+
+                        <VerticalStackLayout>
+                            <Label Text="{Binding name}"
+                                       FontSize="17"
+                                       HorizontalOptions="Center"/>
+                            <Label Text="{Binding minutes, StringFormat='{0}:00 minutos'}"
+                                       HorizontalOptions="Center"/>
+                            <Grid HeightRequest="30">
+                                <Image HorizontalOptions="Start">
+                                    <Image.Style>
+                                        <Style TargetType="Image">
+                                            <Setter Property="Source" Value="timer_icon.png" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsPomodoro}" 
+                                                                 TargetType="Image" Value="True">
+                                                    <Setter Property="Source" Value="pomodoro_icon.png" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Image.Style>
+                                </Image>
+                                <Image Source="delete_icon.png"
+                                                   HorizontalOptions="End"
+                                                   HeightRequest="30">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer 
+                                                        Command=
+                                                        "{Binding Source=
+                                                        {RelativeSource AncestorType=
+                                                        {x:Type viewmodels:ChronosViewModel}}, 
+                                                        Path=DeleteChrono}"
+                                                        CommandParameter=
+                                                        "{Binding SelectedItem,
+                                                        Source={x:Reference ChronoCollection}}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <!--#endregion-->
+    </StackLayout>
+</ContentPage>

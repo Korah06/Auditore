@@ -16,23 +16,23 @@
         Route="Login" />
 
     <TabBar IsVisible="True">
-        <Tab Title="Tasks">
+        <Tab Title="Tasks" x:Name="tasksTab">
             <ShellContent Route="Tasks"
                           x:Name="tasksPage"/>
         </Tab>
-        <Tab Title="Chrono">
+        <Tab Title="Chrono" x:Name="chronoTab">
             <ShellContent Route="Chrono"
                           x:Name="chronoPage"/>
         </Tab>
-        <Tab Title="Calendar">
+        <Tab Title="Calendar" x:Name="calendarTab">
             <ShellContent Route="Calendar"
                           x:Name="calendarPage"/>
         </Tab>
-        <Tab Title="User">
+        <Tab Title="User" x:Name="userTab">
             <ShellContent Route="Profile"
                           x:Name="profilePage"/>
         </Tab>
-        <Tab Title="Admin" IsVisible="{Binding Admin}">
+        <Tab Title="Admin" IsVisible="{Binding Admin}" x:Name="adminTab">
             <ShellContent Route="Admin"
                           x:Name="adminPage"/>
         </Tab>

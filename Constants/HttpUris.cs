@@ -13,7 +13,7 @@ namespace Auditore.Constants
 #if ANDROID || IOS
         private static readonly string uri = "http://192.168.218.86:3000/";
 #else
-                private static readonly string uri = "http://localhost:3000/";
+        private static readonly string uri = "http://localhost:3000/";
 #endif
 
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.AdminPhone"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:AdminViewModel">
+    <StackLayout Grid.Column="1" Spacing="10">
+        <Label Text="Panel del Administrador" 
+                       FontFamily="Prompt"
+                   FontSize="Large" 
+                   HorizontalOptions="Start"
+                   Margin="10,0,0,0"/>
+        <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
+                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
+        <CollectionView VerticalOptions="FillAndExpand" 
+                            ItemsSource="{Binding Users}"
+                            SelectionChanged="collectionUsers_SelectionChanged"
+                            SelectionChangedCommand="{Binding SelectCommand}"
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference collectionUsers}}"
+                            SelectionMode="Single"
+                            x:Name="collectionUsers">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:User">
+                    <Grid ColumnDefinitions=".1*,*" HeightRequest="100"
+                              RowDefinitions="*,*,*"
+                              Margin="5">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup Name="CommonStates">
+                                <VisualState Name="Normal"></VisualState>
+                                <VisualState Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#33325c"></Setter>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Border Stroke="#404272"
+                                StrokeThickness="4"
+                                Grid.RowSpan="3"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="6"
+                                StrokeShape="RoundRectangle 10,10,10,10"
+                                Background="#404272">
+                            
+                            <Grid BackgroundColor="#404272" MaximumHeightRequest="75" 
+                                  Margin="0,5,0,5" Padding="5">
+                            </Grid>
+                        </Border>
+                        <Border Stroke="Transparent"
+                                    Margin="-275,0,0,0"
+                                    Grid.RowSpan="3"
+                                    Grid.ColumnSpan="2"
+                                    StrokeThickness="1"
+                                    WidthRequest="100"
+                                    HeightRequest="100"
+                                    StrokeShape="RoundRectangle 50">
+                            <Image Source="treeprofile.png"
+                                       Aspect="AspectFill"/>
+                        </Border>
+
+                        <Label Text="{Binding username}"
+                                   Grid.Column="1" VerticalOptions="Start"
+                                   HorizontalOptions="Center" Margin="0,0,-20,0"
+                                   Grid.Row="1" FontSize="20"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

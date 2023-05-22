@@ -23,6 +23,7 @@ public partial class AppShell : Shell
         tasksPage.ContentTemplate = new DataTemplate(typeof(TasksPhone));
         chronoPage.ContentTemplate = new DataTemplate(typeof(ChronoPhone));
 		profilePage.ContentTemplate = new DataTemplate(typeof(ProfilePhone));
+		adminPage.ContentTemplate = new DataTemplate(typeof(AdminPhone));
 
 		tasksTab.Icon = "tasks";
 		chronoTab.Icon = "timer_icon";

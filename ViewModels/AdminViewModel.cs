@@ -41,6 +41,7 @@ namespace Auditore.ViewModels
 
         public async void GetData()
         {
+            Roles.Clear();
             Roles.Add("admin");
             Roles.Add("basic");
             Users.Clear();
@@ -56,6 +57,7 @@ namespace Auditore.ViewModels
             _itemSelected = obj as User;
             _selectedRol = _itemSelected.rol;
         });
+        public bool Deleting = true;
         public ICommand DeleteUser => new Command(async () =>
         {
             bool answer = await Application.Current.MainPage
@@ -63,8 +65,16 @@ namespace Auditore.ViewModels
             if (answer)
             {
                 bool deleted = await _userService.DeleteUser(_itemSelected._id, Preferences.Default.Get("token", ""));
+
+#if ANDROID || IOS
+#else
                 if (deleted) { GetData(); }
+#endif
+
             }
+            Deleting = false;
+            await Task.Delay(100);
+            Deleting = true;
         });
 
         public ICommand UpdateUser => new Command(async () =>

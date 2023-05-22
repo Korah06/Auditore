@@ -230,6 +230,7 @@ namespace Auditore.Services
 
         public async Task<List<User>> GetUsers(string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.getUsers, string.Empty));
             try
             {

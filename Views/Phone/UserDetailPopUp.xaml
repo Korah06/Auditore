@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.UserDetailPopUp"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:AdminViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Color="Transparent">
+    <Border StrokeThickness="0" StrokeShape="RoundRectangle 40,40,40,40"  
+            BackgroundColor="{StaticResource DarkContentsBackground}" 
+            VerticalOptions="End">
+        <Frame WidthRequest="360" HeightRequest="720" HasShadow="False">
+            <VerticalStackLayout>
+                <Grid>
+                    <VerticalStackLayout Spacing="10">
+                        <Button Text="X" Style="{StaticResource CircularButtonPhone}" Clicked="CloseButton"/>
+                        <Label Text="Usuario" Margin="0,-30,0,0"/>
+                        <Entry Text="{Binding ItemSelected.username}"
+                                       x:Name="lblusername"/>
+
+                        <Label Text="Nombre"/>
+                        <Entry Text="{Binding ItemSelected.name}"
+                                       x:Name="lblname"/>
+
+                        <Label Text="Apellidos"/>
+                        <Entry Text="{Binding ItemSelected.surname}"
+                                       x:Name="surnamelbl"/>
+
+                        <Label Text="correo electronico"/>
+                        <Entry Text="{Binding ItemSelected.email}"
+                                       x:Name="emaillbl"/>
+
+                        <Label Text="Roles"/>
+                        <Picker ItemsSource="{Binding Roles}"
+                                        x:Name="userRoles"
+                                        WidthRequest="200"
+                                        SelectedItem="{Binding SelectedRol}"
+                                        HorizontalOptions="Start"/>
+
+                        <Grid Margin="0,10,0,0">
+
+                            <Button Text="Actualizar Usuario"
+                                            HorizontalOptions="Start"
+                                            Command="{Binding UpdateUser}"/>
+
+                            <Button Text="Eliminar Usuario"
+                                            HorizontalOptions="End"
+                                            BackgroundColor="#6a040f"
+                                            Clicked="Button_Clicked"
+                                            Command="{Binding DeleteUser}"/>
+                        </Grid>
+
+
+                    </VerticalStackLayout>
+                </Grid>
+            </VerticalStackLayout>
+        </Frame>
+    </Border>
+</toolkit:Popup>

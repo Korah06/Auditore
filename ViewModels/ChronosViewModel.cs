@@ -185,6 +185,7 @@ namespace Auditore.ViewModels
 
             if (totalSeconds == 0)
             {
+                ShowTime = "0:00";
                 await _notificationService.EndChrono();
             }
 
@@ -286,6 +287,7 @@ namespace Auditore.ViewModels
                         }
                     }
                     //reasignar valor de sleepSeconds
+                    ShowTime = "0:00";
                     sleepSeconds = _selectedChrono.restMinutes * 60;
                     await _notificationService.EndRest();
                 }
@@ -359,12 +361,14 @@ namespace Auditore.ViewModels
                     }
 
                 }
+                ShowTime = "0:00";
                 totalSeconds = _selectedChrono.minutes * 60;
                 await _notificationService.EndWorkTime();
             }
 
             init = false;
             Finished = true;
+            ShowTime = "0:00";
             await _notificationService.EndPomodoro();
             foreach (MyTask task in Tasks)
             {

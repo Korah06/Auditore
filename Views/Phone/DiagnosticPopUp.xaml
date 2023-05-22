@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.DiagnosticPopUp"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:DiagnosticViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Color="Transparent">
+    <Border StrokeThickness="0" StrokeShape="RoundRectangle 40,40,40,40"  
+            BackgroundColor="{StaticResource DarkContentsBackground}" 
+            VerticalOptions="End">
+        <Frame WidthRequest="360" HeightRequest="600" HasShadow="False">
+            <VerticalStackLayout>
+                <Button Text="X" Style="{StaticResource CircularButtonPhone}" Clicked="CloseButton"/>
+                <Label Text="{Binding Diagnostic.name}" FontSize="Large"
+               HorizontalOptions="Center"/>
+                <Label Text="{Binding Diagnostic.repeats, StringFormat='Numero de repeticiones: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding Diagnostic.workMinutes, StringFormat='Tiempo trabajado: {0} minutos'}" FontSize="Title"/>
+                <Label Text="{Binding Diagnostic.restMinutes, StringFormat='Tiempo de descanso: {0} minutos'}" FontSize="Title"/>
+                <Label Text="{Binding ChronoName, StringFormat='Nombre del cronometro: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding Date, StringFormat='Fecha del cronometro: {0}'}" FontSize="Title"/>
+                <Label Text="Tareas:" FontSize="Title"/>
+                <CollectionView ItemsSource="{Binding Tasks}"
+                                            x:Name="TaskCollection"
+                                            VerticalOptions="FillAndExpand" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Label Text="{Binding}" FontSize="Subtitle"/>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+    </Border>
+</toolkit:Popup>

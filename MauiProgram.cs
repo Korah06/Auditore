@@ -50,15 +50,16 @@ public static class MauiProgram
 		builder.Services.AddTransient<DiagnosticDesktop>();
 
         builder.Services.AddSingleton<LoginPhone>();
-        builder.Services.AddSingleton<ProfilePhone>();
         builder.Services.AddSingleton<RegisterPhone>();
-        builder.Services.AddSingleton<AdminPhone>();
+        builder.Services.AddTransient<ProfilePhone>();
+        builder.Services.AddTransient<AdminPhone>();
         builder.Services.AddTransient<TasksPhone>();
         builder.Services.AddTransient<ChronoPhone>();
         builder.Services.AddTransient<CreateTaskPhone>();
         builder.Services.AddTransient<CreateChronoPhone>();
         builder.Services.AddTransient<ChronoPopUp>();
         builder.Services.AddTransient<UserDetailPopUp>();
+        builder.Services.AddTransient<CalendarPhone>();
 
         #endregion
 

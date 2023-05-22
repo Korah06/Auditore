@@ -15,7 +15,6 @@ public partial class CalendarDesktop : ContentPage
 		Appearing += AppearingFunc;
 	}
 
-    private bool init = true;
     private async void AppearingFunc(object sender, EventArgs e)
     {    
 		await _calendarViewModel.GetData();

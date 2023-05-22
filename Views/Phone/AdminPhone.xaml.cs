@@ -1,3 +1,4 @@
+using Auditore.Models;
 using Auditore.ViewModels;
 using CommunityToolkit.Maui.Views;
 
@@ -19,6 +20,7 @@ public partial class AdminPhone : ContentPage
         if (init)
         {
             _adminViewModel.GetData();
+            collectionUsers.SelectedItem = new User();
             //_viewModel.SelectedChrono = _selected;
         }
         else
@@ -33,7 +35,8 @@ public partial class AdminPhone : ContentPage
         {
             await this.ShowPopupAsync(new UserDetailPopUp(_adminViewModel));
             initSelect = false;
-            collectionUsers.SelectedItem = null;
+            collectionUsers.SelectedItem = new User();
+            _adminViewModel.GetData();
         }
         else
         {

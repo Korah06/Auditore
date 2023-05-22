@@ -1,5 +1,6 @@
 using Auditore.Services.Interfaces;
 using Auditore.ViewModels;
+using CommunityToolkit.Maui.Views;
 
 namespace Auditore.Views.Phone;
 
@@ -39,6 +40,23 @@ public partial class ChronoPhone : ContentPage
         else
         {
             init = true;
+        }
+    }
+    
+
+    private bool initSelect = true;
+    private async void ChronoCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (initSelect)
+        {
+            await this.ShowPopupAsync(new ChronoPopUp(_viewModel));
+            _viewModel.OnRefresh();
+            initSelect = false;
+            ChronoCollection.SelectedItem = null;
+        }
+        else
+        {
+            initSelect = true;
         }
     }
 }

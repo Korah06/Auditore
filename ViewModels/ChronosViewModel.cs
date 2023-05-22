@@ -425,6 +425,21 @@ namespace Auditore.ViewModels
             }
         });
 
+        public bool Deleting = true;
+        public ICommand DeleteChronoPhone => new Command(async () =>
+        {
+            bool deleted = false;
+            bool answer = await Application.Current.MainPage.DisplayAlert
+            ("Eliminar", "Quieres eliminar el Cronometro?", "Yes", "No");
+            if (answer)
+            {
+                deleted = await _chronoService.DeleteChrono(SelectedChrono._id, Preferences.Default.Get("token", ""));
+            }
+            Deleting = false;
+            await Task.Delay(100);
+            Deleting = true;
+        });
+
 
         private List<MyTask> _tasks_not_completed;
         public ICommand SelectCommand => new Command<object>(async (obj) =>

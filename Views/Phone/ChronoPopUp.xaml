@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Auditore.Views.Phone.ChronoPopUp"
+             xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
+             xmlns:models="clr-namespace:Auditore.Models"
+             x:DataType="viewmodels:ChronosViewModel"
+             CanBeDismissedByTappingOutsideOfPopup="False"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             Color="Transparent">
+    <Border StrokeThickness="0" StrokeShape="RoundRectangle 40,40,40,40"  
+            BackgroundColor="{StaticResource DarkContentsBackground}" 
+            VerticalOptions="End">
+        <Frame WidthRequest="360" HeightRequest="720" HasShadow="False">
+            <VerticalStackLayout Spacing="10">
+                <Grid>
+                    <Image Source="delete_icon.png"
+                            Margin="0,0,-15,0"
+                            HorizontalOptions="Start"
+                            HeightRequest="30">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DeleteChronoPhone}"
+                                                  Tapped="TapGestureRecognizer_Tapped"
+                                                  />
+                        </Image.GestureRecognizers>
+                    </Image>
+                    <Button Text="X" Style="{StaticResource CircularButtonPhone}" Clicked="CloseButton"/>
+                </Grid>
+                <Label x:Name="lblName"
+                       Text="{Binding SelectedChrono.name}"
+                        FontSize="Large"
+                        Margin="0,-30,0,-20"
+                        FontAttributes="Bold"/>
+                <Label x:Name="lblCrono"
+                       Text="{Binding ShowTime}"
+                                FontSize="50"
+                                HorizontalOptions="Center"/>
+
+                <HorizontalStackLayout x:Name="stackRepeat">
+                    <Label Text="Repeticiones" FontSize="20" 
+                                    VerticalOptions="Center" Margin="0,0,10,0"/>
+                    <Entry Text="{Binding Repeats}" HorizontalOptions="Start"
+                                        HorizontalTextAlignment="Center" FontSize="20"/>
+                </HorizontalStackLayout>
+                <Grid>
+                    <Button x:Name="startButton"
+                                    Text="Empezar/Pausar"
+                                    Margin="0,0,180,0"
+                                    WidthRequest="130"
+                                    Command="{Binding StartPauseCommand}"
+                                    HorizontalOptions="Center"/>
+                    <Button x:Name="resetButton"
+                                    Text="Reset"
+                                    WidthRequest="130"
+                                    Margin="180,0,0,0"
+                                    Command="{Binding ResetCommand}"
+                                    HorizontalOptions="Center"/>
+                </Grid>
+                    
+                <Grid>
+                    <Label Text="Tareas" FontSize="Subtitle"
+                                       VerticalOptions="Center"/>
+                    <Button Text="Finalizar" 
+                                        WidthRequest="130" 
+                                        HorizontalOptions="End"
+                                        Command="{Binding EndCommand}"/>
+                </Grid>
+                <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"
+                                  Data="m671.6418,330.59702l-567.16418,0l567.16418,0z"/>
+                <CollectionView ItemsSource="{Binding Tasks}"
+                                            x:Name="TaskCollection"
+                                            VerticalOptions="FillAndExpand" >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:MyTask">
+                            <Frame Margin="10,5,10,5">
+                                <Grid ColumnDefinitions="*,*">
+                                    <HorizontalStackLayout Grid.Column="0">
+                                        <CheckBox IsChecked="{Binding Completed}"
+                                              x:Name="TaskCheckbox"
+                                              VerticalOptions="Center"
+                                              Color="{Binding TaskColor, Converter={StaticResource ColorConverter}}"/>
+                                        <Label Text="{Binding Name}"
+                                           VerticalOptions="Center"
+                                           FontSize="Small" 
+                                            TextColor="{Binding TaskColor, Converter={StaticResource ColorConverter}}">
+                                            <Label.Triggers>
+                                                <DataTrigger Binding="{Binding Source={x:Reference TaskCheckbox}, 
+                                                Path=IsChecked}"
+                                                     TargetType="Label"
+                                                     Value="True">
+                                                    <Setter Property="TextDecorations" Value="Strikethrough"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </HorizontalStackLayout>
+                                    <Label Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center"
+                                           Text="{Binding EndDate, StringFormat='Fecha de finalización: {0:d}'}"/>
+                                </Grid>
+
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+    </Border>
+</toolkit:Popup>

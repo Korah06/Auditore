@@ -26,6 +26,7 @@
                             VerticalOptions="FillAndExpand"
                             SelectionMode="Single"
                             x:Name="ChronoCollection"
+                            SelectionChanged="ChronoCollection_SelectionChanged"
                             SelectionChangedCommand="{Binding SelectCommand}"
                             SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference ChronoCollection}}">
             <CollectionView.ItemsLayout>

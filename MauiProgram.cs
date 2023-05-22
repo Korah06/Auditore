@@ -55,6 +55,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ChronoPhone>();
         builder.Services.AddTransient<CreateTaskPhone>();
         builder.Services.AddTransient<CreateChronoPhone>();
+        builder.Services.AddTransient<ChronoPopUp>();
 
         #endregion
 

@@ -59,7 +59,7 @@
                    HeightRequest="25" WidthRequest="130"
                    IsClippedToBounds="True" CornerRadius="10" 
                    Margin="390,-65,0,0" Padding="0">
-                <Label Text="{Binding User.username}" HorizontalOptions="Center"
+            <Label Text="{Binding User.username}" FontFamily="Prompt" HorizontalOptions="Center"
                        VerticalOptions="Center" Margin="0,-2,0,0"/>
             </Frame>
 
@@ -119,6 +119,7 @@
                    Margin="0,10,0,0" Padding="0">
             <Grid RowDefinitions="0.30*,0.70*">
                 <Label Text="Tareas a punto de finalizar"
+                       FontFamily="Prompt"
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
@@ -157,6 +158,7 @@
                    Margin="0,10,0,0" Padding="0">
             <Grid RowDefinitions="0.30*,0.70*">
                 <Label Text="Informes de las sesiones"
+                       FontFamily="Prompt"
                        FontSize="Title"
                        Grid.Row="0" Margin="10,0,0,0"/>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">

@@ -10,6 +10,7 @@
         <!--#region Title -->
         <Label  Text="Registrarse"
                 FontSize="30"
+                FontFamily="Prompt"
                 HorizontalOptions="Center"/>
         <!--#endregion-->
 

@@ -18,7 +18,8 @@
 
                 <VerticalStackLayout Grid.Row="0">
                     <Grid Margin="0,0,0,5">
-                        <Label Text="Calendar" FontSize="40" 
+                        <Label Text="Calendar" FontSize="40"
+                            FontFamily="Prompt"
                            HorizontalOptions="StartAndExpand" 
                            VerticalOptions="EndAndExpand"
                            Margin="0,0,0,40"/>
@@ -40,7 +41,8 @@
                 </VerticalStackLayout>
 
                 <Grid RowDefinitions=".1*,.9*" Grid.Row="1">
-                    <Label Text="Tareas:" FontSize="Title" Grid.Row="0"/>
+                    <Label Text="Tareas:" FontSize="25"
+                FontFamily="Prompt" Grid.Row="0"/>
                     <CollectionView ItemsSource="{Binding FilteredTasks}"
                                     VerticalOptions="FillAndExpand"
                                     Grid.Row="1">

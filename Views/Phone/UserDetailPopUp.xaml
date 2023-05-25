@@ -11,7 +11,7 @@
     <Border StrokeThickness="0" StrokeShape="RoundRectangle 40,40,40,40"  
             BackgroundColor="{StaticResource DarkContentsBackground}" 
             VerticalOptions="End">
-        <Frame WidthRequest="360" HeightRequest="720" HasShadow="False">
+        <Frame WidthRequest="360" HeightRequest="650" HasShadow="False">
             <VerticalStackLayout>
                 <Grid>
                     <VerticalStackLayout Spacing="10">

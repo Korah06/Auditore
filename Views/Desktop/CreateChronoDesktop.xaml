@@ -7,6 +7,7 @@
              x:DataType="viewmodels:CreateChronoViewModel">
     <VerticalStackLayout VerticalOptions="Center" Spacing="5" Margin="0,0,0,20">
         <Label  Text="Creador de Cronometros"
+                FontFamily="Prompt"
                 FontSize="Header"
                 HorizontalOptions="Center"/>
         <Frame HorizontalOptions="Center" MinimumHeightRequest="500">

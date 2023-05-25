@@ -8,6 +8,7 @@
     <VerticalStackLayout VerticalOptions="Center" Spacing="5" Margin="0,0,0,0">
         <Label  Text="Creador de Tareas"
                 FontSize="30"
+                FontFamily="Prompt"
                 HorizontalOptions="Center"/>
         <Frame HorizontalOptions="Center" MinimumHeightRequest="500" Margin="20,0,20,0">
             <Frame.Content>

@@ -14,7 +14,8 @@
     <Grid Margin="15" 
           RowDefinitions=".4*,.6*">
         <Grid Grid.Row="0" RowDefinitions=".2*,.8*">
-            <Label FontSize="30" Text="Categorias"/>
+            <Label FontSize="30"
+                FontFamily="Prompt" Text="Categorias"/>
             <CollectionView Grid.Row="1" ItemsSource="{Binding Categories}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="5" Orientation="Horizontal"/>
@@ -53,7 +54,8 @@
         </Grid>
         <Grid Grid.Row="1" RowDefinitions=".1*, .7*">
             <Grid>
-                <Label FontSize="30" Text="Tareas pendientes"/>
+                <Label FontSize="30"
+                FontFamily="Prompt" Text="Tareas pendientes"/>
                 <Button Grid.Row="1"
                 Command="{Binding CreateTaskCommand}"
                 Text="+"
@@ -64,8 +66,7 @@
                             SelectionMode="Single"
                             SelectionChanged="CollectionView_SelectionChanged"
                             SelectionChangedCommand="{Binding SelectCommand}"
-                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference TaskCollection}}"
-                            ItemsUpdatingScrollMode="KeepLastItemInView">
+                            SelectionChangedCommandParameter="{Binding SelectedItem, Source={x:Reference TaskCollection}}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MyTask">
 

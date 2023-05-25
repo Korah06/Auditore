@@ -6,9 +6,9 @@
              xmlns:models="clr-namespace:Auditore.Models"
              x:DataType="viewmodels:LoginViewModel">
     <Grid>
-        <BoxView Rotation="45" WidthRequest="300" HeightRequest="300"
+        <BoxView Rotation="45" WidthRequest="320" HeightRequest="320"
                  Color="{StaticResource DarkContentsBackground}" CornerRadius="40"
-                 Margin="0,-720,0,0"/>
+                 Margin="0,-761,0,0"/>
         <VerticalStackLayout VerticalOptions="Center">
 
             

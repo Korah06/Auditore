@@ -60,6 +60,7 @@
                    IsClippedToBounds="True" CornerRadius="10" 
                    Margin="250,-45,30,0" Padding="0">
             <Label Text="{Binding User.username}" HorizontalOptions="Center"
+                    FontFamily="Prompt"
                        VerticalOptions="Center" Margin="0,0,0,0"/>
         </Frame>
 
@@ -119,7 +120,8 @@
                    Margin="0,10,0,0" Padding="0">
             <Grid RowDefinitions="0.35*,0.70*">
                 <Label Text="Tareas a punto de finalizar"
-                       FontSize="Title" HorizontalOptions="Center"
+                       FontSize="20"
+                FontFamily="Prompt" HorizontalOptions="Center"
                        Grid.Row="0" Margin="0,0,0,0"/>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
                     <CollectionView ItemsSource="{Binding NearlyTasks}"
@@ -157,7 +159,8 @@
                    Margin="0,10,0,0" Padding="0">
             <Grid RowDefinitions="0.4*,0.70*">
                 <Label Text="Informes de las sesiones"
-                       FontSize="Title"
+                       FontSize="20"
+                FontFamily="Prompt" HorizontalOptions="Center"
                        Grid.Row="0" Margin="10,0,0,0"/>
                 <StackLayout Grid.Row="1" Orientation="Horizontal">
                     <CollectionView ItemsSource="{Binding Diagnostics}"

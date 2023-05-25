@@ -9,8 +9,8 @@
     <StackLayout>
         <Grid>
             <Label Text="Cronometros" 
-                FontFamily="Prompt"
-                FontSize="Large" 
+                FontSize="30"
+                FontFamily="Prompt" 
                 HorizontalOptions="Start"
                 Margin="10,0,10,0"/>
             <Button Command="{Binding CreateChronoCommand}"

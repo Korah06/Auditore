@@ -8,7 +8,7 @@
     <StackLayout Grid.Column="1" Spacing="10">
         <Label Text="Panel del Administrador" 
                        FontFamily="Prompt"
-                   FontSize="Large" 
+                   FontSize="30" 
                    HorizontalOptions="Start"
                    Margin="10,0,0,0"/>
         <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" Aspect="Fill"

@@ -25,6 +25,7 @@
                            VerticalOptions="EndAndExpand"
                            Margin="0,0,0,-10"/>
                         <Picker ItemsSource="{Binding Types}"
+                                TextColor="White"
                                 x:Name="userRoles"
                                 WidthRequest="200"
                                 SelectedItem="{Binding SelectedType}"
@@ -36,7 +37,7 @@
                                 <Label Text="{Binding CurrentDate, StringFormat='{0:dddd}'}"/>
                                 <Label Text="{Binding CurrentDate, StringFormat='{0:MMM yyyy}'}"/>
                             </VerticalStackLayout>
-                            <DatePicker FontAttributes="Bold" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
+                            <DatePicker FontAttributes="Bold" TextColor="White" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
                         </HorizontalStackLayout>
                     </Grid>
                     <Path Fill="#8a62f7" Stroke="#8a62f7" StrokeThickness="2" 

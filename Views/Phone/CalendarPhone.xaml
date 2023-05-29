@@ -35,7 +35,7 @@
                                 <Label Text="{Binding CurrentDate, StringFormat='{0:dddd}'}"/>
                                 <Label Text="{Binding CurrentDate, StringFormat='{0:MMM yyyy}'}"/>
                             </VerticalStackLayout>
-                            <DatePicker FontAttributes="Bold" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
+                            <DatePicker FontAttributes="Bold" TextColor="White" FontSize="45" Format="dd" Date="{Binding CurrentDate}"/>
                         </HorizontalStackLayout>
                     </Grid>
                 </VerticalStackLayout>

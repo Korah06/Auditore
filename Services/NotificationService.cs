@@ -14,7 +14,7 @@ namespace Auditore.Services
         #region Desktop
         public async Task EndChrono()
         {
-            var toast = Toast.Make("Ha finalizado el cronometro", ToastDuration.Long);
+            var toast = Toast.Make("Ha finalizado el cronómetro", ToastDuration.Long);
             await toast.Show();
         }
 

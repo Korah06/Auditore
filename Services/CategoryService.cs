@@ -70,7 +70,7 @@ namespace Auditore.Services
             CreateCategoryRequest dto = new CreateCategoryRequest();
             dto.name = catName;
             var r = new Random();
-            dto.color = Color.FromRgb(r.Next(0, 255), r.Next(0, 255), r.Next(0, 255)).ToHex();
+            dto.color = Color.FromRgb(r.Next(160, 255), r.Next(160, 255), r.Next(160, 255)).ToHex();
             try
             {
                 _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

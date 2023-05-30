@@ -8,7 +8,7 @@
     
     <StackLayout>
         <Grid>
-            <Label Text="Cronometros" 
+            <Label Text="Cronómetros" 
                 FontSize="30"
                 FontFamily="Prompt" 
                 HorizontalOptions="Start"
@@ -20,7 +20,7 @@
         <Image Source="pomodoro_icon.png" WidthRequest="23" Margin="10,0,0,0" HorizontalOptions="Start"/>
         <Label Text="Pomodoro" HorizontalOptions="Start" Margin="40,-26,0,0"/>
         <Image Source="timer_icon.png" WidthRequest="23" Margin="10,0,0,0" HorizontalOptions="Start"/>
-        <Label Text="Cronometro" HorizontalOptions="Start" Margin="40,-26,0,0"/>
+        <Label Text="Cronómetro" HorizontalOptions="Start" Margin="40,-26,0,0"/>
         <!--#region ChronoCollection -->
         <CollectionView ItemsSource="{Binding Chronos}"
                             VerticalOptions="FillAndExpand"

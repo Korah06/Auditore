@@ -94,7 +94,7 @@
                                    HeightRequest="20"/>
                     </VerticalStackLayout>
                     <VerticalStackLayout>
-                        <Label Text="Cronometros" HorizontalOptions="Center"/>
+                        <Label Text="Cronómetros" HorizontalOptions="Center"/>
                         <Label Text="creados" HorizontalOptions="Center"/>
                         <Label Text="{Binding Chronos.Count}" HorizontalOptions="Center"/>
                         <Image Source="timer_icon.png"

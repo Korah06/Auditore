@@ -417,7 +417,7 @@ namespace Auditore.ViewModels
             bool deleted = false;
             var chrono = obj as Chrono;
             bool answer = await Application.Current.MainPage.DisplayAlert
-            ("Eliminar", "Quieres eliminar el Cronometro?", "Yes", "No");
+            ("Eliminar", "Quieres eliminar el Cronómetro?", "Yes", "No");
             if (answer)
             {
                 deleted = await _chronoService.DeleteChrono(chrono._id, Preferences.Default.Get("token", ""));
@@ -434,7 +434,7 @@ namespace Auditore.ViewModels
         {
             bool deleted = false;
             bool answer = await Application.Current.MainPage.DisplayAlert
-            ("Eliminar", "Quieres eliminar el Cronometro?", "Yes", "No");
+            ("Eliminar", "Quieres eliminar el Cronómetro?", "Yes", "No");
             if (answer)
             {
                 deleted = await _chronoService.DeleteChrono(SelectedChrono._id, Preferences.Default.Get("token", ""));

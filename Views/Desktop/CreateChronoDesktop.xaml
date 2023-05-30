@@ -6,7 +6,7 @@
              xmlns:viewmodels="clr-namespace:Auditore.ViewModels"
              x:DataType="viewmodels:CreateChronoViewModel">
     <VerticalStackLayout VerticalOptions="Center" Spacing="5" Margin="0,0,0,20">
-        <Label  Text="Creador de Cronometros"
+        <Label  Text="Creador de Cronómetros"
                 FontFamily="Prompt"
                 FontSize="Header"
                 HorizontalOptions="Center"/>
@@ -15,7 +15,7 @@
                 <ScrollView WidthRequest="320">
 
                     <VerticalStackLayout >
-                        <Label Text="Nombre del cronometro"
+                        <Label Text="Nombre del cronómetro"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                         <Entry HorizontalOptions="Center" 
@@ -57,7 +57,7 @@
 
                         </Grid>
 
-                        <Label Text="Minutos del cronometro"
+                        <Label Text="Minutos del cronómetro"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                         <Entry HorizontalOptions="Center" 

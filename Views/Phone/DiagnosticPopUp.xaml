@@ -19,8 +19,8 @@
                 <Label Text="{Binding Diagnostic.repeats, StringFormat='Numero de repeticiones: {0}'}" FontSize="Title"/>
                 <Label Text="{Binding Diagnostic.workMinutes, StringFormat='Tiempo trabajado: {0} minutos'}" FontSize="Title"/>
                 <Label Text="{Binding Diagnostic.restMinutes, StringFormat='Tiempo de descanso: {0} minutos'}" FontSize="Title"/>
-                <Label Text="{Binding ChronoName, StringFormat='Nombre del cronometro: {0}'}" FontSize="Title"/>
-                <Label Text="{Binding Date, StringFormat='Fecha del cronometro: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding ChronoName, StringFormat='Nombre del cronómetro: {0}'}" FontSize="Title"/>
+                <Label Text="{Binding Date, StringFormat='Fecha del cronómetro: {0}'}" FontSize="Title"/>
                 <Label Text="Tareas:" FontSize="Title"/>
                 <CollectionView ItemsSource="{Binding Tasks}"
                                             x:Name="TaskCollection"

@@ -100,7 +100,7 @@ namespace Auditore.Services
                 if (response.IsSuccessStatusCode)
                 {
                     await Application.Current.MainPage
-                        .DisplayAlert("Eliminado", "El cronometro ha sido eliminado correctamente", "Aceptar");
+                        .DisplayAlert("Eliminado", "El cronómetro ha sido eliminado correctamente", "Aceptar");
                     return true;
                 }
                 return false;

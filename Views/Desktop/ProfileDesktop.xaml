@@ -39,6 +39,12 @@
             <Image Source="{Binding Icon}"
                     Aspect="AspectFill"/>
         </Border>
+        <Button Text="Cerrar Sesión" 
+                        HorizontalOptions="End"
+                Margin="0,-110,10,0"
+                        WidthRequest="120"
+                        HeightRequest="10"
+                        Command="{Binding CloseSession}"/>
         <Border Stroke="#404272"
                 BackgroundColor="#404272"
                 Margin="-300,0,0,-10"

@@ -39,6 +39,16 @@
             <Image Source="{Binding Icon}"
                     Aspect="AspectFill"/>
         </Border>
+
+        <Image Source="close.png"
+               WidthRequest="35"
+                HeightRequest="35"
+               Margin="-320,-150,0,-10"
+                    Aspect="AspectFill">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding CloseSession}"/>
+            </Image.GestureRecognizers>
+        </Image>
         <Border Stroke="#404272"
                 BackgroundColor="#404272"
                 Margin="-170,0,0,-10"

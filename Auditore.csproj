@@ -67,6 +67,7 @@
 	  <None Remove="Resources\Images\Auditore.png" />
 	  <None Remove="Resources\Images\calendar.png" />
 	  <None Remove="Resources\Images\categories.png" />
+	  <None Remove="Resources\Images\close.png" />
 	  <None Remove="Resources\Images\delete_icon.png" />
 	  <None Remove="Resources\Images\edit.png" />
 	  <None Remove="Resources\Images\pomodoro_icon.png" />

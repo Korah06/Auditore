@@ -14,7 +14,7 @@
         <Frame HorizontalOptions="Center" MinimumHeightRequest="500">
             <Frame.Content>
                 <VerticalStackLayout>
-                    <Label Text="Email"
+                    <Label Text="Correo electrónico"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 
@@ -27,13 +27,13 @@
                     <Entry HorizontalOptions="Center"
                            WidthRequest="300"
                            Text="{Binding username}"/>
-                    <Label Text="name"
+                    <Label Text="Nombre"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center"
                            WidthRequest="300"
                            Text="{Binding name}"/>
-                    <Label Text="surname"
+                    <Label Text="Apellidos"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center"

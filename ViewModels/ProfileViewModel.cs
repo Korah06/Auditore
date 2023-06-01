@@ -102,6 +102,18 @@ namespace Auditore.ViewModels
             await _userService.ModifyUser(User, Preferences.Default.Get("token", ""));
             GetClassifyInfo();
         });
+
+        public ICommand CloseSession => new Command(async () =>
+        {
+            bool answer = await Application.Current.MainPage.DisplayAlert
+            ("Cerrar Sesion", "Estas seguro de cerrar la sesión?", "Si", "No");
+            if (answer)
+            {
+                Preferences.Default.Clear("token");
+                await Shell.Current.GoToAsync("//Login");
+            }
+            
+        });
         public ICommand SelectCommand => new Command<object>(async (obj) =>
         {
             if(obj == null)

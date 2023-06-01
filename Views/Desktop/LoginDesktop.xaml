@@ -25,7 +25,7 @@
         <Frame HorizontalOptions="Center" MinimumHeightRequest="320">
             <Frame.Content>
                 <VerticalStackLayout>
-                    <Label Text="Correo Electronico"
+                    <Label Text="Correo Electrónico"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 

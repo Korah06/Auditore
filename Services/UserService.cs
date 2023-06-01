@@ -74,6 +74,8 @@ namespace Auditore.Services
             catch (Exception ex)
             {
                 Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                await Application.Current.MainPage.DisplayAlert
+                        ("Error", "Ha ocurrido algún error de red", "Aceptar");
                 return null;
             }
         }

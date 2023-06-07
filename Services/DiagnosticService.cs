@@ -43,8 +43,21 @@ namespace Auditore.Services
         public async Task<bool> CreateDiagnostic(Diagnostic diagnostic, string token)
         {
             _client = new HttpClient();
+            string[] arr;
             Uri uri = new Uri(string.Format(HttpUris.CreateDiagnostic, string.Empty));
-            string[] arr = new string[diagnostic.tasksId.Count()];
+            if (diagnostic!=null)
+            {
+                if (diagnostic.tasksId.Count() == null || diagnostic.tasksId.Count() == 0)
+                {
+                    arr = new string[0];
+                }
+                else
+                {
+                    arr = new string[diagnostic.tasksId.Count()];
+
+                }
+            }
+            
             arr = diagnostic.tasksId.ToArray();
             Dtos.Request.CreateDiagnostic dto = new Dtos.Request.CreateDiagnostic
             {

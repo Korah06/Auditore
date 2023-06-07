@@ -114,6 +114,7 @@ namespace Auditore.ViewModels
         #region Countdown
         public async void Countdown()
         {
+            
             totalSeconds = 0;
 
             if (_selectedChrono != null)
@@ -199,6 +200,7 @@ namespace Auditore.ViewModels
                     diagnostic.tasksId.Add(task.Name);
                 }
             }
+            diagnostic.repeats = 0;
             await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
             List<MyTask> nTasks = new List<MyTask>();
             foreach (MyTask task in Tasks)
@@ -220,170 +222,184 @@ namespace Auditore.ViewModels
         #region Pomodoro
         public async void Pomodoro()
         {
-            totalSeconds = 0;
-            if (_selectedChrono != null)
+            if(_repeats == 0)
             {
-                totalSeconds = _selectedChrono.minutes * 60;
-                sleepSeconds = _selectedChrono.restMinutes * 60;
-
+                await Application.Current.MainPage.DisplayAlert
+            ("Eliminar", "No se puede iniciar un pomodoro con 0 repeticiones", "Aceptar");
+                init = false;
+                Finished = true;
+                return;
             }
-
-            int minutesLeft;
-            int secondsLeft;
-
-            for (int i = 0; i < Repeats; i++)
+            else
             {
-                if (Finished)
+                totalSeconds = 0;
+                if (_selectedChrono != null)
                 {
-                    return;
+                    totalSeconds = _selectedChrono.minutes * 60;
+                    sleepSeconds = _selectedChrono.restMinutes * 60;
+
                 }
-                if (i > 0)
+
+                int minutesLeft;
+                int secondsLeft;
+
+                for (int i = 0; i < Repeats; i++)
                 {
-                    while (sleepSeconds > 0)
+                    if (Finished)
                     {
+                        return;
+                    }
+                    if (i > 0)
+                    {
+                        while (sleepSeconds > 0)
+                        {
+                            if (isRunning)
+                            {
+                                minutesLeft = sleepSeconds / 60;
+                                secondsLeft = sleepSeconds % 60;
+
+                                ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
+                                sleepSeconds--;
+                                if (sleepSeconds % 60 == 0)
+                                {
+                                    diagnostic.restMinutes++;
+                                }
+                                await Task.Delay(1000);
+                                if (isReset)
+                                {
+
+                                    isReset = false;
+                                    return;
+                                }
+                                if (Finished)
+                                {
+                                    return;
+                                }
+                            }
+                            else
+                            {
+                                if (isReset)
+                                {
+
+                                    isReset = false;
+                                    return;
+                                }
+                                if (Finished)
+                                {
+                                    return;
+                                }
+                                await Task.Delay(50);
+                                Debug.WriteLine
+                                ("Soy false: " + isRunning + " reset: " + isReset +
+                                " secs: " + totalSeconds + "reset: " + isReset);
+                            }
+                            if (Finished)
+                            {
+                                return;
+                            }
+                        }
+                        //reasignar valor de sleepSeconds
+                        ShowTime = "0:00";
+                        sleepSeconds = _selectedChrono.restMinutes * 60;
+                        await _notificationService.EndRest();
+                    }
+
+                    while (totalSeconds > 0)
+                    {
+                        Debug.WriteLine("Inicio: " + isRunning);
                         if (isRunning)
                         {
-                            minutesLeft = sleepSeconds / 60;
-                            secondsLeft = sleepSeconds % 60;
+                            Debug.WriteLine("Soy true: " + isRunning);
+                            minutesLeft = totalSeconds / 60;
+                            secondsLeft = totalSeconds % 60;
 
                             ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
-                            sleepSeconds--;
-                            if (sleepSeconds % 60 == 0)
+
+                            totalSeconds--;
+                            if (totalSeconds % 60 == 0)
                             {
-                                diagnostic.restMinutes++;
+                                diagnostic.workMinutes++;
+                            }
+                            if (Finished)
+                            {
+                                return;
                             }
                             await Task.Delay(1000);
+
+
+                            Debug.WriteLine("____________" + totalSeconds + "______________" + ShowTime + "reset: " + isReset);
+
                             if (isReset)
                             {
 
                                 isReset = false;
                                 return;
                             }
+                            if (isChanging)
+                            {
+                                totalSeconds = 0;
+                                return;
+                            }
                             if (Finished)
                             {
                                 return;
                             }
+                            Debug.WriteLine
+                                ("Soy false: " + isRunning + " reset: " + isReset +
+                                " secs: " + totalSeconds + "reset: " + isReset);
                         }
                         else
                         {
+
+                            await Task.Delay(50);
                             if (isReset)
                             {
 
                                 isReset = false;
                                 return;
                             }
+                            if (isChanging)
+                            {
+                                totalSeconds = 0;
+                                return;
+                            }
                             if (Finished)
                             {
                                 return;
                             }
-                            await Task.Delay(50);
                             Debug.WriteLine
-                            ("Soy false: " + isRunning + " reset: " + isReset +
-                            " secs: " + totalSeconds + "reset: " + isReset);
+                                ("Soy false: " + isRunning + " reset: " + isReset +
+                                " secs: " + totalSeconds + "reset: " + isReset);
                         }
-                        if (Finished)
-                        {
-                            return;
-                        }
+
                     }
-                    //reasignar valor de sleepSeconds
                     ShowTime = "0:00";
-                    sleepSeconds = _selectedChrono.restMinutes * 60;
-                    await _notificationService.EndRest();
+                    totalSeconds = _selectedChrono.minutes * 60;
+                    await _notificationService.EndWorkTime();
                 }
 
-                while (totalSeconds > 0)
-                {
-                    Debug.WriteLine("Inicio: " + isRunning);
-                    if (isRunning)
-                    {
-                        Debug.WriteLine("Soy true: " + isRunning);
-                        minutesLeft = totalSeconds / 60;
-                        secondsLeft = totalSeconds % 60;
-
-                        ShowTime = string.Format("{0}:{1:00}", minutesLeft, secondsLeft);
-
-                        totalSeconds--;
-                        if (totalSeconds % 60 == 0)
-                        {
-                            diagnostic.workMinutes++;
-                        }
-                        if (Finished)
-                        {
-                            return;
-                        }
-                        await Task.Delay(1000);
-
-
-                        Debug.WriteLine("____________" + totalSeconds + "______________" + ShowTime + "reset: " + isReset);
-
-                        if (isReset)
-                        {
-
-                            isReset = false;
-                            return;
-                        }
-                        if (isChanging)
-                        {
-                            totalSeconds = 0;
-                            return;
-                        }
-                        if (Finished)
-                        {
-                            return;
-                        }
-                        Debug.WriteLine
-                            ("Soy false: " + isRunning + " reset: " + isReset +
-                            " secs: " + totalSeconds + "reset: " + isReset);
-                    }
-                    else
-                    {
-
-                        await Task.Delay(50);
-                        if (isReset)
-                        {
-
-                            isReset = false;
-                            return;
-                        }
-                        if (isChanging)
-                        {
-                            totalSeconds = 0;
-                            return;
-                        }
-                        if (Finished)
-                        {
-                            return;
-                        }
-                        Debug.WriteLine
-                            ("Soy false: " + isRunning + " reset: " + isReset +
-                            " secs: " + totalSeconds + "reset: " + isReset);
-                    }
-
-                }
+                init = false;
+                Finished = true;
                 ShowTime = "0:00";
-                totalSeconds = _selectedChrono.minutes * 60;
-                await _notificationService.EndWorkTime();
+                await _notificationService.EndPomodoro();
+                foreach (MyTask task in Tasks)
+                {
+                    if (task.Completed)
+                    {
+                        diagnostic.tasksId.Add(task.Name);
+                    }
+                }
+                await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
+                List<MyTask> nTasks = new List<MyTask>();
+                foreach (MyTask task in Tasks)
+                {
+                    nTasks.Add(task);
+                }
+                await _taskService.UpdateTasks(nTasks, Preferences.Default.Get("token", ""));
+
             }
 
-            init = false;
-            Finished = true;
-            ShowTime = "0:00";
-            await _notificationService.EndPomodoro();
-            foreach (MyTask task in Tasks)
-            {
-                if (task.Completed)
-                {
-                    diagnostic.tasksId.Add(task.Name);
-                }
-            }
-            await _diagnosticService.CreateDiagnostic(diagnostic, Preferences.Default.Get("token", ""));
-            List<MyTask> nTasks = new List<MyTask>();
-            foreach (MyTask task in Tasks)
-            {
-                nTasks.Add(task);
-            }
-            await _taskService.UpdateTasks(nTasks, Preferences.Default.Get("token", ""));
+            
         } 
         #endregion
 
@@ -417,7 +433,7 @@ namespace Auditore.ViewModels
             bool deleted = false;
             var chrono = obj as Chrono;
             bool answer = await Application.Current.MainPage.DisplayAlert
-            ("Eliminar", "Quieres eliminar el Cronómetro?", "Yes", "No");
+            ("Eliminar", "Quieres eliminar el Cronómetro?", "Si", "No");
             if (answer)
             {
                 deleted = await _chronoService.DeleteChrono(chrono._id, Preferences.Default.Get("token", ""));
@@ -434,7 +450,7 @@ namespace Auditore.ViewModels
         {
             bool deleted = false;
             bool answer = await Application.Current.MainPage.DisplayAlert
-            ("Eliminar", "Quieres eliminar el Cronómetro?", "Yes", "No");
+            ("Eliminar", "Quieres eliminar el Cronómetro?", "Si", "No");
             if (answer)
             {
                 deleted = await _chronoService.DeleteChrono(SelectedChrono._id, Preferences.Default.Get("token", ""));
@@ -560,7 +576,8 @@ namespace Auditore.ViewModels
                     idCategory = _selectedChrono.categoryId,
                     idUser = _selectedChrono.userId,
                     repeats = Repeats,
-                    name = _selectedChrono.name + "-" + DateTime.Now
+                    name = _selectedChrono.name + "-" + DateTime.Now.ToString("d"),
+                    tasksId = new List<string>()
                 };
                 if (_selectedChrono.IsPomodoro)
                 {

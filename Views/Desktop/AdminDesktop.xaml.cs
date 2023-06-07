@@ -23,13 +23,20 @@ public partial class AdminDesktop : ContentPage
             lblname.SetBinding(Entry.TextProperty, new Binding("ItemSelected.name"));
             surnamelbl.SetBinding(Entry.TextProperty, new Binding("ItemSelected.surname"));
             emaillbl.SetBinding(Entry.TextProperty, new Binding("ItemSelected.email"));
-            if(_adminViewModel.ItemSelected.rol == "admin")
+            if(_adminViewModel.ItemSelected != null)
             {
-                userRoles.SelectedItem = "admin";
+                if (_adminViewModel.ItemSelected.rol == "admin")
+                {
+                    userRoles.SelectedItem = "admin";
+                }
+                else
+                {
+                    userRoles.SelectedItem = "basic";
+                }
             }
             else
             {
-                userRoles.SelectedItem = "basic";
+                ContentGrid.IsVisible = false;
             }
         }
     }

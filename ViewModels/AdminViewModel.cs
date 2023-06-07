@@ -54,8 +54,12 @@ namespace Auditore.ViewModels
 
         public ICommand SelectCommand => new Command<object>((obj) =>
         {
-            _itemSelected = obj as User;
-            _selectedRol = _itemSelected.rol;
+            if(obj != null)
+            {
+                _itemSelected = obj as User;
+                _selectedRol = _itemSelected.rol;
+            }
+            
         });
         public bool Deleting = true;
         public ICommand DeleteUser => new Command(async () =>
@@ -68,7 +72,11 @@ namespace Auditore.ViewModels
 
 #if ANDROID || IOS
 #else
-                if (deleted) { GetData(); }
+                if (deleted) 
+                { 
+                    _itemSelected = null; 
+                    GetData(); 
+                }
 #endif
 
             }

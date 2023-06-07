@@ -83,6 +83,12 @@ namespace Auditore.ViewModels
             if(registered)
             {
                 await Application.Current.MainPage.DisplayAlert("Registro completado", "Se ha registrado correctamente", "Aceptar");
+                Cpassword = string.Empty;
+                password = string.Empty;
+                email = string.Empty;
+                username = string.Empty;
+                name = string.Empty;
+                surname = string.Empty;
                 await Shell.Current.GoToAsync("//Login");
             }
 

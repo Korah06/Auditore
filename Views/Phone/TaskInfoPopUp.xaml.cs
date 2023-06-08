@@ -32,4 +32,12 @@ public partial class TaskInfoPopUp : Popup
             }
         }
     }
+
+    private void StartDate_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        if (StartDate.Date > EndDate.Date)
+        {
+            StartDate.Date = EndDate.Date;
+        }
+    }
 }

@@ -33,6 +33,14 @@ public partial class TasksDesktop : ContentPage
         }
     }
 
+    private void StartDate_DateSelected(object sender, DateChangedEventArgs e)
+    {
+        if (StartDate.Date > EndDate.Date)
+        {
+            StartDate.Date = EndDate.Date;
+        }
+    }
+
     private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
 		if (_viewModel.ItemSelected!=null)
@@ -111,4 +119,5 @@ public partial class TasksDesktop : ContentPage
     {
 
     }
+
 }

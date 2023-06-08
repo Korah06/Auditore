@@ -22,6 +22,7 @@
                     <Label Text="Fecha Inicio"
                                            VerticalOptions="Center"/>
                     <DatePicker Date="{Binding ItemSelected.StartDate}"
+                                                DateSelected="StartDate_DateSelected"
                                                 x:Name="StartDate"
                                                 Margin="0,0,70,0"/>
                     <Label Text="Fecha Final"

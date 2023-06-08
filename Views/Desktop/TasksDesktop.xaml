@@ -140,6 +140,7 @@
                                            VerticalOptions="Center"/>
                                     <DatePicker Date="{Binding ItemSelected.StartDate}"
                                                 x:Name="StartDate"
+                                                DateSelected="StartDate_DateSelected"
                                                 Margin="0,0,70,0"/>
                                     <Label Text="Fecha Final"
                                            VerticalOptions="Center"/>

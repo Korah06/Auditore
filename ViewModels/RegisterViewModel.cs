@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -56,7 +57,6 @@ namespace Auditore.ViewModels
         {
             _userService = userService;
         }
-        public bool Registered = false;
         public ICommand RegisterCommand => new Command(async () => 
         {
             if (
@@ -77,24 +77,45 @@ namespace Auditore.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas escritas no son iguales", "Aceptar");
                 return;
             }
-            RegisterRequest registerRequest = new RegisterRequest(_username, _name, _surname, _email, _password, rol);
-            bool registered = await _userService.Register(registerRequest);
-            Registered = registered;
-            if(registered)
+            string pPattern = @"^(?=.*[A-Z])(?=.*\d).{4,}$";
+            bool isValidPassword = Regex.IsMatch(_password, pPattern);
+            if (!isValidPassword)
             {
-                await Task.Run(() =>
-                {
-                    Cpassword = string.Empty;
-                    password = string.Empty;
-                    email = string.Empty;
-                    username = string.Empty;
-                    name = string.Empty;
-                    surname = string.Empty;
-                });
-                
-                await Application.Current.MainPage.DisplayAlert("Registro completado", "Se ha registrado correctamente", "Aceptar");
-                await Shell.Current.GoToAsync("//Login");
+                await Application.Current.MainPage.DisplayAlert
+                ("Formato contraseña", "El formato de la contraseña debe de tener al menos una mayuscula, un número y minimo 4 caracteres", "Aceptar");
+                return;
             }
+            string pattern = @"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$";
+
+
+            bool isValidEmail = Regex.IsMatch(_email, pattern);
+
+            if (isValidEmail)
+            {
+                RegisterRequest registerRequest = new RegisterRequest(_username, _name, _surname, _email, _password, rol);
+                bool registered = await _userService.Register(registerRequest);
+                if (registered)
+                {
+                    await Task.Run(() =>
+                    {
+                        Cpassword = string.Empty;
+                        password = string.Empty;
+                        email = string.Empty;
+                        username = string.Empty;
+                        name = string.Empty;
+                        surname = string.Empty;
+                    });
+
+                    await Application.Current.MainPage.DisplayAlert("Registro completado", "Se ha registrado correctamente", "Aceptar");
+                    await Shell.Current.GoToAsync("//Login");
+                }
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert
+                ("Formato correo", "El formato del correo no es el adecuado", "Aceptar");
+            }
+            
 
         });    
     }

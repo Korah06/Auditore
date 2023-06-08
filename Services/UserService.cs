@@ -43,6 +43,7 @@ namespace Auditore.Services
 
         public async Task<string> Login(LoginRequest user)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.Login, string.Empty));
 
             try
@@ -82,6 +83,7 @@ namespace Auditore.Services
 
         public async Task<bool> Register(RegisterRequest user)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.Register, string.Empty));
             try
             {
@@ -117,6 +119,7 @@ namespace Auditore.Services
 
         public async Task<User> GetUser(string token)
         {
+            _client = new HttpClient();
             UserDto dto = new UserDto();
             Uri uri = new Uri(string.Format(HttpUris.getUser, string.Empty));
             try
@@ -142,6 +145,7 @@ namespace Auditore.Services
 
         public async Task<bool> GetRole(string token)
         {
+            _client = new HttpClient();
             bool isAdmin = false;
             Uri uri = new Uri(string.Format(HttpUris.getRole, string.Empty));
             try
@@ -168,6 +172,7 @@ namespace Auditore.Services
 
         public async Task<bool> DeleteUser(string userId, string token)
         {
+            _client = new HttpClient();
             Uri uri = new Uri(string.Format(HttpUris.deleteUser, string.Empty));
             try
             {

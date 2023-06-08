@@ -56,7 +56,7 @@ namespace Auditore.ViewModels
         {
             _userService = userService;
         }
-
+        public bool Registered = false;
         public ICommand RegisterCommand => new Command(async () => 
         {
             if (
@@ -77,18 +77,22 @@ namespace Auditore.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Error", "Las contraseñas escritas no son iguales", "Aceptar");
                 return;
             }
-
-            bool registered = await _userService.Register(new RegisterRequest(_username,_name,_surname,_email,_password,rol));
-
+            RegisterRequest registerRequest = new RegisterRequest(_username, _name, _surname, _email, _password, rol);
+            bool registered = await _userService.Register(registerRequest);
+            Registered = registered;
             if(registered)
             {
+                await Task.Run(() =>
+                {
+                    Cpassword = string.Empty;
+                    password = string.Empty;
+                    email = string.Empty;
+                    username = string.Empty;
+                    name = string.Empty;
+                    surname = string.Empty;
+                });
+                
                 await Application.Current.MainPage.DisplayAlert("Registro completado", "Se ha registrado correctamente", "Aceptar");
-                Cpassword = string.Empty;
-                password = string.Empty;
-                email = string.Empty;
-                username = string.Empty;
-                name = string.Empty;
-                surname = string.Empty;
                 await Shell.Current.GoToAsync("//Login");
             }
 

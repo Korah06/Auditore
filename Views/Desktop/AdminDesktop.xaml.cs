@@ -11,7 +11,21 @@ public partial class AdminDesktop : ContentPage
 		_adminViewModel = new(userService);
 		InitializeComponent();
 		this.BindingContext = _adminViewModel;
-	}
+        Appearing += MyPage_AppearingAsync;
+    }
+    bool init = false;
+    private void MyPage_AppearingAsync(object sender, EventArgs e)
+    {
+        if (init)
+        {
+            _adminViewModel.GetData();
+
+        }
+        else
+        {
+            init = true;
+        }
+    }
 
     private void collectionUsers_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {

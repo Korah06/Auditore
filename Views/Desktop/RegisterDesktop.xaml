@@ -19,6 +19,7 @@
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 
                            WidthRequest="300"
+                           x:Name="emailEntry"
                            Text="{Binding email}"
                            Placeholder="email@example.com"/>
                     <Label Text="Username"
@@ -26,24 +27,28 @@
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center"
                            WidthRequest="300"
+                           x:Name="usernameEntry"
                            Text="{Binding username}"/>
                     <Label Text="Nombre"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center"
                            WidthRequest="300"
+                           x:Name="nameEntry"
                            Text="{Binding name}"/>
                     <Label Text="Apellidos"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center"
                            WidthRequest="300"
+                           x:Name="surnamesEntry"
                            Text="{Binding surname}"/>
                     <Label Text="Contraseña"
                            HorizontalOptions="Start"
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 
                            WidthRequest="300"
+                           x:Name="passwordEntry"
                            IsPassword="True"
                            Text="{Binding password}"/>
                     <Label Text="Repita la Contraseña"
@@ -51,11 +56,13 @@
                            FontSize="Medium"/>
                     <Entry HorizontalOptions="Center" 
                            WidthRequest="300"
+                           x:Name="cpasswordEntry"
                            IsPassword="True"
                            Text="{Binding Cpassword}"/>
                     <Button Text="Registrarse"
                             Margin="0,10,0,10"
-                            Command="{Binding RegisterCommand}"/>
+                            Command="{Binding RegisterCommand}"
+                            />
                 </VerticalStackLayout>
             </Frame.Content>
         </Frame>

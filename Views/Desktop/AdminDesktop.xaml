@@ -42,7 +42,7 @@
                                     WidthRequest="100"
                                     HeightRequest="100"
                                     StrokeShape="RoundRectangle 50">
-                                <Image Source="treeprofile.png"
+                                <Image Source="{Binding avatar, StringFormat='{0}.png'}"
                                        Aspect="AspectFill"/>
                             </Border>
 

@@ -62,10 +62,10 @@ namespace Auditore.ViewModels
         {
             _taskService = taskService;
             _categoryService = categoryService;
-            Types.Add("End");
-            Types.Add("Start");
-            Types.Add("Between");
-            SelectedType = "End";
+            Types.Add("Fin");
+            Types.Add("Inicio");
+            Types.Add("En Plazo");
+            SelectedType = "Fin";
             CurrentDate = DateTime.Now;
         }
 
@@ -132,21 +132,21 @@ namespace Auditore.ViewModels
             filterStartTasks.RemoveAll(task => filterEndTasks.Any(endTask => endTask._id == task._id));
 
 
-            if (SelectedType == "End")
+            if (SelectedType == "Fin")
             {
                 foreach(var task in filterEndTasks)
                 {
                 FilteredTasks.Add(task);
                 }
             }
-            if (SelectedType == "Start")
+            if (SelectedType == "Inicio")
             {
                 foreach (var task in filterStartTasks)
                 {
                     FilteredTasks.Add(task);
                 }
             }
-            if (SelectedType == "Between")
+            if (SelectedType == "En Plazo")
             {
                 foreach (var task in filterBetweenTasks)
                 {
